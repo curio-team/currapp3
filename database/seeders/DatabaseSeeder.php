@@ -56,5 +56,20 @@ class DatabaseSeeder extends Seeder
             ->for($opleiding)
             ->create();
         
+        //
+        // Cohorten
+        //
+        foreach(\App\Models\Opleiding::all() as $opleiding)
+        {
+            for($i = 2020; $i <= 2024; $i++)
+            {
+                \App\Models\Cohort::create([
+                    'opleiding_id' => $opleiding->id,
+                    'datum_start' => $i . '-08-01',
+                    'datum_eind' => ($i+4) . '-07-31',
+                ]);
+            }
+        }
+        
     }
 }
