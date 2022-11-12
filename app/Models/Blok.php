@@ -31,4 +31,9 @@ class Blok extends Model
     {
         return $this->hasMany(Uitvoer::class);
     }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }
