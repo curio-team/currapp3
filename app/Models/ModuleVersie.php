@@ -30,4 +30,9 @@ class ModuleVersie extends Model
     {
         return $this->morphToMany(Leerdoel::class, 'leerdoelable')->using(Leerdoelable::class)->withPivot('id');
     }
+
+    public function acceptatiecriteria()
+    {
+        return $this->belongsToMany(Acceptatiecriterium::class, 'acceptatiecriterium_module')->withPivot(['voldoet', 'opmerking']);
+    }
 }
