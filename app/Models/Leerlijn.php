@@ -20,4 +20,9 @@ class Leerlijn extends Model
     {
         return $this->hasMany(Module::class);
     }
+
+    public function leerdoelen()
+    {
+        return $this->hasMany(Leerdoel::class);
+    }
 }

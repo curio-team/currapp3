@@ -156,5 +156,21 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+
+        //
+        // Leerdoelen
+        //
+        foreach(\App\Models\Leerlijn::all() as $leerlijn)
+        {
+            for ($i = 1; $i < rand(2, 20); $i++)
+            {
+               $leerdoel = new \App\Models\Leerdoel();
+               $leerdoel->volgorde = $i;
+               $leerdoel->nummer = $i;
+               $leerdoel->tekst_lang = fake()->sentence(nbWords: 10);
+               $leerdoel->tekst_kort = implode(' ', array_slice(explode(' ', $leerdoel->tekst_lang), 0, 3));
+               $leerlijn->leerdoelen()->save($leerdoel);
+            }
+        }
     }
 }
