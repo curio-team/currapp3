@@ -12,4 +12,9 @@ class Comment extends Model
     {
         return $this->morphTo();
     }
+
+    public function taken()
+    {
+        return $this->belongsToMany(Taak::class, 'comment_taak');
+    }
 }

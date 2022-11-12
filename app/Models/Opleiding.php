@@ -37,4 +37,9 @@ class Opleiding extends Model
     {
         return $this->hasManyThrough(Module::class, Leerlijn::class);
     }
+
+    public function taken()
+    {
+        return $this->hasMany(Taak::class);
+    }
 }
