@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 use App\Models\Cohort;
 use App\Models\Blok;
-use App\Models\Vak;
+use App\Models\VakInUitvoer;
 
 class Uitvoer extends Model
 {
@@ -21,7 +21,11 @@ class Uitvoer extends Model
     protected function naam(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => "{$this->blok->naam} ({$this->datum_start->format('y')}-{$this->datum_start->format('M')})",
+            get: function ($value) {
+                $month = $this->datum_start->format('n');
+                $month = ($month >= 6) ? 'sep' : 'feb';
+                return "{$this->blok->naam} ({$this->datum_start->format('y')}-{$month})";
+            },
         );
     }
 
@@ -37,6 +41,6 @@ class Uitvoer extends Model
 
     public function vakken()
     {
-        return $this->hasMany(Vak::class);
+        return $this->hasMany(VakInUitvoer::class);
     }
 }
