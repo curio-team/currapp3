@@ -4,22 +4,22 @@
 Doel van de app: het team krijgt eigenaarschap over de staat van het onderwijs. Dit ligt niet bij één persoon maar is voor iedereen inzichtelijk en het proces hieromheen is gestroomlijnd.
 
 * Als onderwijscoördinator wil ik de structuur inrichten, zodat mijn collega's hun werk kunnen doen (commentaar invullen, enzovoort).
-  * Dit mag niet teveel tijd kosten > oplossing: structuur is geheel kopieerbaar en bij wijzigingen wordt gevraag "wil je wijzigen voor alleen deze uitvoer, of ook toekomstige?"
+  * Dit mag niet teveel tijd kosten > oplossing: structuur is geheel kopieerbaar en bij wijzigingen wordt gevraagd "wil je wijzigen voor alleen deze uitvoer, of ook toekomstige?"
   * Zie ERD (zwarte deel) voor hoofdstructuur, waarbij geldt: een "uitvoer" is een blok-in-een-jaar. Dus niet een globaal blok, maar specifiek "Blok X (2022-sep)".
-* Als module-eigenaar wil ik zien van welke modules ik eigenaar ben, zodat ik me daarop kan focussen.
+  * Wanneer het aantal blokken van een opleiding verandert, of er een heel nieuw blok bijkomt bijvoorbeeld, dan is het dús een hele nieuwe opleiding.
+* Als blok- of module-eigenaar wil ik zien van welke modules ik eigenaar ben, zodat ik me daarop kan focussen.
   * Eigenaarschap is niet uitvoer-gebonden. Zodra de eigenaar wisselt, vallen alle historische en toekomstige verantwoordelijkheden over op de nieuwe eigenaar.
-  * Een uitvoer kent geen eigenaar, commentaar hierop valt onder de verantwoordelijkheid van de blokeigenaar.
   * Een blok of module zonder eigenaar komt op een waarschuwingslijst en default voorlopig naar de opleidingseigenaar.
 * Als docent wil ik na/tijdens het uitvoeren van een module opmerkingen kunnen noteren, zodat de lessen voor een volgende uitvoer beter worden.
   * Ik zie hiervoor het leer/toetsplan waarbij ik een module of het gehele blok kan aanklikken (comment-knop).
   * Een opmerking is gekoppeld aan een module of blok (=uitvoer).
   * En ook gekoppeld aan een uitvoer, zodat herleid kan worden wanneer de opmerking ontstond.
   * Verder noteren we datum+invoerder van opmerking.
-* Als blok/vak/module-eigenaar wil ik na afloop van een uitvoer al het commentaar zien voor mijn eenheden (wel per eenheid apart), zodat ik comments kan groeperen tot SMART-geformuleerde taken.
+* Als blok- of module-eigenaar wil ik na afloop van een uitvoer al het commentaar zien voor mijn eenheden (wel per eenheid apart), zodat ik comments kan groeperen tot SMART-geformuleerde taken.
   * 'Al het commentaar' betekent: al het commentaar van deze én vorige uitvoeren, voor zover dat nog niet de status 'afgehandeld' heeft.
   * Zodra commentaar wordt gelinkt aan een taak, krijgt het de status 'afgehandeld'.
 * Als gebruiker van de app wil ik alle taken zien op één takenbord, zodat ik kan zien wat de status is van de opleiding als geheel, en ook wie waar mee bezig is en welke taken nog niet zijn toegewezen (waar ik eventueel kan helpen).
-  * In principe is dit overzicht weergegeven als kanban-bord, met de blokken als kolommen.
+  * In principe is dit overzicht weergegeven als kanban-bord, met de blokken en leerlijnen als kolommen.
   * Mogelijk later (could-have) nog opties om anders te groeperen/sorteren/filteren.
 * Als onderwijscoördinator wil ik diverse rapportages over het ingevulde commentaar en de gemaakte taken kunnen bekijken, zodat ik weet wat de status is.
   * Taken niet toegewezen
@@ -27,26 +27,41 @@ Doel van de app: het team krijgt eigenaarschap over de staat van het onderwijs. 
   * Taken over datum
   * Taken die inactief zijn (wel gemaakt, maar al lang geen activiteit meer op)
   * Aantal taken per persoon
+* Als onderwijscoördinator wil ik diverse rapportages over de gebouwde structuur zien, zodat ik kan controleren of alles goed is klaargezet.
+  * Lijst van alle uitvoeren waar een vak in voorkomt.
+  * Lijst van alle modules onder een leerlijn.
+  * Lijst van alle modules onder een vak.
+  * Lijst van alle uitvoeren onder een blok.
+* Als onderwijscoördinator wil ik aan de opleiding acceptatiecriteria kunnen koppelen, zodat deze voor iedere module(versie) kunnen worden afgevinkt.
+  * Zodra je een nieuwe versie maakt voor een module worden de criteria allemaal weer ongeldig; de module moet opnieuw worden gecontroleerd.
+  * Bij een versie van een module zijn alleen de criteria zichtbaar die actief waren op het moment dat de bewuste module-versie werd gemaakt.
+* Als onderwijscoördinator wil ik leerlijnen met daaronder leerdoelen toevoegen aan de opleiding, zodat we deze centraal kunnen beheren.
+  * Koppelen aan uitvoeren en modules
+  * Aan die koppeling zijn weer aspecten gekoppeld
+  * Export t.b.v. Itslearning
+  * Diverse rapportages
+  * Leerdoel kan niet wijzigen. Opleiding kent leerdoelen, die kun je archiveren of nieuwe maken. Stel dat 11.02 niet meer klopt, wordt het dus bijvoorbeelds 11.36.
+    * Let wel; voor correcte weergave moeten we dan ook LU's een volgorde mee kunnen geven (zodat 11.36 nog steeds bovenaan staat, want is eerste stap van K1-W1).
+    * Een uitvoer kent dan verschillende LU's die simpelweg niet kúnnen wijzigen.
 
 # ERD
 
 [Volledig ERD op LucidChart](https://lucid.app/lucidchart/b64482a9-95fb-46fe-bef5-d679b203f222/edit?invitationId=inv_ab7f8d7b-f481-4027-b2ac-2af9fdbedf12)
 ![erd](erd.png)
 
-# Klad (nog uitwerken tot userstories)
+# Klad
 
-## Beheer LU's (blauw)
+## Details m.b.t. kopiëren en aanpassen toekomst
 
-Ook een plek voor beheer LU's en aspecten
-LU's beheerd op centraal niveau.
-Die zijn dan gekoppeld aan blokken (zodat je ook rapporten kunt draaien hierop)
-Per blok kun je dan aspecten invullen / kopiëren vanuit andere blokken
-Voor aspecten cascademodel; nu niet ingevuld = auto overnemen uit vorige uitvoer
-Mogelijkheid export (leerlijn nodig, paars/roze)
+Idee van cascade loslaten? In plaats daarvan.. Alle links zijn gelegd enzovoort, en wanneer je iets aanpast in een uitvoer, krijg je de vraag;
 
-## Integratie kwaliteitschecklist / acceptatiecriteria (groen)
+- [X] Voor deze uitvoer
+- [ ] Historische uitvoeren (_kan eigenlijk niet?!_)
+- [ ] Voorliggende maar nog toekomstige uitvoeren
+- [ ] Hierna liggende uitvoeren
 
-Iets met checklist onderwijsmateriaal (de acceptatiecriteria). Aangeven of een module daaraan voldoet. Zodra je een versie bumpt wordt dat weer geïnvalideerd en moet je opnieuw aangeven (liefst door iemand anders!).
+Vanuit het blokscherm kun je dus de vraag krijgen "Je gaat module WED-II met een week vervroegen in uitvoer 22sep". Wil je dit ook aanpassen voor.... (alle bovenstaande opties).
 
-## MISC
+Hiervoor moet een uitvoer dus ook echt een startdatum hebben (zodat je weet of de uitvoer historisch is (en dus gelockt) of niet). Ook onderscheid maken tussen lopende cohorten en toekomstige cohorten!
 
+In het blokscherm kun je van een module alleen aanvinken welke versie je wil gebruiken. Ook daarvoor krijg je bovenstaande vraag.
