@@ -123,5 +123,20 @@ class DatabaseSeeder extends Seeder
             ->for($opleiding)
             ->create();
 
+        //
+        // Modules
+        //
+        $numbers = ['I', 'II', 'III', 'IV', 'V'];
+        foreach(\App\Models\Leerlijn::all() as $leerlijn)
+        {
+            for($i = 0; $i < rand(1, 4); $i++)
+            {
+                \App\Models\Module::create([
+                    'eigenaar_id' => fake()->randomElement(['br10', 'ab01', null]),
+                    'leerlijn_id' => $leerlijn->id,
+                    'naam'        => $leerlijn->naam . '-' . $numbers[$i],
+                ]);
+            }
+        }
     }
 }
