@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Opleiding;
 use App\Models\Leerlijn;
-use App\Models\Versie;
+use App\Models\ModuleVersie;
 
 class Module extends Model
 {
@@ -36,6 +36,6 @@ class Module extends Model
 
     public function versies()
     {
-        return $this->hasMany(Versie::class);
+        return $this->hasMany(ModuleVersie::class);
     }
 }

@@ -138,5 +138,23 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+
+        //
+        // Versies
+        //
+        foreach(\App\Models\Module::all() as $module)
+        {
+            for ($i = 1; $i < rand(2, 5); $i++)
+            { 
+                $versie = new \App\Models\ModuleVersie();
+                $versie->module_id = $module->id;
+                $versie->versie = $i;
+                $versie->hoofdauteur_id = fake()->randomElement(['br10', 'ab01', null, null, null]);
+                \App\Models\VakInUitvoer::inRandomOrder()->first()->modules()->save($versie, [
+                    'week_start' => rand(1, 8),
+                    'week_eind'  => rand(9, 16),
+                ]);
+            }
+        }
     }
 }

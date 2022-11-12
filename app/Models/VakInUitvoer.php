@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Vak;
 use App\Models\Uitvoer;
-use App\Models\Module;
+use App\Models\ModuleVersie;
 
 class VakInUitvoer extends Model
 {
@@ -24,6 +24,8 @@ class VakInUitvoer extends Model
 
     public function modules()
     {
-        return $this->belongsToMany(Module::class);
+        return $this->belongsToMany(ModuleVersie::class, 'module_vak')
+            ->withPivot(['week_start', 'week_eind'])
+            ->withTimestamps();
     }
 }
