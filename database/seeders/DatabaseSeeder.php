@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             'name'  => 'Bart Roos',
             'email' => 'b.roos@curio.nl',
             'type'  => 'teacher',
+            'admin' => true,
         ]);
         $user2 = \App\Models\User::create([
             'id'    => 'ab01',
@@ -202,6 +203,7 @@ class DatabaseSeeder extends Seeder
                 $leerdoelable->aspecten()->save($aspect);
             }
         }
+
         //
         // Acceptatiecriteria
         //
@@ -218,5 +220,13 @@ class DatabaseSeeder extends Seeder
                 $module->acceptatiecriteria()->attach(fake()->randomElement($ids), ['voldoet' => rand(0, 1)]);
             }
         }
+
+        //
+        // Teams
+        //
+        $team = \App\Models\Team::create([
+            'naam' => 'TT-SD',
+        ]);
+        $team->users()->attach(['br10', 'ab01']);
     }
 }

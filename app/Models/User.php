@@ -45,4 +45,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Taak::class, 'eigenaar_id');
     }
+
+    public function teams()
+	{
+		return $this->belongsToMany(Team::class)->orderBy('name');
+	}
 }
