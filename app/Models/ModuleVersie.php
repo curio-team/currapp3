@@ -33,7 +33,7 @@ class ModuleVersie extends Model
 
     public function acceptatiecriteria()
     {
-        return $this->belongsToMany(Acceptatiecriterium::class, 'acceptatiecriterium_module')->withPivot(['voldoet', 'opmerking']);
+        return $this->belongsToMany(Acceptatiecriterium::class, 'acceptatiecriterium_module')->withPivot(['voldoet', 'opmerking', 'reviewer_id']);
     }
 
     public function comments()

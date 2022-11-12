@@ -23,6 +23,6 @@ class Acceptatiecriterium extends Model
 
     public function modules()
     {
-        return $this->belongsToMany(ModuleVersie::class, 'acceptatiecriterium_module')->withPivot(['voldoet', 'opmerking']);
+        return $this->belongsToMany(ModuleVersie::class, 'acceptatiecriterium_module')->withPivot(['voldoet', 'opmerking', 'reviewer_id']);
     }
 }

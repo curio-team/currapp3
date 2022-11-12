@@ -16,8 +16,11 @@ return new class extends Migration
         Schema::create('acceptatiecriterium_module', function (Blueprint $table) {
             $table->foreignId('acceptatiecriterium_id')->constrained('acceptatiecriteria');
             $table->foreignId('module_versie_id')->constrained('module_versies');
+            $table->string('reviewer_id')->nullable();
             $table->boolean('voldoet')->default(false);
             $table->string('opmerking')->nullable();
+
+            $table->foreign('reviewer_id')->references('id')->on('users');
         });
     }
 
