@@ -10,7 +10,7 @@ class Team extends Model
 
     public function users()
 	{
-		return $this->belongsToMany(User::class)->orderBy('name');
+		return $this->belongsToMany(User::class)->orderBy('naam');
 	}
 
 	public function opleidingen()

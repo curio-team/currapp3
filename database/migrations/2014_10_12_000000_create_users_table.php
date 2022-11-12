@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('type');
             $table->string('login')->default('amoclient');
             $table->string('password')->nullable();
-            $table->boolean('active')->default(true);
             $table->boolean('admin')->default(false);
+            $table->foreignId('standaard_opleiding')->nullable();
             $table->rememberToken();
             $table->timestamps();
             

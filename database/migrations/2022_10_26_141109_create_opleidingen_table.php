@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('team_id')->constrained('teams');
             $table->string('eigenaar_id');
             $table->string('naam');
+            $table->string('omschrijving')->nullable();
             $table->string('crebo')->nullable();
             $table->boolean('is_actief')->default(true);
             $table->integer('duur_in_jaren');

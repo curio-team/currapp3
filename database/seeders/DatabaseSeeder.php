@@ -45,7 +45,8 @@ class DatabaseSeeder extends Seeder
         //
         $opleiding = \App\Models\Opleiding::create([
             'team_id' => $team->id,
-            'naam'  => 'Software developer',
+            'naam'  => 'SD',
+            'omschrijving'  => 'Software developer',
             'crebo' => '25604',
             'eigenaar_id' => 'br10',
             'duur_in_jaren' => 4,
