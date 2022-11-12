@@ -12,4 +12,9 @@ class Team extends Model
 	{
 		return $this->belongsToMany(User::class)->orderBy('name');
 	}
+
+	public function opleidingen()
+	{
+		return $this->hasMany(Opleiding::class);
+	}
 }

@@ -8,6 +8,11 @@ class Opleiding extends Model
 {
     protected $table = 'opleidingen';
 
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
+
     public function eigenaar()
     {
         return $this->belongsTo(User::class, 'eigenaar_id');

@@ -33,9 +33,18 @@ class DatabaseSeeder extends Seeder
         ]);
 
         //
+        // Teams
+        //
+        $team = \App\Models\Team::create([
+            'naam' => 'TT-SD',
+        ]);
+        $team->users()->attach(['br10', 'ab01']);
+
+        //
         // Opleiding
         //
         $opleiding = \App\Models\Opleiding::create([
+            'team_id' => $team->id,
             'naam'  => 'Software developer',
             'crebo' => '25604',
             'eigenaar_id' => 'br10',
@@ -220,13 +229,5 @@ class DatabaseSeeder extends Seeder
                 $module->acceptatiecriteria()->attach(fake()->randomElement($ids), ['voldoet' => rand(0, 1)]);
             }
         }
-
-        //
-        // Teams
-        //
-        $team = \App\Models\Team::create([
-            'naam' => 'TT-SD',
-        ]);
-        $team->users()->attach(['br10', 'ab01']);
     }
 }

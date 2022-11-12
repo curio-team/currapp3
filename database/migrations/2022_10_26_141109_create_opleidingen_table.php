@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('opleidingen', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('team_id')->constrained('teams');
             $table->string('eigenaar_id');
             $table->string('naam');
             $table->string('crebo')->nullable();
