@@ -20,4 +20,14 @@ class Leerdoel extends Model
     {
         return $this->belongsTo(Leerlijn::class);
     }
+
+    public function blokken()
+    {
+        return $this->morphedByMany(Uitvoer::class, 'leerdoelable')->using(Leerdoelable::class)->withPivot('id');
+    }
+
+    public function modules()
+    {
+        return $this->morphedByMany(Module::class, 'leerdoelable')->using(Leerdoelable::class)->withPivot('id');
+    }
 }

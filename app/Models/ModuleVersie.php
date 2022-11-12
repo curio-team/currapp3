@@ -25,4 +25,9 @@ class ModuleVersie extends Model
     {
         return $this->belongsToMany(VakInUitvoer::class, 'module_vak')->withPivot(['week_start', 'week_eind'])->withTimestamps();
     }
+    
+    public function leerdoelen()
+    {
+        return $this->morphToMany(Leerdoel::class, 'leerdoelable')->using(Leerdoelable::class)->withPivot('id');
+    }
 }

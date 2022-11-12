@@ -39,4 +39,9 @@ class Uitvoer extends Model
     {
         return $this->hasMany(VakInUitvoer::class);
     }
+
+    public function leerdoelen()
+    {
+        return $this->morphToMany(Leerdoel::class, 'leerdoelable')->using(Leerdoelable::class)->withPivot('id');
+    }
 }

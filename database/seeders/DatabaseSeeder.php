@@ -172,5 +172,35 @@ class DatabaseSeeder extends Seeder
                $leerlijn->leerdoelen()->save($leerdoel);
             }
         }
+
+        //
+        // Leerdoelen aan modules en blokken
+        //
+        $ids = \App\Models\Leerdoel::all()->pluck('id')->toArray();
+        foreach(\App\Models\ModuleVersie::all() as $versie)
+        {
+            $start = rand(0, count($ids) / 2);
+            $end = rand($start+1, $start+20);
+            $versie->leerdoelen()->attach(array_slice($ids, $start, $end));
+        }
+        foreach(\App\Models\Uitvoer::all() as $blok)
+        {
+            $start = rand(0, count($ids) / 2);
+            $end = rand($start+1, $start+20);
+            $blok->leerdoelen()->attach(array_slice($ids, $start, $end));
+        }
+
+        //
+        // Aspecten
+        //
+        foreach(\App\Models\Leerdoelable::all() as $leerdoelable)
+        {
+            for($i = 0; $i < rand(1, 3); $i++)
+            {
+                $aspect = new \App\Models\Aspect();
+                $aspect->voldoende = fake()->sentence(nbWords: 4);
+                $leerdoelable->aspecten()->save($aspect);
+            }
+        }
     }
 }
