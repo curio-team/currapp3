@@ -14,7 +14,7 @@ class VakInUitvoer extends Model
 
     public function parent()
     {
-        return $this->belongsTo(Vak::class);
+        return $this->belongsTo(Vak::class, 'vak_id');
     }
 
     public function uitvoer()

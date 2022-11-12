@@ -12,9 +12,10 @@ class VakFactory extends Factory
 {
     public function definition()
     {
+        $name = fake()->word();
         return [
-            'naam' => strtoupper(fake()->lexify('???')),
-            'omschrijving' => ucfirst(fake()->word()),
+            'naam' => strtoupper(substr($name, 0, 3)),
+            'omschrijving' => ucfirst($name),
             'volgorde' => fake()->randomDigit(),
         ];
     }
