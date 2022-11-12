@@ -43,6 +43,19 @@ class DatabaseSeeder extends Seeder
         ]);
 
         //
+        // Vakken
+        //
+        \App\Models\Vak::factory()
+            ->count(15)
+            ->for($opleiding)
+            ->create();
+        \App\Models\Vak::factory()
+            ->count(10)
+            ->zonderOmschrijving()
+            ->for($opleiding)
+            ->create();
+
+        //
         // Blokken
         //
         \App\Models\Blok::factory()
@@ -87,6 +100,5 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
-
     }
 }
