@@ -71,5 +71,22 @@ class DatabaseSeeder extends Seeder
             }
         }
         
+        //
+        // Uitvoeren
+        //
+        foreach(\App\Models\Cohort::all() as $cohort)
+        {
+            $datum = $cohort->datum_start;
+            foreach(\App\Models\Blok::all() as $blok)
+            {
+                \App\Models\Uitvoer::create([
+                    'cohort_id' => $cohort->id,
+                    'blok_id' => $blok->id,
+                    'datum_start' => $datum->format('Y-m-d'),
+                    'datum_eind' => $datum->addMonths(6),
+                ]);
+            }
+        }
+
     }
 }
