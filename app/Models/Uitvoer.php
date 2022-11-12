@@ -5,10 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
-use App\Models\Cohort;
-use App\Models\Blok;
-use App\Models\VakInUitvoer;
-
 class Uitvoer extends Model
 {
     protected $table = 'uitvoeren';

@@ -3,12 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Cohort;
-use App\Models\Blok;
-use App\Models\Leerlijn;
-use App\Models\Acceptatiecriterium;
-use App\Models\Module;
 
 class Opleiding extends Model
 {

@@ -8,11 +8,6 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
-use App\Models\Opleiding;
-use App\Models\Module;
-use App\Models\Comment;
-use App\Models\Taak;
-
 class User extends Authenticatable
 {
     use HasApiTokens, Notifiable;

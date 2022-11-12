@@ -5,9 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
-use App\Models\Opleiding;
-use App\Models\Uitvoer;
-
 class Cohort extends Model
 {
     protected $table = 'cohorten';

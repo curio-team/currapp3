@@ -4,11 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\User;
-use App\Models\Opleiding;
-use App\Models\Leerlijn;
-use App\Models\ModuleVersie;
-
 class Module extends Model
 {
     protected $table = 'modules';

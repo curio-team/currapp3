@@ -4,10 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\Vak;
-use App\Models\Uitvoer;
-use App\Models\ModuleVersie;
-
 class VakInUitvoer extends Model
 {
     protected $table = 'vakken_in_uitvoer';

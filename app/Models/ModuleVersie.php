@@ -5,9 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
-use \App\Models\Module;
-use \App\Models\VakInUitvoer;
-
 class ModuleVersie extends Model
 {
     protected $table = 'module_versies';
