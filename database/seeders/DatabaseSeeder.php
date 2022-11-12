@@ -100,5 +100,19 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+
+        //
+        // Vakken-in-uitvoer
+        //
+        foreach(\App\Models\Uitvoer::all() as $uitvoer)
+        {
+            foreach(\App\Models\Vak::inRandomOrder()->limit(4)->get() as $vak)
+            {
+                \App\Models\VakInUitvoer::create([
+                    'vak_id' => $vak->id,
+                    'uitvoer_id' => $uitvoer->id,
+                ]);
+            }
+        }
     }
 }
