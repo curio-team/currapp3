@@ -30,5 +30,16 @@ class DatabaseSeeder extends Seeder
             'type'  => 'teacher',
         ]);
 
+        //
+        // Opleiding
+        //
+        $opleiding = \App\Models\Opleiding::create([
+            'naam'  => 'Software developer',
+            'crebo' => '25604',
+            'eigenaar_id' => 'br10',
+            'duur_in_jaren' => 4,
+            'blokken_per_jaar' => 2,
+        ]);
+
     }
 }
