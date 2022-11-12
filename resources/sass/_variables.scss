@@ -1,0 +1,16 @@
+// Body
+$body-bg: #f8fafc;
+
+$theme-colors: (
+	"primary":    hsl(209, 29%,  30%),
+ 	"secondary":  hsl(209, 33%,  53%),
+  	"light":      hsl(209, 100%, 97%),
+  	"dark":       hsl(209, 29%,  22%),
+  	"gray": 	  hsl(209, 47%,  85%)
+);
+
+// Typography
+$font-family-sans-serif: 'Source Sans Pro', sans-serif;
+$line-height-base: 1.6;
+
+$headings-font-family: 'Oswald', sans-serif;
