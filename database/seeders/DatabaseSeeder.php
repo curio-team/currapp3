@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class DatabaseSeeder extends Seeder
 {
@@ -41,5 +42,19 @@ class DatabaseSeeder extends Seeder
             'blokken_per_jaar' => 2,
         ]);
 
+        //
+        // Blokken
+        //
+        \App\Models\Blok::factory()
+            ->count(8)
+            ->state(new Sequence(
+                ['eigenaar_id' => 'br10'],
+                ['eigenaar_id' => 'ab01'],
+                ['eigenaar_id' => null],
+                ['eigenaar_id' => null],
+            ))
+            ->for($opleiding)
+            ->create();
+        
     }
 }
