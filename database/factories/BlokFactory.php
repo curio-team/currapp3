@@ -32,7 +32,6 @@ class BlokFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'naam' => null,
-            'volgorde' => fake()->randomDigit(),
         ]);
     }
 }
