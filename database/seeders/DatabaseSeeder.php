@@ -114,5 +114,14 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+
+        //
+        // Leerlijnen
+        //
+        \App\Models\Leerlijn::factory()
+            ->count(20)
+            ->for($opleiding)
+            ->create();
+
     }
 }
