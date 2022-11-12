@@ -194,6 +194,14 @@ class DatabaseSeeder extends Seeder
         // Aspecten
         //
         foreach(\App\Models\Leerdoelable::all() as $leerdoelable)
+        {
+            for($i = 0; $i < rand(1, 3); $i++)
+            {
+                $aspect = new \App\Models\Aspect();
+                $aspect->voldoende = fake()->sentence(nbWords: 4);
+                $leerdoelable->aspecten()->save($aspect);
+            }
+        }
         //
         // Acceptatiecriteria
         //
@@ -205,12 +213,8 @@ class DatabaseSeeder extends Seeder
         $ids = \App\Models\Acceptatiecriterium::all()->pluck('id')->toArray();
         foreach(\App\Models\ModuleVersie::limit(10)->get() as $module)
         {
-            for($i = 0; $i < rand(1, 3); $i++)
             for($i = 0; $i < rand(1, 4); $i++)
             {
-                $aspect = new \App\Models\Aspect();
-                $aspect->voldoende = fake()->sentence(nbWords: 4);
-                $leerdoelable->aspecten()->save($aspect);
                 $module->acceptatiecriteria()->attach(fake()->randomElement($ids), ['voldoet' => rand(0, 1)]);
             }
         }
