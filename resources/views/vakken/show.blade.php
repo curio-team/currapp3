@@ -1,5 +1,5 @@
 <div wire:ignore.self class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-labelledby="showModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-fullscreen-md-down" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="showModalLabel">{{ $item->naam }} <span class="text-muted">{{ $item->omschrijving }}</span></h1>
