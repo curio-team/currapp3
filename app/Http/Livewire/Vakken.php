@@ -4,25 +4,17 @@ namespace App\Http\Livewire;
 
 use App\Models\Opleiding;
 use App\Models\Vak;
-use Livewire\Component;
 
-class Vakken extends Component
+class Vakken extends MyComponent
 {
     public Opleiding $opleiding;
-    public $vak;
 
+    protected $className = \App\Models\Vak::class;
     protected $rules = [
-        'vak.naam' => 'required',
-        'vak.omschrijving' => 'nullable',
-        'vak.volgorde' => 'required|integer|min:0',
+        'item.naam' => 'required',
+        'item.omschrijving' => 'nullable',
+        'item.volgorde' => 'required|integer|min:0',
     ];
-
-    protected $listeners = ['refreshComponent' => '$refresh'];
-
-    public function mount()
-    {
-        $this->vak = new Vak();
-    }
 
     public function render()
     {
@@ -34,43 +26,26 @@ class Vakken extends Component
     public function create()
     {
         $this->validate($this->rules);
-        $this->vak->opleiding_id = $this->opleiding->id;
-        $this->vak->save();
+        $this->item->opleiding_id = $this->opleiding->id;
+        $this->item->save();
         $this->endModal();
     }
 
     public function update()
     {
         $this->validate($this->rules);
-        $this->vak->save();
+        $this->item->save();
         $this->endModal();
     }
 
     public function destroy()
     {
-        foreach($this->vak->uitvoeren as $uitvoer)
+        foreach($this->item->uitvoeren as $uitvoer)
         {
             $uitvoer->modules()->detach();
             $uitvoer->delete();
         }
-        $this->vak->delete();
+        $this->item->delete();
         $this->endModal();
-    }
-
-    public function setVak($id)
-    {
-        $this->vak = Vak::find($id);
-    }
-
-    public function clearVak()
-    {
-        $this->vak = new Vak();
-    }
-
-    private function endModal()
-    {
-        $this->clearVak();
-        $this->emit('confirm');
-        $this->emit('refreshComponent');
     }
 }

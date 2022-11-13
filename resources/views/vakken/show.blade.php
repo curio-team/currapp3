@@ -2,13 +2,13 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="showModalLabel">{{ $vak->naam }} <span class="text-muted">{{ $vak->omschrijving }}</span></h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearVak()"></button>
+                <h1 class="modal-title fs-5" id="showModalLabel">{{ $item->naam }} <span class="text-muted">{{ $item->omschrijving }}</span></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>
             </div>
             <div class="modal-body">
                 <p>Dit vak wordt uitgevoerd in:</p>
                 <ul>
-                    @forelse ($vak->uitvoeren->sortBy('uitvoer.datum_start') as $uitvoer)
+                    @forelse ($item->uitvoeren->sortBy('uitvoer.datum_start') as $uitvoer)
                         <li>{{ $uitvoer->uitvoer->naam }}</li>
                     @empty
                         <li><em>(geen uitvoeren gekoppeld)</em></li>

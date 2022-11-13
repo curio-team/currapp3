@@ -2,36 +2,42 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="{{ $action }}ModalLabel">Nieuw</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearVak()"></button>
+                <h1 class="modal-title fs-5" id="{{ $action }}ModalLabel">
+                @if($action == 'update')
+                    Aanpassen
+                @else
+                    Nieuw
+                @endif
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
                         <label for="naam">Afkorting <span class="text-muted">(korte naam)</span>*:</label>
-                        <input type="text" class="form-control" id="naam" name="naam" wire:model="vak.naam" required>
-                        @error('vak.naam') <span class="text-danger error">{{ $message }}</span>@enderror
+                        <input type="text" class="form-control" id="naam" name="naam" wire:model="item.naam" required>
+                        @error('item.naam') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                     <div class="mb-3">
                         <label for="omschrijving">Omschrijving <span class="text-muted">(lange naam)</span>:</label>
-                        <input type="text" class="form-control" id="omschrijving" name="omschrijving" wire:model="vak.omschrijving">
-                        @error('vak.omschrijving') <span class="text-danger error">{{ $message }}</span>@enderror
+                        <input type="text" class="form-control" id="omschrijving" name="omschrijving" wire:model="item.omschrijving">
+                        @error('item.omschrijving') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                     <div class="mb-3">
                         <label for="omschrijving">Volgorde *:</label>
-                        <input type="number" class="form-control" id="volgorde" name="volgorde" required wire:model="vak.volgorde">
-                        @error('vak.volgorde') <span class="text-danger error">{{ $message }}</span>@enderror
+                        <input type="number" class="form-control" id="volgorde" name="volgorde" required wire:model="item.volgorde">
+                        @error('item.volgorde') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light"   data-bs-dismiss="modal" wire:click.prevent="clearVak()">Annuleren</button>
+                <button type="button" class="btn btn-light"   data-bs-dismiss="modal" wire:click.prevent="clearItem()">Annuleren</button>
                 <button type="button" class="btn btn-success" wire:click.prevent="{{ $action }}()">
                     <span class="d-none spinner-border spinner-border-sm" role="status" aria-hidden="true" wire:loading.class.remove="d-none" wire:target="{{ $action }}"></span>
                     <i class="fa-regular fa-floppy-disk fa-fw" wire:loading.class="d-none" wire:target="{{ $action }}"></i>
                     Opslaan
                 </button>
-                <input type="hidden" name="id" wire:model="vak.id">
+                <input type="hidden" name="id" wire:model="item.id">
             </div>
         </div>
     </div>
