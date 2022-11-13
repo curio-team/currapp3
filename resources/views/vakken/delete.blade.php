@@ -6,8 +6,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearVak()"></button>
             </div>
             <div class="modal-body">
-                <p>Je gaat het vak <strong>{{ $vak->naam }}</strong> verwijderen. Dit vak is gekoppeld aan <strong>{{ $vak->uitvoeren->count() }}</strong> blok-uitvoeren met daaraan gelinkte modules.</p>
-                <p>Je verwijdert het vak uit <em>alle</em> uitvoeren en verbreekt alle koppelingen.</p>
+                @if($vak->uitvoeren->count())
+                    <p>Je gaat het vak <strong>{{ $vak->naam }}</strong> verwijderen. Dit vak is gekoppeld aan <strong>{{ $vak->uitvoeren->count() }}</strong> blok-uitvoeren met daaraan gelinkte modules.</p>
+                    <p>Je verwijdert het vak uit <em>alle</em> uitvoeren en verbreekt alle koppelingen.</p>
+                @else
+                    <p>Je gaat het vak <strong>{{ $vak->naam }}</strong> verwijderen.</p>
+                    <p>Dit vaak is <em>niet</em> gekoppeld aan blok-uitvoeren, er  worden dus geen koppelingen verbroken.</p>
+                @endif                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light"  data-bs-dismiss="modal" wire:click.prevent="clearVak()">Annuleren</button>
