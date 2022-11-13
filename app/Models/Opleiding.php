@@ -23,6 +23,11 @@ class Opleiding extends Model
         return $this->hasMany(Cohort::class);
     }
 
+    public function vakken()
+    {
+        return $this->hasMany(Vak::class)->orderBy('volgorde');
+    }
+
     public function blokken()
     {
         return $this->hasMany(Blok::class);

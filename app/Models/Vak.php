@@ -15,4 +15,9 @@ class Vak extends Model
     {
         return $this->belongsTo(Opleiding::class);
     }
+
+    public function uitvoeren()
+    {
+        return $this->hasMany(VakInUitvoer::class);
+    }
 }

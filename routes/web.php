@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OpleidingController;
+use App\Http\Controllers\VakController;
+use App\Http\Livewire\Vakken;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(["auth"])->group(function () {
@@ -9,7 +11,8 @@ Route::middleware(["auth"])->group(function () {
     Route::get('/', [HomeController::class, 'show'])->name('home');
     Route::post('/standaard', [HomeController::class, 'store'])->name('standaard.store');
 
-    Route::resource('opleidingen', OpleidingController::class);
+    Route::resource('opleidingen', OpleidingController::class)->parameter('opleidingen', 'opleiding');
+    Route::get('opleidingen/{opleiding}/vakken', Vakken::class)->name('opleidingen.vakken.index');
 
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
     });

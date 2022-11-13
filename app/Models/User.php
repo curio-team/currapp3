@@ -50,4 +50,9 @@ class User extends Authenticatable
 	{
 		return $this->belongsToMany(Team::class)->orderBy('naam');
 	}
+
+    public function opleiding()
+    {
+        return $this->belongsTo(Opleiding::class, 'standaard_opleiding');
+    }
 }
