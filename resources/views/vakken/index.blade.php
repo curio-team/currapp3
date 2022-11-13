@@ -12,7 +12,7 @@
             <tr>
                 <th>Naam</th>
                 <th>Omschrijving</th>
-                <th>Volgorde</th>
+                <th class="d-none d-sm-table-cell">Volgorde</th>
                 <th></th>
             </tr>
         </thead>
@@ -21,11 +21,11 @@
                 <tr class="hover-show">
                     <td>{{ $vak->naam }}</td>
                     <td>{{ $vak->omschrijving }}</td>
-                    <td>{{ $vak->volgorde }}</td>
+                    <td class="d-none d-sm-table-cell">{{ $vak->volgorde }}</td>
                     <td class="text-end">
-                        <button class="btn btn-lg btn-link link-primary"   data-bs-toggle="modal" data-bs-target="#showModal"   wire:click="setItem({{ $vak->id }})"><i class="fa-regular fa-eye"></i></button>
-                        <button class="btn btn-lg btn-link link-secondary" data-bs-toggle="modal" data-bs-target="#updateModal" wire:click="setItem({{ $vak->id }})"><i class="fa-solid fa-pen-to-square"></i></button>
-                        <button class="btn btn-lg btn-link link-danger"    data-bs-toggle="modal" data-bs-target="#deleteModal" wire:click="setItem({{ $vak->id }})"><i class="fa-regular fa-trash-can">  </i></button>
+                        <button class="btn btn-lg p-1 p-md-3 btn-link link-primary"   data-bs-toggle="modal" data-bs-target="#showModal"   wire:click="setItem({{ $vak->id }})"><i class="fa-regular fa-eye"></i></button>
+                        <button class="btn btn-lg p-1 p-md-3 btn-link link-secondary" data-bs-toggle="modal" data-bs-target="#updateModal" wire:click="setItem({{ $vak->id }})"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="btn btn-lg p-1 p-md-3 btn-link link-danger"    data-bs-toggle="modal" data-bs-target="#deleteModal" wire:click="setItem({{ $vak->id }})"><i class="fa-regular fa-trash-can">  </i></button>
                     </td>
                 </tr>
             @endforeach
