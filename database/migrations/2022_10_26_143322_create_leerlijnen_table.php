@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('opleiding_id')->constrained('opleidingen');
             $table->string('naam');
+            $table->string('color');
             $table->timestamps();
         });
     }

@@ -11,6 +11,7 @@ class LeerlijnFactory extends Factory
     {
         return [
             'naam' => strtoupper(fake()->lexify('???')),
+            'color' => fake()->hexColor(),
         ];
     }
 }
