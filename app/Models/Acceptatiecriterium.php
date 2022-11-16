@@ -25,4 +25,9 @@ class Acceptatiecriterium extends Model
     {
         return $this->belongsToMany(ModuleVersie::class, 'acceptatiecriterium_module')->withPivot(['voldoet', 'opmerking', 'reviewer_id']);
     }
+
+    public function leerlijnen()
+    {
+        return $this->belongsToMany(Leerlijn::class, 'acceptatiecriterium_leerlijn');
+    }
 }

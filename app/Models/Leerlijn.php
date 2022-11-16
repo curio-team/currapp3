@@ -25,4 +25,9 @@ class Leerlijn extends Model
     {
         return $this->hasMany(Leerdoel::class);
     }
+
+    public function acceptatiecriteria()
+    {
+        return $this->belongsToMany(Acceptatiecriterium::class, 'acceptatiecriterium_leerlijn');
+    }
 }

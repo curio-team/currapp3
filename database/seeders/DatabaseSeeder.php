@@ -230,5 +230,13 @@ class DatabaseSeeder extends Seeder
                 $module->acceptatiecriteria()->attach(fake()->randomElement($ids), ['voldoet' => rand(0, 1)]);
             }
         }
+
+        foreach(\App\Models\Leerlijn::all() as $leerlijn)
+        {
+            for($i = 0; $i < rand(5, 10); $i++)
+            {
+                $leerlijn->acceptatiecriteria()->attach(fake()->randomElement($ids));
+            }
+        }
     }
 }
