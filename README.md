@@ -3,6 +3,11 @@
 
 Doel van de app: het team krijgt eigenaarschap over de staat van het onderwijs. Dit ligt niet bij één persoon maar is voor iedereen inzichtelijk en het proces hieromheen is gestroomlijnd.
 
+* Als admin van de app wil ik:
+  * Teams maken (bijv.. TT-SD, TT-BBO, enzovoort).
+  * Een opleiding koppelen aan een team (één opleiding heeft één team).
+  * Gebruikers koppelen aan een team (veel-op-veel), zodat bijhorende opleidingen kunnen zien.
+  * Andere gebruikers admin maken.
 * Als onderwijscoördinator wil ik de structuur inrichten, zodat mijn collega's hun werk kunnen doen (commentaar invullen, enzovoort).
   * Dit mag niet teveel tijd kosten > oplossing: structuur is geheel kopieerbaar en bij wijzigingen wordt gevraagd "wil je wijzigen voor alleen deze uitvoer, of ook toekomstige?"
   * Zie ERD (zwarte deel) voor hoofdstructuur, waarbij geldt: een "uitvoer" is een blok-in-een-jaar. Dus niet een globaal blok, maar specifiek "Blok X (2022-sep)".
@@ -39,6 +44,7 @@ Doel van de app: het team krijgt eigenaarschap over de staat van het onderwijs. 
   * Koppelen aan uitvoeren en modules
   * Aan die koppeling zijn weer aspecten gekoppeld
   * Export t.b.v. Itslearning
+    * Samenwerking met app van Tim?! Zodat het direct kan worden ingelezen als aspecten..
   * Diverse rapportages
   * Leerdoel kan niet wijzigen. Opleiding kent leerdoelen, die kun je archiveren of nieuwe maken. Stel dat 11.02 niet meer klopt, wordt het dus bijvoorbeelds 11.36.
     * Let wel; voor correcte weergave moeten we dan ook LU's een volgorde mee kunnen geven (zodat 11.36 nog steeds bovenaan staat, want is eerste stap van K1-W1).
