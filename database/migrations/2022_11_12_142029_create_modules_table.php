@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('omschrijving')->nullable();
             $table->string('map_url')->nullable();
             $table->timestamps();
-
-            $table->foreign('eigenaar_id')->references('id')->on('users');
         });
     }
 

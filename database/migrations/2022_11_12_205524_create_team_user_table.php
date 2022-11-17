@@ -16,8 +16,6 @@ return new class extends Migration
         Schema::create('team_user', function (Blueprint $table) {
             $table->foreignId('team_id')->constrained('teams');
             $table->string('user_id');
-
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

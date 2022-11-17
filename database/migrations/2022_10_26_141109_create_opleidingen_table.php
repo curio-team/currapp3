@@ -24,8 +24,6 @@ return new class extends Migration
             $table->integer('duur_in_jaren');
             $table->integer('blokken_per_jaar');
             $table->timestamps();
-
-            $table->foreign('eigenaar_id')->references('id')->on('users');
         });
     }
 

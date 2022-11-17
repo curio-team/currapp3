@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('auteur_id');
             $table->text('comment');
             $table->timestamps();
-
-            $table->foreign('auteur_id')->references('id')->on('users');
         });
     }
 

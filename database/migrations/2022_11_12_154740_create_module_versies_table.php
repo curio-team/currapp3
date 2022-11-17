@@ -19,8 +19,6 @@ return new class extends Migration
             $table->integer('versie');
             $table->string('hoofdauteur_id')->nullable();
             $table->timestamps();
-
-            $table->foreign('hoofdauteur_id')->references('id')->on('users');
         });
     }
 

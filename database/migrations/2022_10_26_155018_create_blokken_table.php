@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string('naam');
             $table->integer('volgorde');
             $table->timestamps();
-
-            $table->foreign('eigenaar_id')->references('id')->on('users');
         });
     }
 

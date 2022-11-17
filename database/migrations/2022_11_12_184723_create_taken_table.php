@@ -22,8 +22,6 @@ return new class extends Migration
             $table->integer('voortgang')->default(0);
             $table->boolean('afgerond')->default(false);
             $table->timestamps();
-
-            $table->foreign('eigenaar_id')->references('id')->on('users');
         });
     }
 

@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('reviewer_id')->nullable();
             $table->boolean('voldoet')->default(false);
             $table->string('opmerking')->nullable();
-
-            $table->foreign('reviewer_id')->references('id')->on('users');
         });
     }
 
