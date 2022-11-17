@@ -11,7 +11,7 @@
                     <p>Je verwijdert het vak uit <em>alle</em> uitvoeren en verbreekt alle koppelingen.</p>
                 @else
                     <p>Je gaat het vak <strong>{{ $item->naam }}</strong> verwijderen.</p>
-                    <p>Dit vaak is <em>niet</em> gekoppeld aan blok-uitvoeren, er  worden dus geen koppelingen verbroken.</p>
+                    <p>Dit vak is <em>niet</em> gekoppeld aan blok-uitvoeren, er  worden dus geen koppelingen verbroken.</p>
                 @endif                
             </div>
             <div class="modal-footer">
