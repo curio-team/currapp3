@@ -30,7 +30,7 @@ class Opleiding extends Model
 
     public function blokken()
     {
-        return $this->hasMany(Blok::class);
+        return $this->hasMany(Blok::class)->orderBy('volgorde');
     }
 
     public function leerlijnen()
