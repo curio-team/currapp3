@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 use App\Models\Opleiding;
 
-class Vakken extends MyComponent
+class Vakken extends _MyComponent
 {
     public Opleiding $opleiding;
 

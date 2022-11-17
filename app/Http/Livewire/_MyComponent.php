@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 use Livewire\Component;
 
-class MyComponent extends Component
+class _MyComponent extends Component
 {
     protected $listeners = ['refreshComponent' => '$refresh'];
     public $item;
