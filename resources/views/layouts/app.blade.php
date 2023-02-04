@@ -31,9 +31,9 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li><p class="dropdown-header">Basisdata:</p></li>
-                                    <li><a class="dropdown-item" href="{{ route('opleidingen.vakken',  $opleiding) }}">Vakken</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('opleidingen.blokken', $opleiding) }}">Blokken</a></li>
-                                    <li><a class="dropdown-item" href="#">Cohorten</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('opleidingen.vakken',   $opleiding) }}">Vakken</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('opleidingen.blokken',  $opleiding) }}">Blokken</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('opleidingen.cohorten', $opleiding) }}">Cohorten</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><p class="dropdown-header">Wissel opleiding:</p></li>
 

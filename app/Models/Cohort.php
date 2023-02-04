@@ -9,15 +9,15 @@ class Cohort extends Model
 {
     protected $table = 'cohorten';
 
-    protected $casts = [
-        'datum_start' => 'date',
-        'datum_eind' => 'date',
-    ];
+    // protected $casts = [
+    //     'datum_start' => 'datetime',
+    //     'datum_eind' => 'datetime',
+    // ];
 
     protected function naam(): Attribute
     {
         return Attribute::make(
-            get: fn ($value, $attributes) => 'C' . $this->datum_start->format('y'),
+            get: fn ($value, $attributes) => 'C' . substr($this->datum_start, 2, 2),
         );
     }
 

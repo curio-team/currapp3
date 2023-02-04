@@ -20,7 +20,7 @@ class Opleiding extends Model
 
     public function cohorten()
     {
-        return $this->hasMany(Cohort::class);
+        return $this->hasMany(Cohort::class)->orderBy('datum_start');
     }
 
     public function vakken()

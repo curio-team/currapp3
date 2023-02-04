@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>
             </div>
             <div class="modal-body">
-                <p>Dit blok wordt uitgevoerd als:</p>
+                <p>Dit cohort kent de volgende blokken:</p>
                 <ul>
                     @forelse ($item->uitvoeren->sortBy('uitvoer.datum_start') as $uitvoer)
                         <li>{{ $uitvoer->naam }}</li>
