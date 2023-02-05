@@ -101,7 +101,7 @@ class DatabaseSeeder extends Seeder
         foreach(\App\Models\Cohort::all() as $cohort)
         {
             $datum = new \Carbon\Carbon($cohort->datum_start);
-            $i = $j = 1;
+            $i = 1;
             foreach(\App\Models\Blok::all() as $blok)
             {
                 $schooljaar = $datum->format('Y');
@@ -111,17 +111,12 @@ class DatabaseSeeder extends Seeder
                     'blok_id' => $blok->id,
                     'datum_start' => $datum->format('Y-m-d'),
                     'datum_eind' => $datum->addMonths(6),
-                    'leerjaar' => $j,
                     'schooljaar' => $schooljaar,
                     'blok_in_schooljaar' => $i,
                 ]);
 
                 $i++;
-                if($i > 2)
-                {
-                    $i = 1;
-                    $j++;
-                }
+                if($i > 2) $i = 1;
             }
         }
 

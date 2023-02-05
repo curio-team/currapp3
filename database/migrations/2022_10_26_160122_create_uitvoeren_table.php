@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('blok_id')->constrained('blokken');
             $table->date('datum_start');
             $table->date('datum_eind');
-            $table->integer('leerjaar');
             $table->integer('schooljaar');
             $table->integer('blok_in_schooljaar');
             $table->timestamps();

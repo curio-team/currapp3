@@ -20,11 +20,6 @@
                     <p><em>Wanneer wordt dit blok uitgevoerd binnen</em> {{ $cohort->naam }}<em>? <strong>Tip:</strong> wanneer je een bestaande combinatie invoert, dan wordt die bestaande uitvoer gekoppeld. Iedere uitvoer bestaat namelijk maar één keer.</em></p>
                     <hr class="my-3">
                     <div class="mb-3">
-                        <label for="leerjaar">Uitgevoerd in leerjaar... *</label>
-                        <input type="number" class="form-control" id="leerjaar" name="leerjaar" wire:model="item.leerjaar" required>
-                        @error('item.leerjaar') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                    <div class="mb-3">
                         <label for="schooljaar">Uitgevoerd in schooljaar... *</label>
                         <select class="form-select" id="schooljaar" name="schooljaar" wire:model="item.schooljaar" required>
                             <option />

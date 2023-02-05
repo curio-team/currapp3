@@ -15,7 +15,6 @@ class CohortUitvoeren extends _MyComponent
     protected $className = \App\Models\Uitvoer::class;
     protected $rules = [
         'item.blok_id' => 'required',
-        'item.leerjaar' => 'required|integer|min:0',
         'item.schooljaar' => 'required|integer|min:0',
         'item.blok_in_schooljaar' => 'required|integer|min:0',
     ];
