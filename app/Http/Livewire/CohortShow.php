@@ -7,7 +7,7 @@ use App\Models\Cohort;
 use App\Models\Opleiding;
 use App\Models\Uitvoer;
 
-class CohortUitvoeren extends _MyComponent
+class CohortShow extends _MyComponent
 {
     public Opleiding $opleiding;
     public Cohort $cohort;
@@ -21,7 +21,7 @@ class CohortUitvoeren extends _MyComponent
 
     public function render()
     {
-        return view('cohort_uitvoeren.show')
+        return view('cohorten.show')
             ->extends('layouts.app', ['opleiding' => $this->opleiding])
             ->with('blokken', Blok::all())
             ->section('main');

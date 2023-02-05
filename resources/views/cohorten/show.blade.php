@@ -17,7 +17,10 @@
                 <div class="card hover-show" style="grid-column: {{ $uitvoer->blok_in_schooljaar+1 }};">
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <span>{{ $uitvoer->naam }}</span>
-                        <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#unlinkModal" wire:click="setItem({{ $uitvoer->id }})"><i class="fa-solid fa-unlink fa-fw"></i></button>
+                        <div class="btn-group">
+                            <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#unlinkModal" wire:click="setItem({{ $uitvoer->id }})"><i class="fa-solid fa-unlink fa-fw"></i></button>
+                            <a href="{{ route('opleidingen.uitvoeren.show', [$opleiding, $uitvoer]) }}" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-eye fa-fw"></i></a>
+                        </div>
                     </div>
                 </div>
             @endforeach
@@ -25,7 +28,7 @@
     @endfor
 
     <!-- Modals -->
-    @include('cohort_uitvoeren.unlink')
-    @include('cohort_uitvoeren.link')
+    @include('cohorten.unlink')
+    @include('cohorten.link')
 
 </div>

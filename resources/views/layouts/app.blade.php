@@ -10,7 +10,7 @@
     <body>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">CurrApp</a>
+                <a class="navbar-brand" href="{{ route('home') }}">CurrApp</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -21,6 +21,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Modules</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('opleidingen.cohorten', $opleiding) }}">Cohorten</a>
                         </li>
                     </ul>
                     @if(isset($opleiding))
@@ -33,7 +36,6 @@
                                     <li><p class="dropdown-header">Basisdata:</p></li>
                                     <li><a class="dropdown-item" href="{{ route('opleidingen.vakken',   $opleiding) }}">Vakken</a></li>
                                     <li><a class="dropdown-item" href="{{ route('opleidingen.blokken',  $opleiding) }}">Blokken</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('opleidingen.cohorten', $opleiding) }}">Cohorten</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><p class="dropdown-header">Wissel opleiding:</p></li>
 
