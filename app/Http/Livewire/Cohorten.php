@@ -62,6 +62,7 @@ class Cohorten extends _MyComponent
                 $comment->delete();
             }
 
+            $uitvoer->cohorten()->detach();
             $uitvoer->delete();
         }
 
