@@ -4,7 +4,10 @@
             <span class="subheader">Basisdata:</span>
             <h1>Cohorten</h1>
         </div>
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal" wire:click.prevent="clearItem()"><i class="fa-solid fa-plus fa-fw"></i></button>
+        <div class="btn-group">
+            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#createModal" wire:click.prevent="clearItem()"><i class="fa-solid fa-plus fa-fw"></i></button>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#copyModal" wire:click.prevent="clearItem()"><i class="fa-regular fa-copy fa-fw"></i></button>
+        </div>
     </div>
     
     <table class="table table-hover table-striped">
@@ -36,4 +39,5 @@
     @include('cohorten.form', ['action' => 'create'])
     @include('cohorten.form', ['action' => 'update'])
     @include('cohorten.delete')
+    @include('cohorten.copy')
 </div>

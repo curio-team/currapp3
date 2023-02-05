@@ -6,7 +6,7 @@
                 @if($action == 'update')
                     Aanpassen
                 @else
-                    Nieuw
+                    Nieuw (handmatig inrichten)
                 @endif
                 </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>

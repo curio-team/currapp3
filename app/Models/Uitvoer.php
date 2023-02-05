@@ -27,7 +27,7 @@ class Uitvoer extends Model
 
     public function cohorten()
     {
-        return $this->belongsToMany(Cohort::class);
+        return $this->belongsToMany(Cohort::class)->orderBy('datum_start');
     }
 
     public function blok()

@@ -52,4 +52,9 @@ class Opleiding extends Model
     {
         return $this->hasMany(Taak::class);
     }
+
+    public function uitvoeren()
+    {
+        return $this->hasManyThrough(Uitvoer::class, Blok::class);
+    }
 }

@@ -51,7 +51,7 @@ class CohortUitvoeren extends _MyComponent
 
             $monthsToAdd = $maanden_per_blok * ($this->item->blok_in_schooljaar);
             $daysToAdd = 28 * ($monthsToAdd - floor($monthsToAdd));
-            $this->item->datum_eind = $this->item->datum_start->addMonths($monthsToAdd)->addDays($daysToAdd-1);
+            $this->item->datum_eind = $start_schooljaar->addMonths($monthsToAdd)->addDays($daysToAdd-1);
 
             $this->cohort->uitvoeren()->save($this->item);
         }
