@@ -10,6 +10,7 @@ class Cohorten extends _MyComponent
     protected $className = \App\Models\Cohort::class;
 
     protected $rules = [
+        'item.naam' => 'required',
         'item.datum_start' => 'required',
         'item.datum_eind' => 'required',
     ];

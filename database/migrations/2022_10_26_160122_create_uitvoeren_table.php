@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('uitvoeren', function (Blueprint $table) {
             $table->id();
             $table->foreignId('blok_id')->constrained('blokken');
-            $table->foreignId('cohort_id')->constrained('cohorten');
             $table->date('datum_start');
             $table->date('datum_eind');
+            $table->integer('leerjaar');
+            $table->integer('schooljaar');
+            $table->integer('blok_in_schooljaar');
             $table->timestamps();
         });
     }

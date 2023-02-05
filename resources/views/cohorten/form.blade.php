@@ -14,6 +14,11 @@
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
+                        <label for="naam">Naam *:</label>
+                        <input type="text" class="form-control" id="naam" name="naam" wire:model="item.naam" required>
+                        @error('item.naam') <span class="text-danger error">{{ $message }}</span>@enderror
+                    </div>
+                    <div class="mb-3">
                         <label for="datum_start">Startdatum *:</label>
                         <input type="text" placeholder="yyyy-mm-dd" class="form-control" id="datum_start" name="datum_start" wire:model="item.datum_start" required>
                         @error('item.datum_start') <span class="text-danger error">{{ $message }}</span>@enderror

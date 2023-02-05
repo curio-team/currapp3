@@ -18,16 +18,16 @@ class Uitvoer extends Model
     {
         return Attribute::make(
             get: function ($value) {
-                $month = $this->datum_start->format('n');
+                $month = optional($this->datum_start)->format('n');
                 $month = ($month >= 6) ? 'sep' : 'feb';
-                return "{$this->blok->naam} ({$this->datum_start->format('y')}-{$month})";
+                return optional($this->blok)->naam . " (" . optional($this->datum_start)->format('y') . "-" . $month . ")";
             },
         );
     }
 
-    public function cohort()
+    public function cohorten()
     {
-        return $this->belongsTo(Cohort::class);
+        return $this->belongsToMany(Cohort::class);
     }
 
     public function blok()

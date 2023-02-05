@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('omschrijving')->nullable();
             $table->string('crebo')->nullable();
             $table->boolean('is_actief')->default(true);
-            $table->integer('duur_in_jaren');
             $table->integer('blokken_per_jaar');
             $table->timestamps();
         });

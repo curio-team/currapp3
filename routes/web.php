@@ -7,6 +7,7 @@ use App\Http\Controllers\OpleidingController;
 use App\Http\Livewire\Vakken;
 use App\Http\Livewire\Blokken;
 use App\Http\Livewire\Cohorten;
+use App\Http\Livewire\CohortUitvoeren;
 
 Route::middleware(["auth"])->group(function () {
 
@@ -18,6 +19,7 @@ Route::middleware(["auth"])->group(function () {
     Route::get('opleidingen/{opleiding}/vakken',   Vakken::class  )->name('opleidingen.vakken' );
     Route::get('opleidingen/{opleiding}/blokken',  Blokken::class )->name('opleidingen.blokken');
     Route::get('opleidingen/{opleiding}/cohorten', Cohorten::class)->name('opleidingen.cohorten');
+    Route::get('opleidingen/{opleiding}/cohorten/{cohort}', CohortUitvoeren::class)->name('opleidingen.cohorten.show');
 
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         // TODO

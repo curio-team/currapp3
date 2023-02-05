@@ -8,19 +8,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 class Cohort extends Model
 {
     protected $table = 'cohorten';
-
-    // protected $casts = [
-    //     'datum_start' => 'datetime',
-    //     'datum_eind' => 'datetime',
-    // ];
-
-    protected function naam(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($value, $attributes) => 'C' . substr($this->datum_start, 2, 2),
-        );
-    }
-
+    
     public function opleiding()
     {
         return $this->belongsTo(Opleiding::class);
@@ -28,6 +16,6 @@ class Cohort extends Model
 
     public function uitvoeren()
     {
-        return $this->hasMany(Uitvoer::class);
+        return $this->belongsToMany(Uitvoer::class)->orderBy('datum_start');
     }
 }

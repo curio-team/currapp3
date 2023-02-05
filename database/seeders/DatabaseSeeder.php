@@ -49,7 +49,6 @@ class DatabaseSeeder extends Seeder
             'omschrijving'  => 'Software developer',
             'crebo' => '25604',
             'eigenaar_id' => 'br10',
-            'duur_in_jaren' => 4,
             'blokken_per_jaar' => 2,
         ]);
 
@@ -89,6 +88,7 @@ class DatabaseSeeder extends Seeder
             {
                 \App\Models\Cohort::create([
                     'opleiding_id' => $opleiding->id,
+                    'naam' => 'C' . substr($i, 2, 2) . ' (4jr-sep)',
                     'datum_start' => $i . '-08-01',
                     'datum_eind' => ($i+4) . '-07-31',
                 ]);
@@ -100,15 +100,28 @@ class DatabaseSeeder extends Seeder
         //
         foreach(\App\Models\Cohort::all() as $cohort)
         {
-            $datum = $cohort->datum_start;
+            $datum = new \Carbon\Carbon($cohort->datum_start);
+            $i = $j = 1;
             foreach(\App\Models\Blok::all() as $blok)
             {
-                \App\Models\Uitvoer::create([
-                    'cohort_id' => $cohort->id,
+                $schooljaar = $datum->format('Y');
+                if($datum->format('m') <= 6) $schooljaar -= 1;
+
+                $cohort->uitvoeren()->create([
                     'blok_id' => $blok->id,
                     'datum_start' => $datum->format('Y-m-d'),
                     'datum_eind' => $datum->addMonths(6),
+                    'leerjaar' => $j,
+                    'schooljaar' => $schooljaar,
+                    'blok_in_schooljaar' => $i,
                 ]);
+
+                $i++;
+                if($i > 2)
+                {
+                    $i = 1;
+                    $j++;
+                }
             }
         }
 
