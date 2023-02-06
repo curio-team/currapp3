@@ -1,4 +1,12 @@
 
+# Status 06-feb-2023
+Je kunt nu blokken en vakken maken.
+Je kunt een cohort maken en daar blokken aan koppelen, zodat uitvoeren ontstaan.
+Je kunt een cohort kopieeren (alle uitvoeren worden gekopieerd).
+Je ziet op de homepage de actuele uitvoeren.
+Je kunt een uitvoer bekijken; je ziet dan de vakken en modules van die uitvoer.
+Je kunt nog NIET de vakken/modules van een uitvoer toevoegen/wijzigen/verwijderen.
+
 # Backlog
 
 Doel van de app: het team krijgt eigenaarschap over de staat van het onderwijs. Dit ligt niet bij één persoon maar is voor iedereen inzichtelijk en het proces hieromheen is gestroomlijnd.
