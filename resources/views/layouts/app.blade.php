@@ -55,7 +55,7 @@
                 </div>
             </div>
         </nav>
-        <div class="container mt-4">
+        <div class="@yield('container-class', 'container mt-4')">
             @yield('main')
         </div>
         @livewireScripts
