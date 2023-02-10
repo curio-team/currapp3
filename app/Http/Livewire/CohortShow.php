@@ -23,7 +23,7 @@ class CohortShow extends _MyComponent
     {
         return view('cohorten.show')
             ->extends('layouts.app', ['opleiding' => $this->opleiding])
-            ->with('blokken', Blok::all())
+            ->with('blokken', $this->opleiding->blokken)
             ->section('main');
     }
 

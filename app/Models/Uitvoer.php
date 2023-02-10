@@ -37,7 +37,10 @@ class Uitvoer extends Model
 
     public function vakken()
     {
-        return $this->hasMany(VakInUitvoer::class);
+        return $this->hasMany(VakInUitvoer::class)
+                ->join('vakken', 'vakken.id', '=', 'vakken_in_uitvoer.vak_id')
+                ->select('vakken_in_uitvoer.*')
+                ->orderBy('vakken.volgorde');
     }
 
     public function leerdoelen()

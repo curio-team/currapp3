@@ -55,6 +55,9 @@
                 </div>
             </div>
         </nav>
+        
+        @yield('subnav')
+
         <div class="@yield('container-class', 'container mt-4')">
             @yield('main')
         </div>

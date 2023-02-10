@@ -1,7 +1,6 @@
 <div>
     <div class="title-header">
         <div>
-            <span class="subheader">Basisdata:</span>
             <h1>Cohorten</h1>
         </div>
         <div class="btn-group">

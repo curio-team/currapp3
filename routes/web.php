@@ -4,11 +4,11 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OpleidingController;
+use App\Http\Controllers\UitvoerController;
 use App\Http\Livewire\Vakken;
 use App\Http\Livewire\Blokken;
 use App\Http\Livewire\Cohorten;
 use App\Http\Livewire\CohortShow;
-use App\Http\Livewire\UitvoerShow;
 
 Route::middleware('auth')->group(function () {
 
@@ -21,7 +21,10 @@ Route::middleware('auth')->group(function () {
     Route::get('opleidingen/{opleiding}/blokken',  Blokken::class )->name('opleidingen.blokken');
     Route::get('opleidingen/{opleiding}/cohorten', Cohorten::class)->name('opleidingen.cohorten');
     Route::get('opleidingen/{opleiding}/cohorten/{cohort}', CohortShow::class)->name('opleidingen.cohorten.show');
-    Route::get('opleidingen/{opleiding}/uitvoeren/{uitvoer}', UitvoerShow::class)->name('opleidingen.uitvoeren.show');
+    
+    Route::get('opleidingen/{opleiding}/uitvoeren/{uitvoer}', [UitvoerController::class, 'show'])->name('opleidingen.uitvoeren.show');
+    Route::post('uitvoeren/{uitvoer}/vak', [UitvoerController::class, 'link_vak'])->name('uitvoeren.link.vak');
+    Route::post('uitvoeren/{uitvoer}/module', [UitvoerController::class, 'link_module'])->name('uitvoeren.link.module');
 
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         // TODO

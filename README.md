@@ -6,6 +6,7 @@
 * Je ziet op de homepage de actuele uitvoeren.
 * Je kunt een uitvoer bekijken; je ziet dan de vakken en modules van die uitvoer.
 * Je kunt nog NIET de vakken/modules van een uitvoer toevoegen/wijzigen/verwijderen.
+* Kopieer-actie cohort werkt NIET door op gekoppelde vakken/modules (kopieert nu lege uitvoeren)
 
 # Backlog
 

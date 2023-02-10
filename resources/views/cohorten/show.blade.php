@@ -19,7 +19,7 @@
                         <span>{{ $uitvoer->naam }}</span>
                         <div class="btn-group">
                             <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#unlinkModal" wire:click="setItem({{ $uitvoer->id }})"><i class="fa-solid fa-unlink fa-fw"></i></button>
-                            <a href="{{ route('opleidingen.uitvoeren.show', [$opleiding, $uitvoer]) }}" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-eye fa-fw"></i></a>
+                            <a target="_blank" href="{{ route('opleidingen.uitvoeren.show', [$opleiding, $uitvoer]) }}" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-eye fa-fw"></i></a>
                         </div>
                     </div>
                 </div>
