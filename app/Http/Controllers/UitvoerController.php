@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ModuleVersie;
 use App\Models\Opleiding;
 use App\Models\Uitvoer;
 use App\Models\VakInUitvoer;
@@ -18,6 +19,7 @@ class UitvoerController extends Controller
 
     public function link_vak(Uitvoer $uitvoer, Request $request)
     {
+        // Koppel nieuw aangevinkte vakken:
         foreach($request->vakken as $vak_id)
         {
             if($uitvoer->vakken->doesntContain('vak_id', $vak_id))
@@ -29,6 +31,7 @@ class UitvoerController extends Controller
             }
         }
 
+        // Verwijder uitgevinkte vakken:
         $vakken = collect($request->vakken);
         foreach($uitvoer->vakken as $vak)
         {
@@ -38,6 +41,18 @@ class UitvoerController extends Controller
                 $vak->delete();
             }
         }
+
+        return redirect()->back();
+    }
+
+    public function link_module(Uitvoer $uitvoer, Request $request)
+    {
+        $vak = VakInUitvoer::find($request->vak_id);
+        $module_versie = ModuleVersie::where('module_id', $request->module_id)->orderByDesc('versie')->first();
+        $vak->modules()->attach($module_versie, [
+                'week_start' => $request->week_start,
+                'week_eind' => $request->week_eind,
+        ]);
 
         return redirect()->back();
     }

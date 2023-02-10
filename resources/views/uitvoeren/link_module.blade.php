@@ -15,7 +15,6 @@
                             <option value="{{ $vak->id }}">{{ $vak->parent->naam }} {{ $vak->parent->omschrijving }}</option>
                         @endforeach
                     </select>
-                    @error('item.vak_id') <span class="text-danger error">{{ $message }}</span>@enderror
                 </div>
                 <div class="mb-3">
                     <label for="module_id">Module *:</label>
@@ -25,7 +24,15 @@
                             <option value="{{ $module->id }}">{{ $module->naam }} {{ $module->omschrijving }}</option>
                         @endforeach
                     </select>
-                    @error('item.module_id') <span class="text-danger error">{{ $message }}</span>@enderror
+                </div>
+                <div class="mb-3">
+                    <label for="module_id">Weken *:</label>
+                    <div class="input-group">
+                        <span class="input-group-text">Week van:</span>
+                        <input type="number" name="week_start" class="form-control" required>
+                        <span class="input-group-text">Week tot:</span>
+                        <input type="number" name="week_eind" class="form-control" required>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
