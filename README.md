@@ -1,12 +1,15 @@
 
-# Status 06-feb-2023
-* Je kunt nu blokken en vakken maken.
-* Je kunt een cohort maken en daar blokken aan koppelen, zodat uitvoeren ontstaan.
-* Je kunt een cohort kopieeren (alle uitvoeren worden gekopieerd).
+# Status 10-feb-2023
+* Hele zwarte deel van ERD is af en crud'able.
 * Je ziet op de homepage de actuele uitvoeren.
-* Je kunt een uitvoer bekijken; je ziet dan de vakken en modules van die uitvoer.
-* Je kunt nog NIET de vakken/modules van een uitvoer toevoegen/wijzigen/verwijderen.
-* Kopieer-actie cohort werkt NIET door op gekoppelde vakken/modules (kopieert nu lege uitvoeren)
+* Je kunt een uitvoer bekijken; je ziet dan de vakken en modules van die uitvoer (= 'leerplan' uit blokboek).
+* Je kunt een cohort kopieeren (alle uitvoeren worden gekopieerd).
+
+### Next:
+* Je kunt nog NIET de modules van een uitvoer verwijderen.
+* Kopieer-actie cohort werkt NIET door op gekoppelde vakken/modules (kopieert nu lege uitvoeren).
+* Daarna... door met rode deel (comments). Zodat het product als eerste de docentenfora kan gaan vervangen. Daarna acceptatiecriteria.
+* Wellicht leerdoelen helemaal niet meer bouwen... in afwachting van pilot studiepunten.
 
 # Backlog
 
