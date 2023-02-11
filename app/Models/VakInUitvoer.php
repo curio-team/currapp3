@@ -22,6 +22,7 @@ class VakInUitvoer extends Model
     {
         return $this->belongsToMany(ModuleVersie::class, 'module_vak')
             ->withPivot(['week_start', 'week_eind'])
-            ->withTimestamps();
+            ->withTimestamps()
+            ->orderBy('week_start');
     }
 }

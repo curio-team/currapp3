@@ -14,11 +14,11 @@
 @import 'bootstrap/scss/bootstrap';
 
 
-.hover-show a, .hover-show button{
+.hover-show a, .hover-show button, .hover-show .btn-group{
     visibility: hidden;
 }
 
-.hover-show:hover a, .hover-show:hover button{
+.hover-show:hover a, .hover-show:hover button,  .hover-show:hover .btn-group{
     visibility: visible;
 }
 
@@ -64,8 +64,23 @@ td{
 
 .module{
     border: 1px solid black;
+    opacity: 0.9;
 }
 
 .module + .module{
     border-top: none;
+}
+
+.btn-outline-white {
+    --bs-btn-color: white;
+    --bs-btn-border-color: white;
+    --bs-btn-hover-color: black;
+    --bs-btn-hover-bg: white;
+}
+
+.btn-outline-black {
+    --bs-btn-color: black;
+    --bs-btn-border-color: black;
+    --bs-btn-hover-color: white;
+    --bs-btn-hover-bg: black;
 }

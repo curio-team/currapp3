@@ -28,9 +28,9 @@
                 <div class="mb-3">
                     <label for="module_id">Weken *:</label>
                     <div class="input-group">
-                        <span class="input-group-text">Week van:</span>
+                        <span class="input-group-text">Week start:</span>
                         <input type="number" name="week_start" class="form-control" required>
-                        <span class="input-group-text">Week tot:</span>
+                        <span class="input-group-text">Week eind:</span>
                         <input type="number" name="week_eind" class="form-control" required>
                     </div>
                 </div>
