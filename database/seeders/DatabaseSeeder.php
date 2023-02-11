@@ -161,25 +161,30 @@ class DatabaseSeeder extends Seeder
         //
         // Versies
         //
+        foreach(\App\Models\Module::all() as $module)
+        {
+            for($i = 1; $i <= rand(1, 4); $i++)
+            {
+                \App\Models\ModuleVersie::create([
+                    'module_id'      => $module->id,
+                    'versie'         => $i,
+                    'hoofdauteur_id' => fake()->randomElement(['br10', 'ab01', null, null, null]),
+                ]);
+            }
+        }
 
         foreach(\App\Models\VakInUitvoer::all() as $vak)
         {
-            $versie = new \App\Models\ModuleVersie();
-            $versie->module_id = \App\Models\Module::inRandomOrder()->first()->id;
-            $versie->versie = rand(1, 5);
-            $versie->hoofdauteur_id = fake()->randomElement(['br10', 'ab01', null, null, null]);
             $eind = rand(3, 14);
+            $versie = \App\Models\ModuleVersie::inRandomOrder()->first();
             $vak->modules()->save($versie, [
                 'week_start' => 1,
                 'week_eind'  => $eind,
             ]);
 
-            $versie = new \App\Models\ModuleVersie();
-            $versie->module_id = \App\Models\Module::inRandomOrder()->first()->id;
-            $versie->versie = rand(1, 5);
-            $versie->hoofdauteur_id = fake()->randomElement(['br10', 'ab01', null, null, null]);
+            $versie = \App\Models\ModuleVersie::inRandomOrder()->first();
             $vak->modules()->save($versie, [
-                'week_start' => $eind + 1,
+                'week_start' => $eind+1,
                 'week_eind'  => 16,
             ]);
         }
