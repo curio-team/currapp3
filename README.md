@@ -8,6 +8,8 @@
 
 ### Next:
 * Kopieer-actie cohort werkt NIET door op gekoppelde vakken/modules (kopieert nu lege uitvoeren).
+* CRUD'en blauwe gedeelte ERD.
+* Bij aanpassen van leerplan wordt nog niet gevraagd of je dit ook voor andere uitvoeren wil doen.
 * Daarna... door met rode deel (comments). Zodat het product als eerste de docentenfora kan gaan vervangen. Daarna acceptatiecriteria.
 * Wellicht leerdoelen helemaal niet meer bouwen... in afwachting van pilot studiepunten.
 
