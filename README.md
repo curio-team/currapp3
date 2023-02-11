@@ -1,12 +1,12 @@
 
-# Status 10-feb-2023
+# Status 11-feb-2023
 * Hele zwarte deel van ERD is af en crud'able.
 * Je ziet op de homepage de actuele uitvoeren.
 * Je kunt een uitvoer bekijken; je ziet dan de vakken en modules van die uitvoer (= 'leerplan' uit blokboek).
+* Je kunt de leerplannen volledig beheren (vakken en modules toevoegen/wijzigen/verwijderen).
 * Je kunt een cohort kopieeren (alle uitvoeren worden gekopieerd).
 
 ### Next:
-* Je kunt nog NIET de modules van een uitvoer verwijderen.
 * Kopieer-actie cohort werkt NIET door op gekoppelde vakken/modules (kopieert nu lege uitvoeren).
 * Daarna... door met rode deel (comments). Zodat het product als eerste de docentenfora kan gaan vervangen. Daarna acceptatiecriteria.
 * Wellicht leerdoelen helemaal niet meer bouwen... in afwachting van pilot studiepunten.
