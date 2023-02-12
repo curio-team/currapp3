@@ -28,6 +28,12 @@
                         <div class="form-text">Het nieuwe cohort start ... jaar na het cohort waarvan je kopieert.</div>
                         @error('kopieer_jaren') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="1" id="nieuwste_versie" wire:model="nieuwste_versie">
+                            <label class="form-check-label" for="nieuwste_versie">Update gekoppelde modules automatisch naar laatste versie.</label>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">

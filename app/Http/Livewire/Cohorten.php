@@ -3,7 +3,9 @@
 namespace App\Http\Livewire;
 use App\Models\Opleiding;
 use App\Models\Cohort;
+use App\Models\ModuleVersie;
 use App\Models\Uitvoer;
+use App\Models\VakInUitvoer;
 
 class Cohorten extends _MyComponent
 {
@@ -18,10 +20,12 @@ class Cohorten extends _MyComponent
 
     public $kopieer_van;
     public $kopieer_jaren;
+    public $nieuwste_versie;
     protected $copyrules = [
         'item.naam' => 'required',
         'kopieer_van' => 'required',
         'kopieer_jaren' => 'required',
+        'nieuwste_versie' => 'nullable'
     ];
 
     public function render()
@@ -120,6 +124,27 @@ class Cohorten extends _MyComponent
                 $uitvoer_nieuw->datum_eind = $start_schooljaar->addMonths($monthsToAdd)->addDays($daysToAdd-1);
     
                 $this->item->uitvoeren()->save($uitvoer_nieuw);
+
+                foreach($uitvoer_oud->vakken as $vak_oud)
+                {
+                    $vak_nieuw = new VakInUitvoer();
+                    $vak_nieuw->vak_id = $vak_oud->vak_id;
+                    $uitvoer_nieuw->vakken()->save($vak_nieuw);
+
+                    foreach($vak_oud->modules as $module_oud)
+                    {
+                        $module_to_copy = $module_oud;
+                        if($this->nieuwste_versie)
+                        {
+                            $module_to_copy = ModuleVersie::where('module_id', $module_oud->module_id)->orderByDesc('versie')->first();
+                        }
+                        
+                        $vak_nieuw->modules()->attach($module_to_copy, [
+                            'week_start' => $module_oud->pivot->week_start,
+                            'week_eind' => $module_oud->pivot->week_eind,
+                        ]);
+                    }
+                }
             }
         }
 
@@ -131,5 +156,6 @@ class Cohorten extends _MyComponent
         $this->clearItem();
         $this->kopieer_van = $cohort_id;
         $this->kopieer_jaren = 1;
+        $this->nieuwste_versie = 0;
     }
 }
