@@ -14,11 +14,11 @@
 @import 'bootstrap/scss/bootstrap';
 
 
-.hover-show a, .hover-show button, .hover-show .btn-group{
+.hover-show a, .hover-show button, .hover-show .btn-group, .hover-show .hover-hide{
     visibility: hidden;
 }
 
-.hover-show:hover a, .hover-show:hover button,  .hover-show:hover .btn-group{
+.hover-show:hover a, .hover-show:hover button,  .hover-show:hover .btn-group, .hover-show:hover .hover-hide{
     visibility: visible;
 }
 
