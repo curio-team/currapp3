@@ -17,42 +17,98 @@ class UitvoerController extends Controller
                 ->with('uitvoer', $uitvoer);
     }
 
-    public function link_vak(Uitvoer $uitvoer, Request $request)
+    public function link_vak_preview(Uitvoer $uitvoer, Request $request)
     {
         // Koppel nieuw aangevinkte vakken:
+        $added = [];
         foreach($request->vakken as $vak_id)
         {
             if($uitvoer->vakken->doesntContain('vak_id', $vak_id))
             {
-                $vak = new VakInUitvoer();
-                $vak->vak_id = $vak_id;
-                $vak->uitvoer_id = $uitvoer->id;
-                $vak->save();
+                $added[] = $vak_id;
             }
         }
 
         // Verwijder uitgevinkte vakken:
+        $removed = [];
         $vakken = collect($request->vakken);
         foreach($uitvoer->vakken as $vak)
         {
             if($vakken->doesntContain($vak->vak_id))
             {
-                $vak->modules()->detach();
-                $vak->delete();
+                $removed[] = $vak->vak_id;
+            }
+        }
+
+        if(count($added) || count($removed))
+        {
+            return redirect()->back()->with('vakken_update_preview', ['added' => $added, 'removed' => $removed]);
+        }
+        else
+        {
+            return redirect()->back();
+        }
+    }
+
+    public function link_vak(Uitvoer $uitvoer, Request $request)
+    {
+        $removed = collect($request->removed);
+        $added   = collect($request->added);
+
+        foreach($request->uitvoeren as $uitvoer_id)
+        {
+            $uitvoer = Uitvoer::find($uitvoer_id);
+
+            foreach($added as $vak_id)
+            {
+                if($uitvoer->vakken->doesntContain('vak_id', $vak_id))
+                {
+                    $vak = new VakInUitvoer();
+                    $vak->vak_id = $vak_id;
+                    $vak->uitvoer_id = $uitvoer_id;
+                    $vak->save();
+                }
+            }
+
+            foreach($uitvoer->vakken as $vak)
+            {
+                if($removed->contains($vak->vak_id))
+                {
+                    $vak->modules()->detach();
+                    $vak->delete();
+                }
             }
         }
 
         return redirect()->back();
     }
 
+    public function link_module_preview(Uitvoer $uitvoer, Request $request)
+    {
+        return redirect()->back()->with('link_module_preview', [... $request->all()]);
+    }
+
     public function link_module(Uitvoer $uitvoer, Request $request)
     {
-        $vak = VakInUitvoer::find($request->vak_id);
+        $vak_id = VakInUitvoer::find($request->vak_id)->parent->id;
         $module_versie = ModuleVersie::where('module_id', $request->module_id)->orderByDesc('versie')->first();
-        $vak->modules()->attach($module_versie, [
+
+        foreach($request->uitvoeren as $uitvoer_id)
+        {
+            $vak = VakInUitvoer::where('vak_id', $vak_id)->where('uitvoer_id', $uitvoer_id)->first();
+            if(!$vak)
+            {
+                $vak = new VakInUitvoer();
+                $vak->vak_id = $vak_id;
+                $vak->uitvoer_id = $uitvoer_id;
+                $vak->save();
+            }
+
+            $vak->modules()->attach($module_versie, [
                 'week_start' => $request->week_start,
                 'week_eind' => $request->week_eind,
-        ]);
+            ]);
+        }
 
         return redirect()->back();
     }

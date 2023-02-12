@@ -23,7 +23,9 @@ Route::middleware('auth')->group(function () {
     Route::get('opleidingen/{opleiding}/cohorten/{cohort}', CohortShow::class)->name('opleidingen.cohorten.show');
     
     Route::get('opleidingen/{opleiding}/uitvoeren/{uitvoer}', [UitvoerController::class, 'show'])->name('opleidingen.uitvoeren.show');
+    Route::post('uitvoeren/{uitvoer}/vak/preview', [UitvoerController::class, 'link_vak_preview'])->name('uitvoeren.link.vak.preview');
     Route::post('uitvoeren/{uitvoer}/vak', [UitvoerController::class, 'link_vak'])->name('uitvoeren.link.vak');
+    Route::post('uitvoeren/{uitvoer}/module/preview', [UitvoerController::class, 'link_module_preview'])->name('uitvoeren.link.module.preview');
     Route::post('uitvoeren/{uitvoer}/module', [UitvoerController::class, 'link_module'])->name('uitvoeren.link.module');
 
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {

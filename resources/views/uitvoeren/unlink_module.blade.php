@@ -15,7 +15,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light"   data-bs-dismiss="modal" wire:click.prevent="clearItem()">Annuleren</button>
-                <button type="button" class="btn btn-primary" wire:click.prevent="unlinkModule()">
+                <button type="button" class="btn btn-primary" wire:click.prevent="unlinkModulePreview()">
                     <span class="d-none spinner-border spinner-border-sm" role="status" aria-hidden="true" wire:loading.class.remove="d-none" wire:target="unlinkModule"></span>
                     <i class="fa-solid fa-unlink fa-fw" wire:loading.class="d-none" wire:target="unlinkModule"></i>
                     Ontkoppelen

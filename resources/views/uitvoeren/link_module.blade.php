@@ -1,6 +1,6 @@
 <div class="modal fade" id="linkModuleModal" tabindex="-1" role="dialog" aria-labelledby="linkModuleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen-md-down" role="document">
-        <form class="modal-content" method="POST" action="{{ route('uitvoeren.link.module', $uitvoer) }}">
+        <form class="modal-content" method="POST" action="{{ route('uitvoeren.link.module.preview', $uitvoer) }}">
             @csrf
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="linkModuleModalLabel">Nieuwe module koppelen</h1>

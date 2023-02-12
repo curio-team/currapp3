@@ -13,6 +13,7 @@ class Leerplan extends _MyComponent
     public Opleiding $opleiding;
     public Uitvoer $uitvoer;
     public $versie_id;
+    public $uitvoeren = [];
 
     protected $className = \App\Models\ModuleVersie::class;
     protected $rules = [
@@ -21,6 +22,16 @@ class Leerplan extends _MyComponent
         'item.pivot.week_eind' => 'required',
         'item.pivot.vak_in_uitvoer_id' => 'required',
     ];
+
+    public function mount()
+    {
+        parent::mount();
+        $this->uitvoeren[0] = $this->uitvoer->id;
+        foreach(\App\Models\Uitvoer::where('blok_id', $this->uitvoer->blok_id)->whereDate('datum_start', '>', date('Y-m-d'))->where('id', '<>', $this->uitvoer->id)->orderBy('datum_start')->get() as $u)
+        {
+            $this->uitvoeren[] = $u->id;
+        }
+    }
 
     public function render()
     {
@@ -57,10 +68,23 @@ class Leerplan extends _MyComponent
         $this->endModal();
     }
 
+    public function unlinkModulePreview()
+    {
+        $this->emit('confirm');
+        $this->emit('unlinkModulePreview');
+    }
+
     public function unlinkModule()
     {
-        $vak = VakInUitvoer::find($this->item->pivot['vak_in_uitvoer_id']);
-        $vak->modules()->detach($this->item->id);
+        $vak_id = VakInUitvoer::find($this->item->pivot['vak_in_uitvoer_id'])->vak_id;
+        foreach($this->uitvoeren as $uitvoer_id)
+        {
+            if($uitvoer_id)
+            {
+                $vak = VakInUitvoer::where('vak_id', $vak_id)->where('uitvoer_id', $uitvoer_id)->first();
+                $vak->modules()->detach($this->item->id);
+            }
+        }
         $this->endModal();
     }
 }
