@@ -125,4 +125,11 @@ class Cohorten extends _MyComponent
 
         $this->endModal();
     }
+
+    public function preFillCopyModal($cohort_id)
+    {
+        $this->clearItem();
+        $this->kopieer_van = $cohort_id;
+        $this->kopieer_jaren = 1;
+    }
 }

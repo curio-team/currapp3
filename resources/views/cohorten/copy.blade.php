@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
-                        <label for="naam">Naam *:</label>
+                        <label for="naam">Naam nieuwe cohort*:</label>
                         <input type="text" class="form-control" id="naam" name="naam" wire:model="item.naam" required>
                         @error('item.naam') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="kopieer_jaren">Kopieer aantal jaren later *:</label>
-                        <input type="number" placeholder="1" class="form-control" id="kopieer_jaren" name="kopieer_jaren" wire:model="kopieer_jaren" required>
+                        <input type="number" class="form-control" id="kopieer_jaren" name="kopieer_jaren" wire:model="kopieer_jaren" required>
                         <div class="form-text">Het nieuwe cohort start ... jaar na het cohort waarvan je kopieert.</div>
                         @error('kopieer_jaren') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
