@@ -17,6 +17,7 @@ class CohortShow extends _MyComponent
         'item.blok_id' => 'required',
         'item.schooljaar' => 'required|integer|min:0',
         'item.blok_in_schooljaar' => 'required|integer|min:0',
+        'item.points' => 'required|integer|min:0',
     ];
 
     public function render()

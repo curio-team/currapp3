@@ -19,12 +19,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('home') }}">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('opleidingen.modules', $opleiding) }}">Modules</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('opleidingen.cohorten', $opleiding) }}">Cohorten</a>
-                        </li>
+                        @if(isset($opleiding))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('opleidingen.modules', $opleiding) }}">Modules</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('opleidingen.cohorten', $opleiding) }}">Cohorten</a>
+                            </li>
+                        @endif
                     </ul>
                     @if(isset($opleiding))
                         <ul class="navbar-nav">
