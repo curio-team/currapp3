@@ -111,6 +111,7 @@ class Cohorten extends _MyComponent
                 $uitvoer_nieuw->blok_id = $uitvoer_oud->blok_id;
                 $uitvoer_nieuw->schooljaar = $schooljaar_nieuw;
                 $uitvoer_nieuw->blok_in_schooljaar = $uitvoer_oud->blok_in_schooljaar;
+                $uitvoer_nieuw->points = $uitvoer_oud->points;
 
                 $maanden_per_blok = 11 / $this->opleiding->blokken_per_jaar;
                 $start_schooljaar = new \Carbon\CarbonImmutable("{$schooljaar_nieuw}-09-01");
