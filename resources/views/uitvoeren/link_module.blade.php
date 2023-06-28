@@ -4,7 +4,7 @@
             @csrf
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="linkModuleModalLabel">Nieuwe module koppelen</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="mb-3">

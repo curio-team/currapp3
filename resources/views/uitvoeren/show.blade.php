@@ -7,8 +7,15 @@
         <div class="container-fluid">
             <div class="navbar-brand">{{ $uitvoer->naam }}</div>
             <div class="d-print-none btn-group">
+                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editStudiepuntenBlokModal">
+                    @if($uitvoer->points == $uitvoer->vakken->sum('points'))
+                        <i class="fa-solid fa-fw fa-check"></i>
+                    @else
+                        <i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i>
+                        {{ $uitvoer->vakken->sum('points') }} / 
+                    @endif
+                    {{ $uitvoer->points }} studiepunten</button>
                 <button class="btn btn-outline-light"><i class="fa-regular fa-comments fa-fw"></i> Comments</button>
-                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#linkModuleModal"><i class="fa-solid fa-plus fa-fw"></i> Module</button>
                 <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#linkVakModal"><i class="fa-regular fa-edit fa-fw"></i> Vakken</button>
             </div>
         </div>
@@ -22,6 +29,7 @@
     <!-- Modals -->
     @include('uitvoeren.link_module')
     @include('uitvoeren.link_vak')
+    @include('uitvoeren.edit_studiepunten_blok')
 
     @if(session('vakken_update_preview'))
         <div class="modal fade" id="linkVakPreviewModal" tabindex="-1" role="dialog" aria-labelledby="linkVakPreviewModalLabel" aria-hidden="true">
@@ -118,6 +126,46 @@
         <script>
             window.addEventListener('load', function (){
                 new bootstrap.Modal('#linkModulePreviewModal').show();
+            });
+        </script>
+    @endif
+
+    @if(session('edit_points_preview'))
+        <div class="modal fade" id="editStudiepuntenBlokPreviewModal" tabindex="-1" role="dialog" aria-labelledby="editStudiepuntenBlokPreviewModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-fullscreen-md-down" role="document">
+                <form class="modal-content" method="POST" action="{{ route('uitvoeren.edit.points', $uitvoer) }}">
+                    @csrf
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="editStudiepuntenBlokPreviewModalLabel">Studiepunten aanpassen</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>
+                    </div>
+                    <div class="modal-body">
+                        Je gaat de volgende wijzigingen toepassen op <strong>{{ $uitvoer->naam }}</strong>:
+                        <div class="text-primary"><i class="fa-regular fa-edit fa-fw"></i>Van <strong>{{ $uitvoer->points }}</strong> <i class="fa-solid fa-arrow-right-long"></i> <strong>{{ session('edit_points_preview')['points'] }}</strong> studiepunten voor het gehele blok.</div>
+                        <input type="hidden" name="points" value="{{ session('edit_points_preview')['points'] }}" />
+                        <hr class="my-3">
+                        Wil je deze wijzigingen <strong>ook toepassen</strong> op de volgende niet-gestarte uitvoeren van dit blok?
+                        <input type="hidden" name="uitvoeren[]" value="{{ $uitvoer->id }}">
+                        @foreach(\App\Models\Uitvoer::where('blok_id', $uitvoer->blok_id)->whereDate('datum_start', '>', date('Y-m-d'))->where('id', '<>', $uitvoer->id)->orderBy('datum_start')->get() as $u)
+                            <div>
+                                <input type="checkbox" name="uitvoeren[]" value="{{ $u->id }}" id="uitvoer_{{ $u->id }}" checked>
+                                <label for="uitvoer_{{ $u->id }}">{{ $u->naam }}</label>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuleren</button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa-regular fa-floppy-disk fa-fw"></i>
+                            Opslaan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script>
+            window.addEventListener('load', function (){
+                new bootstrap.Modal('#editStudiepuntenBlokPreviewModal').show();
             });
         </script>
     @endif

@@ -71,6 +71,37 @@ td{
     border-top: none;
 }
 
+
+.vak-header{
+    position: relative;
+}
+.vak-header-left{
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    transition: left 0.1s ease, transform 0.1s ease;
+}
+.vak-header:hover .vak-header-left{
+    left: 0;
+    transform: none;
+    text-align: left;
+}
+.vak-header .vak-header-right{
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    transition: visibility 0s, opacity 0.2s ease;
+}
+.vak-header:hover .vak-header-right{
+    visibility: visible;
+    opacity: 1;
+}
+
 .btn-outline-white {
     --bs-btn-color: white;
     --bs-btn-border-color: white;

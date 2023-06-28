@@ -113,6 +113,7 @@ class DatabaseSeeder extends Seeder
                     'datum_eind' => $datum->addMonths(6),
                     'schooljaar' => $schooljaar,
                     'blok_in_schooljaar' => $i,
+                    'points' => 100,
                 ]);
 
                 $i++;
@@ -130,6 +131,7 @@ class DatabaseSeeder extends Seeder
                 \App\Models\VakInUitvoer::create([
                     'vak_id' => $vak->id,
                     'uitvoer_id' => $uitvoer->id,
+                    'points' => 25,
                 ]);
             }
         }

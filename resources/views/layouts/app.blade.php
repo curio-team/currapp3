@@ -20,7 +20,7 @@
                             <a class="nav-link" href="{{ route('home') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Modules</a>
+                            <a class="nav-link" href="{{ route('opleidingen.modules', $opleiding) }}">Modules</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('opleidingen.cohorten', $opleiding) }}">Cohorten</a>
@@ -34,8 +34,9 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li><p class="dropdown-header">Basisdata:</p></li>
-                                    <li><a class="dropdown-item" href="{{ route('opleidingen.vakken',   $opleiding) }}">Vakken</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('opleidingen.blokken',  $opleiding) }}">Blokken</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('opleidingen.blokken',     $opleiding) }}">Blokken</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('opleidingen.leerlijnen',  $opleiding) }}">Leerlijnen</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('opleidingen.vakken',      $opleiding) }}">Vakken</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><p class="dropdown-header">Wissel opleiding:</p></li>
 

@@ -15,6 +15,7 @@ class Leerplan extends _MyComponent
     public $versie_id;
     public $uitvoeren = [];
     public $vaknaam;
+    public VakInUitvoer $vak_voor_punten;
 
     protected $className = \App\Models\ModuleVersie::class;
     protected $rules = [
@@ -22,6 +23,7 @@ class Leerplan extends _MyComponent
         'item.pivot.week_start' => 'required',
         'item.pivot.week_eind' => 'required',
         'item.pivot.vak_in_uitvoer_id' => 'required',
+        'vak_voor_punten.points' => 'integer',
     ];
 
     public function mount()
@@ -45,6 +47,11 @@ class Leerplan extends _MyComponent
         $this->vaknaam = $vak->parent->naam;
         $this->item = $vak->modules()->find($module_id);
         $this->versie_id = $this->item->id;
+    }
+
+    public function setVakItem(VakInUitvoer $vak)
+    {
+        $this->vak_voor_punten = $vak;
     }
 
     public function editModulePreview()
@@ -72,25 +79,30 @@ class Leerplan extends _MyComponent
                 }
             }
         }
-
-        // if($this->versie_id == $this->item->id)
-        // {
-        //     $this->item->vakken()->updateExistingPivot($this->item->pivot['vak_in_uitvoer_id'], [
-        //         'week_start' => $this->item->pivot['week_start'],
-        //         'week_eind' => $this->item->pivot['week_eind'],
-        //     ]);
-        // }
-        // else
-        // {
-        //     $vak = VakInUitvoer::find($this->item->pivot['vak_in_uitvoer_id']);
-        //     $vak->modules()->detach($this->item->id);
-        //     $vak->modules()->attach($this->versie_id, [
-        //         'week_start' => $this->item->pivot['week_start'],
-        //         'week_eind' => $this->item->pivot['week_eind'],
-        //     ]);
-        // }
-
         $this->endModal();
+    }
+
+    public function editStudiepuntenVakPreview()
+    {
+        $this->emit('confirm');
+        $this->emit('editStudiepuntenVakPreview');
+    }
+
+    public function editStudiepuntenVak()
+    {
+        $vak_id = $this->vak_voor_punten->vak_id;
+        foreach($this->uitvoeren as $uitvoer_id)
+        {
+            if($uitvoer_id)
+            {
+                $vak = VakInUitvoer::where('vak_id', $vak_id)->where('uitvoer_id', $uitvoer_id)->first();
+                $vak->points = $this->vak_voor_punten->points;
+                $vak->save();
+            }
+        }
+
+        //Cause page refresh so button top-right outside Leerplan is refreshed too
+        return redirect()->route('opleidingen.uitvoeren.show', ['opleiding' => $this->opleiding->id , 'uitvoer' =>  $this->uitvoer->id]);
     }
 
     public function unlinkModulePreview()

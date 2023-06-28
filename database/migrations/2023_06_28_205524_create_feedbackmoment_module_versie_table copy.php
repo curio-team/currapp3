@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vakken_in_uitvoer', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('vak_id')->constrained('vakken');
-            $table->foreignId('uitvoer_id')->constrained('uitvoeren');
-            $table->integer('points')->default(0);
-            $table->timestamps();
+        Schema::create('feedbackmoment_module_versie', function (Blueprint $table) {
+            $table->foreignId('feedbackmoment_id')->constrained('feedbackmoments');
+            $table->foreignId('module_versie_id')->constrained('module_versies');
+            $table->integer('week');
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vakken_in_uitvoer');
+        Schema::dropIfExists('feedbackmoment_module_versie');
     }
 };

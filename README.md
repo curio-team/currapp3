@@ -1,12 +1,14 @@
 
-# Status 11-feb-2023
+# Status 27-jun-2023
 * Hele zwarte deel van ERD is af en crud'able.
 * Je ziet op de homepage de actuele uitvoeren.
 * Je kunt een uitvoer bekijken; je ziet dan de vakken en modules van die uitvoer (= 'leerplan' uit blokboek).
 * Je kunt de leerplannen volledig beheren (vakken en modules toevoegen/wijzigen/verwijderen).
+* Je kunt voor een leerplan de studiepunten inrichten (op het blok totaal instellen, verdelen over de vakken).
 * Je kunt een cohort kopieeren (alle uitvoeren worden gekopieerd).
 
 ### Next:
+* Meekopieeren inrichting studiepunten op uitvoeren + vakkeninuitvoer bij aanmaken nieuw cohort
 * CRUD'en blauwe gedeelte ERD.
 * Daarna... door met rode deel (comments). Zodat het product als eerste de docentenfora kan gaan vervangen. Daarna acceptatiecriteria.
 * Wellicht leerdoelen helemaal niet meer bouwen... in afwachting van pilot studiepunten.
@@ -83,3 +85,12 @@ Vanuit het blokscherm kun je dus de vraag krijgen "Je gaat module WED-II met een
 Hiervoor moet een uitvoer dus ook echt een startdatum hebben (zodat je weet of de uitvoer historisch is (en dus gelockt) of niet). Ook onderscheid maken tussen lopende cohorten en toekomstige cohorten!
 
 In het blokscherm kun je van een module alleen aanvinken welke versie je wil gebruiken. Ook daarvoor krijg je bovenstaande vraag.
+
+
+### Feedbackmomenten
+FBM hoort bij een moduleversie en is onwijzigbaar.
+Naast id krijgen ze een unieke 3cijferige code, zoals FX9B, bij aanmaken wordt uniekheid in DB gecheckt.
+Bij maken van een nieuwe versie worden de bestaande fbm's ook aan die versie gekoppeld.
+Zodra je een fbm wil wijzigen, moet je dus een nieuwe code aanvragen. Je krijgt wel de optie om een kopie te maken obv huidige gegevens.
+Zijn de checks ook onwijzigbaar?! Eigenlijk heb je dan wel een andere toets dus...
+Een moduleversie heeft meerdere fbm's, en op deze koppeltabel worden ook zaken als weeknummer, aantal studiepunten opgeslagen

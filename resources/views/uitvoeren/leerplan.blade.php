@@ -5,7 +5,25 @@
     @endfor
     
     @foreach($uitvoer->vakken as $vak)
-        <div style="grid-column: {{ $loop->iteration+1 }}; grid-row: 1; text-align: center;"><strong>{{ $vak->parent->naam }}</strong></div>
+        <div class="vak-header lh-1 mt-1 mb-2" style="grid-column: {{ $loop->iteration+1 }}; grid-row: 1;">
+            <div class="vak-header-left">
+                <strong>{{ $vak->parent->naam }}</strong><br>
+                <small>
+                    @if($vak->points != $vak->modules->sum('points'))
+                        {{ $vak->modules->sum('points') }} / {{ $vak->points }}pts
+                        <i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i>
+                    @else
+                        {{ $vak->points }}pts
+                    @endif
+                </small>
+            </div>
+            <div class="vak-header-right btn-group">
+                <button class="btn btn-sm btn-outline-primary" onclick="prefillModal({{ $vak->id }})" data-bs-toggle="modal" data-bs-target="#linkModuleModal"><i class="fa-solid fa-plus fa-fw"></i> Module</button>
+                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editStudiepuntenVakModal" wire:click="setVakItem({{ $vak }})">
+                    <i class="fa-solid fa-eye fa-fw"></i> punten
+                </button>
+            </div>
+        </div>
         @foreach ($vak->modules as $module)
             <div class="position-relative module p-2 text-center hover-show" style="background-color: {{ $module->parent->leerlijn->color }}; color: {{ $module->parent->leerlijn->textcolor }}; grid-column: {{ $loop->parent->iteration+1 }}; grid-row: {{ $module->pivot->week_start+1 }} / {{ $module->pivot->week_eind+2 }};">
                 <div class="module-titel">{{ $module->parent->naam }}</div>
@@ -22,6 +40,7 @@
     <!-- Modals -->
     @include('uitvoeren.edit_module')
     @include('uitvoeren.unlink_module')
+    @include('uitvoeren.edit_studiepunten_vak')
 
     <script>
         document.addEventListener('livewire:load', () => {
@@ -35,5 +54,16 @@
                 new bootstrap.Modal('#editModulePreviewModal').show();
             })
         })
+
+        document.addEventListener('livewire:load', () => {
+            Livewire.on('editStudiepuntenVakPreview', param => {
+                new bootstrap.Modal('#editStudiepuntenVakPreviewModal').show();
+            })
+        })
+
+        function prefillModal(id)
+        {
+            document.querySelector(".modal-body #vak_id").value = id;
+        };
     </script>
 </div>

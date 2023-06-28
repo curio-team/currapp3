@@ -112,4 +112,20 @@ class UitvoerController extends Controller
 
         return redirect()->back();
     }
+
+    public function edit_points_preview(Uitvoer $uitvoer, Request $request)
+    {
+        return redirect()->back()->with('edit_points_preview', [... $request->all()]);
+    }
+
+    public function edit_points(Request $request)
+    {
+        foreach($request->uitvoeren as $uitvoer_id)
+        {
+            $uitvoer = Uitvoer::find($uitvoer_id);
+            $uitvoer->points = $request->points;
+            $uitvoer->save();
+        }
+        return redirect()->back();
+    }
 }

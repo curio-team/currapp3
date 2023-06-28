@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('uitvoeren', function (Blueprint $table) {
+        Schema::create('feedbackmoments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('blok_id')->constrained('blokken');
-            $table->date('datum_start');
-            $table->date('datum_eind');
-            $table->integer('schooljaar');
-            $table->integer('blok_in_schooljaar');
+            $table->string('code')->unique();
+            $table->string('naam');
             $table->integer('points');
+            $table->integer('cesuur');
+            $table->longtext('checks');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('uitvoeren');
+        Schema::dropIfExists('feedbackmoments');
     }
 };

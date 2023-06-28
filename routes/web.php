@@ -5,8 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OpleidingController;
 use App\Http\Controllers\UitvoerController;
-use App\Http\Livewire\Vakken;
+use App\Http\Controllers\ModuleController;
 use App\Http\Livewire\Blokken;
+use App\Http\Livewire\Leerlijnen;
+use App\Http\Livewire\Vakken;
+use App\Http\Livewire\Modules;
 use App\Http\Livewire\Cohorten;
 use App\Http\Livewire\CohortShow;
 
@@ -17,8 +20,13 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('opleidingen', OpleidingController::class)->parameter('opleidingen', 'opleiding');
 
-    Route::get('opleidingen/{opleiding}/vakken',   Vakken::class  )->name('opleidingen.vakken' );
     Route::get('opleidingen/{opleiding}/blokken',  Blokken::class )->name('opleidingen.blokken');
+    Route::get('opleidingen/{opleiding}/leerlijnen',  Leerlijnen::class )->name('opleidingen.leerlijnen');
+    Route::get('opleidingen/{opleiding}/vakken',   Vakken::class  )->name('opleidingen.vakken' );
+    Route::get('opleidingen/{opleiding}/modules', Modules::class)->name('opleidingen.modules');
+    Route::get('opleidingen/{opleiding}/modules/{module}', [ModuleController::class, 'show'])->name('opleidingen.modules.show');
+    Route::get('opleidingen/{opleiding}/modules/{module}/v/{versie}', [ModuleController::class, 'show_versie'])->name('opleidingen.modules.show.versie');
+    Route::post('opleidingen/{opleiding}/modules/{module}/v/{versie}/fbm', [ModuleController::class, 'create_fbm'])->name('opleidingen.modules.fbm.create');
     Route::get('opleidingen/{opleiding}/cohorten', Cohorten::class)->name('opleidingen.cohorten');
     Route::get('opleidingen/{opleiding}/cohorten/{cohort}', CohortShow::class)->name('opleidingen.cohorten.show');
     
@@ -27,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::post('uitvoeren/{uitvoer}/vak', [UitvoerController::class, 'link_vak'])->name('uitvoeren.link.vak');
     Route::post('uitvoeren/{uitvoer}/module/preview', [UitvoerController::class, 'link_module_preview'])->name('uitvoeren.link.module.preview');
     Route::post('uitvoeren/{uitvoer}/module', [UitvoerController::class, 'link_module'])->name('uitvoeren.link.module');
+    Route::post('uitvoeren/{uitvoer}/points/preview', [UitvoerController::class, 'edit_points_preview'])->name('uitvoeren.edit.points.preview');
+    Route::post('uitvoeren/{uitvoer}/points', [UitvoerController::class, 'edit_points'])->name('uitvoeren.edit.points');
 
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         // TODO

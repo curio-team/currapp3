@@ -16,6 +16,13 @@ class ModuleVersie extends Model
         );
     }
 
+    protected function points(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $this->feedbackmomenten->sum('points'),
+        );
+    }
+
     public function parent()
     {
         return $this->belongsTo(Module::class, 'module_id');
@@ -39,5 +46,10 @@ class ModuleVersie extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function feedbackmomenten()
+    {
+        return $this->belongsToMany(Feedbackmoment::class,)->withPivot('week');
     }
 }
