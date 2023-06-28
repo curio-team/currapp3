@@ -94,7 +94,7 @@
                     <h1 class="modal-title fs-5" id="fbmDeleteModalLabel">Weet je het zeker?</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>
                 </div>
-                @if($fbm)
+                @if(isset($fbm))
                     <div class="modal-body">
                         Dit feedbackmoment is gekoppeld aan in totaal {{ $fbm->modules->count() }} module(versie).
                         @if($fbm->modules->count() > 1)
