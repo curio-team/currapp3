@@ -94,12 +94,14 @@
                     <h1 class="modal-title fs-5" id="fbmDeleteModalLabel">Weet je het zeker?</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>
                 </div>
-                <div class="modal-body">
-                    Dit feedbackmoment is gekoppeld aan in totaal {{ $fbm->modules->count() }} module(versie).
-                    @if($fbm->modules->count() > 1)
-                        Dit kan onverwachte gevolgen hebben voor de andere gekoppelde versies!
-                    @endif
-                </div>
+                @if($fbm)
+                    <div class="modal-body">
+                        Dit feedbackmoment is gekoppeld aan in totaal {{ $fbm->modules->count() }} module(versie).
+                        @if($fbm->modules->count() > 1)
+                            Dit kan onverwachte gevolgen hebben voor de andere gekoppelde versies!
+                        @endif
+                    </div>
+                @endif
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light"   data-bs-dismiss="modal" wire:click.prevent="clearItem()">Annuleren</button>
                     <button type="button" class="btn btn-danger" wire:click.prevent="destroy()">
