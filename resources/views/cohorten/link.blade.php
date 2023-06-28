@@ -40,8 +40,8 @@
                         @error('item.blok_in_schooljaar') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                     <div class="mb-3">
-                        <label for="points">Met hoevel studiepunten? *</label>
-                        <input type="number" class="form-select" id="points" name="points" required wire:model="item.points">
+                        <label for="points">Met hoeveel studiepunten? *</label>
+                        <input type="number" placeholder="0" class="form-select" id="points" name="points" required wire:model="item.points">
                         @error('item.points') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                 </form>
