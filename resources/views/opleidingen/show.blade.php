@@ -2,7 +2,7 @@
 
 @section('main')
     
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); row-gap: 1rem; column-gap: 3rem;">
+    <div class="mb-3" style="display: grid; grid-template-columns: repeat(3, 1fr); row-gap: 1rem; column-gap: 3rem;">
 
         <h3 style="grid-row: 1; grid-column: 1;">Afgelopen blokken</h3>
         @foreach ($uitvoeren_verleden as $uitvoer)
