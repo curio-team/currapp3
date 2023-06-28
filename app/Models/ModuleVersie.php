@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class ModuleVersie extends Model
 {
+    protected $fillable = ['versie'];
     protected $table = 'module_versies';
     
     protected function naam(): Attribute

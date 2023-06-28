@@ -30,6 +30,8 @@ class Modules extends _MyComponent
     {
         $this->validate($this->rules);
         $this->item->save();
+
+        $this->item->versies()->create(['versie' => 1]);
         $this->endModal();
     }
 
