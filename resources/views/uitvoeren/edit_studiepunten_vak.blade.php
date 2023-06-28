@@ -1,5 +1,6 @@
 <div wire:ignore.self class="modal fade" id="editStudiepuntenVakModal" tabindex="-1" role="dialog" aria-labelledby="editStudiepuntenVakModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-fullscreen-md-down" role="document">
+        @if($vak_voor_punten)
         <form class="modal-content">
             @csrf
             <div class="modal-header">
@@ -7,11 +8,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>
             </div>
             <div class="modal-body">
-                <div class="mb-3">
-                    <div class="input-group">
-                        <span class="input-group-text">Totaal punten:</span>
-                        <input type="number" class="form-control" wire:model="vak_voor_punten.points" required>
-                    </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Nu verdeeld:</span>
+                    <span class="input-group-text form-control">{{ $vak_voor_punten->modules->sum('points') }}</span>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Totaal punten {{ optional(optional($vak_voor_punten)->parent)->naam }}:</span>
+                    <input type="number" class="form-control" wire:model="vak_voor_punten.points" required>
                 </div>
                 <table class="table table-bordered">
                     <tr class="table-primary">
@@ -20,21 +23,19 @@
                         <th>Punten</th>
                         <th>Week</th>
                     </tr>
-                    @if($vak_voor_punten)
-                        @foreach ($vak_voor_punten->modules as $m)
-                            <tr class="table-light">
-                                <td colspan="4">{{ $m->parent->naam }}</td>
+                    @foreach ($vak_voor_punten->modules as $m)
+                        <tr class="table-light">
+                            <td colspan="4">{{ $m->parent->naam }}</td>
+                        </tr>
+                        @foreach ($m->feedbackmomenten as $fbm)
+                            <tr>
+                                <td>{{ $fbm->code }}</td>
+                                <td>{{ $fbm->naam }}</td>
+                                <td>{{ $fbm->points }}</td>
+                                <td>{{ $fbm->pivot->week }}</td>
                             </tr>
-                            @foreach ($m->feedbackmomenten as $fbm)
-                                <tr>
-                                    <td>{{ $fbm->code }}</td>
-                                    <td>{{ $fbm->naam }}</td>
-                                    <td>{{ $fbm->points }}</td>
-                                    <td>{{ $fbm->pivot->week }}</td>
-                                </tr>
-                            @endforeach
                         @endforeach
-                    @endif
+                    @endforeach
                 </table>
             </div>
             <div class="modal-footer">
@@ -46,6 +47,7 @@
                 </button>
             </div>
         </form>
+        @endif
     </div>
 </div>
 

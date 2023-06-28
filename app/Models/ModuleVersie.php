@@ -23,6 +23,20 @@ class ModuleVersie extends Model
         );
     }
 
+    protected function aantalFeedbackmomenten(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $this->feedbackmomenten->count(),
+        );
+    }
+
+    protected function maxPunten(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $this->feedbackmomenten->max('points'),
+        );
+    }
+
     public function parent()
     {
         return $this->belongsTo(Module::class, 'module_id');
@@ -50,6 +64,6 @@ class ModuleVersie extends Model
 
     public function feedbackmomenten()
     {
-        return $this->belongsToMany(Feedbackmoment::class,)->withPivot('week');
+        return $this->belongsToMany(Feedbackmoment::class,)->withPivot(['week']);
     }
 }

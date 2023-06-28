@@ -86,21 +86,14 @@
                                 <tr class="table-light">
                                     <th>Vak</th>
                                     <th>Blok</th>
-                                    <th colspan="2">Punten</th>
+                                    <th>Punten vak</th>
                                     <th>Weken</th>
                                 </tr>
                                 @foreach($versie->vakken as $vak)
                                     <tr>
                                         <td>{{ $vak->parent->naam }}</td>
                                         <td>{{ $vak->uitvoer->naam }}</td>
-                                        <td class="text-center">{{ $vak->points }}</td>
-                                        <td class="text-center">
-                                            @if($vak->points == $versie->feedbackmomenten->sum('points'))
-                                                <i class="fa-solid fa-fw fa-check"></i>
-                                            @else
-                                                <i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i>
-                                            @endif
-                                        </td>
+                                        <td>{{ $vak->points }}</td>
                                         <td>{{ $vak->pivot->week_start }} - {{ $vak->pivot->week_eind }}</td>
                                     </tr>
                                 @endforeach
@@ -114,30 +107,7 @@
                     </button>
                     <div id="panel5" class="accordion-collapse collapse show">
                         <div class="accordion-body">
-                            <table class="table table-bordered table-hover">
-                                <tr class="table-primary">
-                                    <td colspan="3">Totaal: <strong>{{ $versie->feedbackmomenten->sum('points') }}pts</strong></td>
-                                    <td colspan="3"><button class="btn btn-link link-primary" data-bs-toggle="modal" data-bs-target="#fbmCreateModal"><i class="fa-solid fa-fw fa-plus"></i> nieuw</button></td>
-                                </tr>
-                                <tr class="table-light">
-                                    <th>Code</th>
-                                    <th>Onderwerp</th>
-                                    <th>Punten</th>
-                                    <th>Cesuur</th>
-                                    <th>Week</th>
-                                    <th></th>
-                                </tr>
-                                @foreach($versie->feedbackmomenten()->orderBy('pivot_week')->get(); as $fbm)
-                                    <tr>
-                                        <td>{{ $fbm->code }}</td>
-                                        <td>{{ $fbm->naam }}</td>
-                                        <td>{{ $fbm->points }}</td>
-                                        <td>{{ $fbm->cesuur }}</td>
-                                        <td>{{ $fbm->pivot->week }}</td>
-                                        <td></td>
-                                    </tr>
-                                @endforeach
-                            </table>
+                            @livewire('feedbackmomenten', ['versie' => $versie])
                         </div>
                     </div>
                 </div>
@@ -171,7 +141,7 @@
 
 
     <div class="modal fade" id="fbmCreateModal" tabindex="-1" role="dialog" aria-labelledby="fbmCreateModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen-md-down" role="document">
+        <div class="modal-dialog modal-xl modal-fullscreen-md-down" role="document">
             <div class="modal-content">
                 <form action="{{ route('opleidingen.modules.fbm.create', [$opleiding, $module, $versie]) }}" method="POST">
                     <div class="modal-header">
@@ -180,28 +150,38 @@
                     </div>
                     <div class="modal-body">
                         @csrf
-                        <div class="mb-3">
-                            <label for="naam">Onderwerp *:</label>
-                            <input type="text" class="form-control" id="naam" name="naam" required>
-                            @error('item.naam') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="points">Punten *:</label>
-                            <input type="number" class="form-control" id="points" name="points" required>
-                            @error('item.points') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="cesuur">Cesuur *:</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" id="cesuur" name="cesuur" placeholder="70" required>
-                                <span class="input-group-text">%</span>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="naam">Onderwerp *:</label>
+                                    <input type="text" class="form-control" id="naam" name="naam" required>
+                                    @error('item.naam') <span class="text-danger error">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="points">Punten *:</label>
+                                    <input type="number" class="form-control" id="points" name="points" required>
+                                    @error('item.points') <span class="text-danger error">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cesuur">Cesuur *:</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="cesuur" name="cesuur" placeholder="70" required>
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                    @error('item.cesuur') <span class="text-danger error">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="week">Blokweek *:</label>
+                                    <input type="number" class="form-control" id="week" name="week" required>
+                                    @error('item.week') <span class="text-danger error">{{ $message }}</span>@enderror
+                                </div>
                             </div>
-                            @error('item.cesuur') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="week">Week *:</label>
-                            <input type="number" class="form-control" id="week" name="week" required>
-                            @error('item.week') <span class="text-danger error">{{ $message }}</span>@enderror
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="checks">Checks:</label>
+                                    <textarea id="checks" name="checks" class="form-control" rows="13"></textarea>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

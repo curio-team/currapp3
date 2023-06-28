@@ -38,7 +38,7 @@ class ModuleController extends Controller
         $fbm->naam = $request->naam;
         $fbm->points = $request->points;
         $fbm->cesuur = $request->cesuur;
-        $fbm->checks = "todo";
+        $fbm->checks = $request->checks;
 
         do{
             $code = strtoupper("F" . Str::random(3));

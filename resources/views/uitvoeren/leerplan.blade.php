@@ -9,7 +9,7 @@
             <div class="vak-header-left">
                 <strong>{{ $vak->parent->naam }}</strong><br>
                 <small>
-                    @if($vak->points != $vak->modules->sum('points'))
+                    @if($vak->points != $vak->modules->sum('points') || $vak->modules->sum('aantal_feedbackmomenten') < 1 || $vak->modules->max('max_punten') > $uitvoer->points*0.10)
                         {{ $vak->modules->sum('points') }} / {{ $vak->points }}pts
                         <i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i>
                     @else
@@ -28,10 +28,11 @@
             <div class="position-relative module p-2 text-center hover-show" style="background-color: {{ $module->parent->leerlijn->color }}; color: {{ $module->parent->leerlijn->textcolor }}; grid-column: {{ $loop->parent->iteration+1 }}; grid-row: {{ $module->pivot->week_start+1 }} / {{ $module->pivot->week_eind+2 }};">
                 <div class="module-titel">{{ $module->parent->naam }}</div>
                 <div class="fw-light hover-hide">{{ $module->naam }}</div>
-                <div class="d-print-none btn-group btn-group position-absolute top-50 left-50 translate-middle shadow" style="background-color: {{ $module->parent->leerlijn->color }};">
+                <div class="d-print-none btn-group btn-group-sm position-absolute top-50 left-50 translate-middle shadow" style="background-color: {{ $module->parent->leerlijn->color }};">
                     <button class="btn btn-outline-{{ $module->parent->leerlijn->textcolor }}"><i class="fa-regular fa-comments fa-fw"></i></button>
                     <button class="btn btn-outline-{{ $module->parent->leerlijn->textcolor }}" data-bs-toggle="modal" data-bs-target="#editModuleModal" wire:click="setVersieItem({{ $module->id }}, {{ $vak->id }})"><i class="fa-regular fa-edit fa-fw"></i></button>
                     <button class="btn btn-outline-{{ $module->parent->leerlijn->textcolor }}" data-bs-toggle="modal" data-bs-target="#unlinkModuleModal" wire:click="setVersieItem({{ $module->id }}, {{ $vak->id }})"><i class="fa-solid fa-unlink fa-fw"></i></button>
+                    <a class="btn btn-outline-{{ $module->parent->leerlijn->textcolor }}" target="_blank" href="{{ route('opleidingen.modules.show.versie', [$opleiding, $module->parent, $module]) }}"><i class="fa-solid fa-eye fa-fw"></i></a>
                 </div>
             </div>
         @endforeach

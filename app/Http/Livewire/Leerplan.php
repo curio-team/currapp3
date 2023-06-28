@@ -96,8 +96,11 @@ class Leerplan extends _MyComponent
             if($uitvoer_id)
             {
                 $vak = VakInUitvoer::where('vak_id', $vak_id)->where('uitvoer_id', $uitvoer_id)->first();
-                $vak->points = $this->vak_voor_punten->points;
-                $vak->save();
+                if($vak)
+                {
+                    $vak->points = $this->vak_voor_punten->points;
+                    $vak->save();
+                }
             }
         }
 
