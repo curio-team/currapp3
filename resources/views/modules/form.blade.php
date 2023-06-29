@@ -35,7 +35,7 @@
                             <label for="versie">Laatste versie *:</label>
                             <div class="input-group">
                                 <span class="input-group-text">v</span>
-                                <input type="number" class="form-control" id="versie" name="versie" wire:model="item.versie" required>
+                                <input type="number" class="form-control" id="versie" name="versie" wire:model="item.versie" placeholder="1" required>
                                 <span class="input-group-text">.X</span>
                             </div>
                             @error('item.versie') <span class="text-danger error">{{ $message }}</span>@enderror

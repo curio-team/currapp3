@@ -180,6 +180,7 @@
                                 <div class="mb-3">
                                     <label for="checks">Checks:</label>
                                     <textarea id="checks" name="checks" class="form-control" rows="13"></textarea>
+                                    <div class="text-muted"><em>Tip: bij leeglaten verschijnt een waarschuwing dat je de checks nog moet invullen.</em></div>
                                 </div>
                             </div>
                         </div>
