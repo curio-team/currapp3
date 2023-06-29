@@ -7,19 +7,20 @@
         @endif
     </div>
     <div class="modal-body">
-        @if($vak_voor_punten->points != $vak_voor_punten->modules->sum('points'))
-            <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i> Aantal punten verdeeld niet gelijk aan totaal punten voor vak.</strong></div>
-        @endif
-        @if($vak_voor_punten->modules->sum('aantal_feedbackmomenten') < 1)
-            <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i> Aantal feedbackmomenten moet groter zijn dan één.</strong></div>
-        @endif
-        @if($vak_voor_punten->modules->max('max_punten') > $uitvoer->points*0.10)
-            <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i> Punten per feedbackmoment mogen niet groter zijn dan 10% van totaal van het blok.</strong></div>
-        @endif
-        @if($vak_voor_punten->modules->sum('aantal_checks_niet_oke') > 0)
-            <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i> Niet alle checks zijn ingevuld.</strong></div>
-        @endif
-        
+        <div class="my-3">
+            @if($vak_voor_punten->points != $vak_voor_punten->modules->sum('points'))
+                <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i> Aantal punten verdeeld niet gelijk aan totaal punten voor vak.</strong></div>
+            @endif
+            @if($vak_voor_punten->modules->sum('aantal_feedbackmomenten') < 1)
+                <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i> Aantal feedbackmomenten moet groter zijn dan één.</strong></div>
+            @endif
+            @if($vak_voor_punten->modules->max('max_punten') > $uitvoer->points*0.10)
+                <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i> Punten per feedbackmoment mogen niet groter zijn dan 10% van totaal van het blok.</strong></div>
+            @endif
+            @if($vak_voor_punten->modules->sum('aantal_checks_niet_oke') > 0)
+                <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i> Niet alle checks zijn ingevuld.</strong></div>
+            @endif
+        </div>
         @if($mode == 'modal')
             <div class="input-group my-3">
                 <span class="input-group-text">Aantal punten nu verdeeld voor {{ optional(optional($vak_voor_punten)->parent)->naam }}:</span>
@@ -65,7 +66,7 @@
     @if($mode == 'modal')
         <div class="modal-footer">
             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuleren</button>
-            <a class="btn btn-primary" target="_blank" href="{{ route('studiepuntenplan.show', $uitvoer) }}"><i class="fa-solid fa-print fa-fw"></i> Afdrukken</a>
+            <a class="btn btn-primary" target="_blank" href="{{ route('studiepuntenplan.show', $vak_voor_punten) }}"><i class="fa-solid fa-print fa-fw"></i> Afdrukken</a>
             <button type="button" class="btn btn-success" wire:click.prevent="editStudiepuntenVakPreview()">
                 <span class="d-none spinner-border spinner-border-sm" role="status" aria-hidden="true" wire:loading.class.remove="d-none" wire:target="editStudiepuntenVak"></span>
                 <i class="fa-solid fa-save fa-fw" wire:loading.class="d-none" wire:target="editStudiepuntenVak"></i>
