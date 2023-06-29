@@ -30,11 +30,6 @@
                         <input type="text" class="form-control" id="naam" name="naam" wire:model="item.naam" required>
                         @error('item.naam') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
-                    <div class="mb-3">
-                        <label for="omschrijving">Omschrijving *:</label>
-                        <input type="text" class="form-control" id="omschrijving" name="omschrijving" wire:model="item.omschrijving" required>
-                        @error('item.omschrijving') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
                     @if($action == 'create')
                         <div class="mb-3">
                             <label for="versie">Laatste versie *:</label>
@@ -46,6 +41,11 @@
                             @error('item.versie') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
                     @endif
+                    <div class="mb-3">
+                        <label for="omschrijving">Omschrijving:</label>
+                        <input type="text" class="form-control" id="omschrijving" name="omschrijving" wire:model="item.omschrijving">
+                        @error('item.omschrijving') <span class="text-danger error">{{ $message }}</span>@enderror
+                    </div>
                     <div class="mb-3">
                         <label for="map_url">Link naar map:</label>
                         <input type="text" class="form-control" id="map_url" name="map_url" wire:model="item.map_url">
