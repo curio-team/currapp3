@@ -37,6 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::post('uitvoeren/{uitvoer}/module', [UitvoerController::class, 'link_module'])->name('uitvoeren.link.module');
     Route::post('uitvoeren/{uitvoer}/points/preview', [UitvoerController::class, 'edit_points_preview'])->name('uitvoeren.edit.points.preview');
     Route::post('uitvoeren/{uitvoer}/points', [UitvoerController::class, 'edit_points'])->name('uitvoeren.edit.points');
+    Route::post('uitvoeren/{uitvoer}/weeks/preview', [UitvoerController::class, 'edit_weeks_preview'])->name('uitvoeren.edit.weeks.preview');
+    Route::post('uitvoeren/{uitvoer}/weeks', [UitvoerController::class, 'edit_weeks'])->name('uitvoeren.edit.weeks');
 
     Route::get('studiepuntenplan/uitvoer/{uitvoer}', [UitvoerController::class, 'studiepuntenplan_uitvoer'])->name('studiepuntenplan.uitvoer.show');
     Route::get('studiepuntenplan/vak/{vak}', [UitvoerController::class, 'studiepuntenplan_vak'])->name('studiepuntenplan.vak.show');

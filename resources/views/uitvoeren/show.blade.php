@@ -17,6 +17,7 @@
                     {{ $uitvoer->points }} studiepunten</button>
                 <button class="btn btn-outline-light"><i class="fa-regular fa-comments fa-fw"></i> Comments</button>
                 <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#linkVakModal"><i class="fa-regular fa-edit fa-fw"></i> Vakken</button>
+                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editWeeksModal"><i class="fa-regular fa-edit fa-fw"></i></button>
             </div>
         </div>
     </nav>
@@ -166,6 +167,71 @@
         <script>
             window.addEventListener('load', function (){
                 new bootstrap.Modal('#editStudiepuntenBlokPreviewModal').show();
+            });
+        </script>
+    @endif
+
+    <div class="modal fade" id="editWeeksModal" tabindex="-1" role="dialog" aria-labelledby="editWeeksModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-fullscreen-md-down" role="document">
+            <form class="modal-content" method="POST" action="{{ route('uitvoeren.edit.weeks.preview', $uitvoer) }}">
+                @csrf
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="editWeeksModalLabel">Aanpassen {{ $uitvoer->naam }}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="weeks">Aantal weken *:</label>
+                        <input type="number" class="form-control" id="weeks" name="weeks" value="{{ $uitvoer->weeks }}" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuleren</button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa-regular fa-floppy-disk fa-fw"></i>
+                        Opslaan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if(session('edit_weeks_preview'))
+        <div class="modal fade" id="editWeeksPreviewModal" tabindex="-1" role="dialog" aria-labelledby="editWeeksPreviewModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-fullscreen-md-down" role="document">
+                <form class="modal-content" method="POST" action="{{ route('uitvoeren.edit.weeks', $uitvoer) }}">
+                    @csrf
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="editWeeksPreviewModalLabel">Weken aanpassen</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>
+                    </div>
+                    <div class="modal-body">
+                        Je gaat de volgende wijzigingen toepassen op <strong>{{ $uitvoer->naam }}</strong>:
+                        <div class="text-primary"><i class="fa-regular fa-edit fa-fw"></i>Van <strong>{{ $uitvoer->weeks }}</strong> <i class="fa-solid fa-arrow-right-long"></i> <strong>{{ session('edit_weeks_preview')['weeks'] }}</strong> weken.</div>
+                        <input type="hidden" name="weeks" value="{{ session('edit_weeks_preview')['weeks'] }}" />
+                        <hr class="my-3">
+                        Wil je deze wijzigingen <strong>ook toepassen</strong> op de volgende niet-gestarte uitvoeren van dit blok?
+                        <input type="hidden" name="uitvoeren[]" value="{{ $uitvoer->id }}">
+                        @foreach(\App\Models\Uitvoer::where('blok_id', $uitvoer->blok_id)->whereDate('datum_start', '>', date('Y-m-d'))->where('id', '<>', $uitvoer->id)->orderBy('datum_start')->get() as $u)
+                            <div>
+                                <input type="checkbox" name="uitvoeren[]" value="{{ $u->id }}" id="uitvoer_{{ $u->id }}" checked>
+                                <label for="uitvoer_{{ $u->id }}">{{ $u->naam }}</label>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuleren</button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa-regular fa-floppy-disk fa-fw"></i>
+                            Opslaan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script>
+            window.addEventListener('load', function (){
+                new bootstrap.Modal('#editWeeksPreviewModal').show();
             });
         </script>
     @endif

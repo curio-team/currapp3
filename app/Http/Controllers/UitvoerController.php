@@ -129,6 +129,22 @@ class UitvoerController extends Controller
         return redirect()->back();
     }
 
+    public function edit_weeks_preview(Request $request)
+    {
+        return redirect()->back()->with('edit_weeks_preview', [... $request->all()]);
+    }
+
+    public function edit_weeks(Request $request)
+    {
+        foreach($request->uitvoeren as $uitvoer_id)
+        {
+            $uitvoer = Uitvoer::find($uitvoer_id);
+            $uitvoer->weeks = $request->weeks;
+            $uitvoer->save();
+        }
+        return redirect()->back();
+    }
+
     public function studiepuntenplan_vak(VakInUitvoer $vak)
     {
         return view('uitvoeren.studiepuntenplan_vak_print')

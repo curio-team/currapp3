@@ -8,6 +8,7 @@
 * Je kunt een cohort kopieeren (alle uitvoeren worden gekopieerd).
 
 ### Next:
+* Twee modules tegelijk in één vak?! of kan ook gewoon twee lossen vakken maken..
 * Nieuwe versies van module maken handmatig
 * Meekopieeren inrichting studiepunten op uitvoeren + vakkeninuitvoer bij aanmaken nieuw cohort
 * CRUD'en blauwe gedeelte ERD.

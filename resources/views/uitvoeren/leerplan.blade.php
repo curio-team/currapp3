@@ -1,5 +1,5 @@
 <div class="leerplan" style="display: grid; grid-template-columns: auto repeat({{ $uitvoer->vakken->count() }}, 1fr) auto; column-gap: 1rem;">
-    @for ($i = 1; $i <= 16; $i++)
+    @for ($i = 1; $i <= $uitvoer->weeks; $i++)
         <div class="d-flex justify-content-center align-items-center" style="grid-column: 1; grid-row: {{ $i+1 }}; text-align: center;"><em>{{ $i }}</em></div>
         <div class="d-flex justify-content-center align-items-center" style="grid-column: {{ $uitvoer->vakken->count()+2 }}; grid-row: {{ $i+1 }}; text-align: center;"><em>{{ $i }}</em></div>
     @endfor
