@@ -17,7 +17,7 @@ class Feedbackmomenten extends _MyComponent
         'item.checks' => 'nullable',
         'item.points' => 'required|integer|min:1',
         'item.cesuur' => 'required|integer|min:70|max:100',
-        'week' => 'required|integer|min:1|max:16',
+        'week' => 'required|integer|min:1',
     ];
 
     public function render()

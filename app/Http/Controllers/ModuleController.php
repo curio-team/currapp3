@@ -31,7 +31,7 @@ class ModuleController extends Controller
             'naam' => 'required',
             'points' => 'required|integer|min:1',
             'cesuur' => 'required|integer|min:70|max:100',
-            'week' => 'required|integer|min:1|max:16',
+            'week' => 'required|integer|min:1',
         ]);
         
         $fbm = new Feedbackmoment();
