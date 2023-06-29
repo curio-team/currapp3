@@ -102,6 +102,10 @@ td{
     opacity: 1;
 }
 
+.break-my-page h1{
+    page-break-before: always;
+}
+
 .btn-outline-white {
     --bs-btn-color: white;
     --bs-btn-border-color: white;

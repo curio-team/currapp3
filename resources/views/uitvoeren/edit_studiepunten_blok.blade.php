@@ -22,6 +22,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuleren</button>
+                <a class="btn btn-primary" target="_blank" href="{{ route('studiepuntenplan.uitvoer.show', $uitvoer) }}"><i class="fa-solid fa-print fa-fw"></i> Afdrukken studiepuntenplan</a>
                 <button type="submit" class="btn btn-success">
                     <i class="fa-regular fa-floppy-disk fa-fw"></i>
                     Opslaan

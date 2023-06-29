@@ -66,7 +66,7 @@
     @if($mode == 'modal')
         <div class="modal-footer">
             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuleren</button>
-            <a class="btn btn-primary" target="_blank" href="{{ route('studiepuntenplan.show', $vak_voor_punten) }}"><i class="fa-solid fa-print fa-fw"></i> Afdrukken</a>
+            <a class="btn btn-primary" target="_blank" href="{{ route('studiepuntenplan.vak.show', $vak_voor_punten) }}"><i class="fa-solid fa-print fa-fw"></i> Afdrukken</a>
             <button type="button" class="btn btn-success" wire:click.prevent="editStudiepuntenVakPreview()">
                 <span class="d-none spinner-border spinner-border-sm" role="status" aria-hidden="true" wire:loading.class.remove="d-none" wire:target="editStudiepuntenVak"></span>
                 <i class="fa-solid fa-save fa-fw" wire:loading.class="d-none" wire:target="editStudiepuntenVak"></i>

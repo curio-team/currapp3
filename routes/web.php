@@ -38,7 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::post('uitvoeren/{uitvoer}/points/preview', [UitvoerController::class, 'edit_points_preview'])->name('uitvoeren.edit.points.preview');
     Route::post('uitvoeren/{uitvoer}/points', [UitvoerController::class, 'edit_points'])->name('uitvoeren.edit.points');
 
-    Route::get('studiepuntenplan/{vak}', [UitvoerController::class, 'studiepuntenplan'])->name('studiepuntenplan.show');
+    Route::get('studiepuntenplan/uitvoer/{uitvoer}', [UitvoerController::class, 'studiepuntenplan_uitvoer'])->name('studiepuntenplan.uitvoer.show');
+    Route::get('studiepuntenplan/vak/{vak}', [UitvoerController::class, 'studiepuntenplan_vak'])->name('studiepuntenplan.vak.show');
 
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         // TODO

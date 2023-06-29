@@ -129,11 +129,18 @@ class UitvoerController extends Controller
         return redirect()->back();
     }
 
-    public function studiepuntenplan(VakInUitvoer $vak)
+    public function studiepuntenplan_vak(VakInUitvoer $vak)
     {
-        return view('uitvoeren.studiepuntenplan_print')
+        return view('uitvoeren.studiepuntenplan_vak_print')
                 ->with('vak_voor_punten', $vak)
                 ->with('uitvoer', $vak->uitvoer)
                 ->with('opleiding', $vak->uitvoer->blok->opleiding);
+    }
+
+    public function studiepuntenplan_uitvoer(Uitvoer $uitvoer)
+    {
+        return view('uitvoeren.studiepuntenplan_uitvoer_print')
+                ->with('uitvoer', $uitvoer)
+                ->with('opleiding', $uitvoer->blok->opleiding);
     }
 }
