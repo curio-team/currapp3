@@ -1,11 +1,13 @@
-<div class="leerplan" style="display: grid; grid-template-columns: auto repeat({{ $uitvoer->vakken->count() }}, 1fr) auto; column-gap: 1rem;">
+<div class="leerplan" style="display: grid; grid-template-columns: auto repeat({{ $uitvoer->vakken->sum('aantal_kolommen') }}, 1fr) auto; column-gap: 1rem;">
     @for ($i = 1; $i <= $uitvoer->weeks; $i++)
         <div class="d-flex justify-content-center align-items-center" style="grid-column: 1; grid-row: {{ $i+1 }}; text-align: center;"><em>{{ $i }}</em></div>
-        <div class="d-flex justify-content-center align-items-center" style="grid-column: {{ $uitvoer->vakken->count()+2 }}; grid-row: {{ $i+1 }}; text-align: center;"><em>{{ $i }}</em></div>
+        <div class="d-flex justify-content-center align-items-center" style="grid-column: {{ $uitvoer->vakken->sum('aantal_kolommen')+2 }}; grid-row: {{ $i+1 }}; text-align: center;"><em>{{ $i }}</em></div>
     @endfor
     
+    <?php $counter = 1; ?>
     @foreach($uitvoer->vakken as $vak)
-        <div class="vak-header lh-1 mt-1 mb-2" style="grid-column: {{ $loop->iteration+1 }}; grid-row: 1;">
+        <div class="vak-header lh-1 mt-1 mb-2" style="grid-column: {{ $counter+1 }} / span {{ $vak->aantal_kolommen }}; grid-row: 1;">
+            <?php $counter += $vak->aantal_kolommen; ?>
             <div class="vak-header-left">
                 <strong>{{ $vak->parent->naam }}</strong><br>
                 <small>
@@ -24,8 +26,9 @@
                 </button>
             </div>
         </div>
+        {{-- {{ var_dump($vak->kolom_indeling) }} --}}
         @foreach ($vak->modules as $module)
-            <div class="position-relative module p-2 text-center hover-show" style="background-color: {{ $module->parent->leerlijn->color }}; color: {{ $module->parent->leerlijn->textcolor }}; grid-column: {{ $loop->parent->iteration+1 }}; grid-row: {{ $module->pivot->week_start+1 }} / {{ $module->pivot->week_eind+2 }};">
+            <div class="position-relative module p-2 text-center hover-show" style="background-color: {{ $module->parent->leerlijn->color }}; color: {{ $module->parent->leerlijn->textcolor }}; grid-column: {{ $counter - ($vak->kolom_indeling[$module->id]) }}; grid-row: {{ $module->pivot->week_start+1 }} / {{ $module->pivot->week_eind+2 }};">
                 <div class="module-titel">{{ $module->parent->naam }}</div>
                 <div class="fw-light hover-hide">{{ $module->naam }}</div>
                 <div class="d-print-none btn-group btn-group-sm position-absolute top-50 left-50 translate-middle shadow" style="background-color: {{ $module->parent->leerlijn->color }};">
