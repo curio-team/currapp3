@@ -17,6 +17,7 @@ class Modules extends _MyComponent
         'item.omschrijving' => 'required',
         'item.map_url' => 'nullable',
         'item.leerlijn_id' => 'nullable',
+        'item.versie' => 'nullable'
     ];
 
     public function render()
@@ -29,15 +30,18 @@ class Modules extends _MyComponent
     public function create()
     {
         $this->validate($this->rules);
+        $versie = $this->item->versie;
+        unset($this->item->versie);
         $this->item->save();
 
-        $this->item->versies()->create(['versie' => 1]);
+        $this->item->versies()->create(['versie' => $versie]);
         $this->endModal();
     }
 
     public function update()
     {
         $this->validate($this->rules);
+        unset($this->item->versie);
         $this->item->save();
         $this->endModal();
     }
