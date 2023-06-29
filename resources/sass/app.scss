@@ -65,10 +65,7 @@ td{
 .module{
     border: 1px solid black;
     opacity: 0.9;
-}
-
-.module + .module{
-    border-top: none;
+    margin-top: -1px; //de randen over elkaar laten vallen
 }
 
 
