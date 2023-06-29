@@ -32,7 +32,7 @@
             </ul>
         </div>
     @endif
-    <div class="row">
+    <div class="row mb-4">
         <div class="col">
             <div class="accordion">
                 @if($module->omschrijving)
@@ -56,23 +56,12 @@
                     </div>
                 @endif
                 <div class="accordion-item">
-                    <button class="accordion-header accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panel4" aria-expanded="true" aria-controls="panel4">
-                        Koppeling module aan vakken (<em>alle versies</em>)
+                    <button class="accordion-header accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panel5" aria-expanded="true" aria-controls="panel5">
+                        Feedbackmomenten
                     </button>
-                    <div id="panel4" class="accordion-collapse collapse">
+                    <div id="panel5" class="accordion-collapse collapse show">
                         <div class="accordion-body">
-                            <ul>
-                                @foreach($module->versies as $v)
-                                    <li>
-                                        {{ $module->naam }} {{ $v->naam }}
-                                        <ul>
-                                            @foreach($v->vakken as $vak)
-                                                <li>{{ $vak->parent->naam }} in {{ $vak->uitvoer->naam }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                @endforeach
-                            </ul>
+                            @livewire('feedbackmomenten', ['versie' => $versie])
                         </div>
                     </div>
                 </div>
@@ -102,12 +91,23 @@
                     </div>
                 </div>
                 <div class="accordion-item">
-                    <button class="accordion-header accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panel5" aria-expanded="true" aria-controls="panel5">
-                        Feedbackmomenten
+                    <button class="accordion-header accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panel4" aria-expanded="true" aria-controls="panel4">
+                        Koppeling module aan vakken (<em>alle versies</em>)
                     </button>
-                    <div id="panel5" class="accordion-collapse collapse show">
+                    <div id="panel4" class="accordion-collapse collapse">
                         <div class="accordion-body">
-                            @livewire('feedbackmomenten', ['versie' => $versie])
+                            <ul>
+                                @foreach($module->versies as $v)
+                                    <li>
+                                        {{ $module->naam }} {{ $v->naam }}
+                                        <ul>
+                                            @foreach($v->vakken as $vak)
+                                                <li>{{ $vak->parent->naam }} in {{ $vak->uitvoer->naam }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
                 </div>

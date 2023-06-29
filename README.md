@@ -8,7 +8,7 @@
 * Je kunt een cohort kopieeren (alle uitvoeren worden gekopieerd).
 
 ### Next:
-* Checks invoeren/editen op fbm!
+* Nieuwe versies van module maken handmatig
 * Meekopieeren inrichting studiepunten op uitvoeren + vakkeninuitvoer bij aanmaken nieuw cohort
 * CRUD'en blauwe gedeelte ERD.
 * Daarna... door met rode deel (comments). Zodat het product als eerste de docentenfora kan gaan vervangen. Daarna acceptatiecriteria.

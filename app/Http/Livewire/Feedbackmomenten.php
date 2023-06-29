@@ -14,7 +14,7 @@ class Feedbackmomenten extends _MyComponent
     protected $className = \App\Models\Feedbackmoment::class;
     protected $rules = [
         'item.naam' => 'required',
-        'item.checks' => 'required',
+        'item.checks' => 'nullable',
         'item.points' => 'required|integer|min:1',
         'item.cesuur' => 'required|integer|min:70|max:100',
         'week' => 'required|integer|min:1|max:16',
@@ -34,6 +34,7 @@ class Feedbackmomenten extends _MyComponent
     public function edit()
     {
         $this->validate($this->rules);
+        if(empty($this->item->checks)) $this->item->checks = null;
         $this->item->save();
         $this->versie->feedbackmomenten()->updateExistingPivot(
             $this->item->id,

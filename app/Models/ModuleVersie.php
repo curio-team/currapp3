@@ -38,6 +38,13 @@ class ModuleVersie extends Model
         );
     }
 
+    protected function aantalChecksNietOke(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $this->feedbackmomenten()->whereNull('checks')->count(),
+        );
+    }
+
     public function parent()
     {
         return $this->belongsTo(Module::class, 'module_id');

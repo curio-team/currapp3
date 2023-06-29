@@ -1,52 +1,7 @@
 <div wire:ignore.self class="modal fade" id="editStudiepuntenVakModal" tabindex="-1" role="dialog" aria-labelledby="editStudiepuntenVakModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-fullscreen-md-down" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable modal-fullscreen-md-down" role="document">
         @if($vak_voor_punten)
-        <form class="modal-content">
-            @csrf
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="editStudiepuntenVakModalLabel">Studiepunten {{ optional(optional($vak_voor_punten)->parent)->naam }}</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>
-            </div>
-            <div class="modal-body">
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Nu verdeeld:</span>
-                    <span class="input-group-text form-control">{{ $vak_voor_punten->modules->sum('points') }}</span>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Totaal punten {{ optional(optional($vak_voor_punten)->parent)->naam }}:</span>
-                    <input type="number" class="form-control" wire:model="vak_voor_punten.points" required>
-                </div>
-                <table class="table table-bordered">
-                    <tr class="table-primary">
-                        <th>Code</th>
-                        <th>Onderwerp</th>
-                        <th>Punten</th>
-                        <th>Week</th>
-                    </tr>
-                    @foreach ($vak_voor_punten->modules as $m)
-                        <tr class="table-light">
-                            <td colspan="4">{{ $m->parent->naam }}</td>
-                        </tr>
-                        @foreach ($m->feedbackmomenten as $fbm)
-                            <tr>
-                                <td>{{ $fbm->code }}</td>
-                                <td>{{ $fbm->naam }}</td>
-                                <td>{{ $fbm->points }}</td>
-                                <td>{{ $fbm->pivot->week }}</td>
-                            </tr>
-                        @endforeach
-                    @endforeach
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuleren</button>
-                <button type="button" class="btn btn-success" wire:click.prevent="editStudiepuntenVakPreview()">
-                    <span class="d-none spinner-border spinner-border-sm" role="status" aria-hidden="true" wire:loading.class.remove="d-none" wire:target="editStudiepuntenVak"></span>
-                    <i class="fa-solid fa-save fa-fw" wire:loading.class="d-none" wire:target="editStudiepuntenVak"></i>
-                    Opslaan
-                </button>
-            </div>
-        </form>
+            @include('uitvoeren.studiepuntenplan', ['mode' => 'modal'])
         @endif
     </div>
 </div>

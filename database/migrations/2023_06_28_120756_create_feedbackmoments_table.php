@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('naam');
             $table->integer('points');
             $table->integer('cesuur');
-            $table->longtext('checks');
+            $table->longtext('checks')->nullable();
             $table->timestamps();
         });
     }

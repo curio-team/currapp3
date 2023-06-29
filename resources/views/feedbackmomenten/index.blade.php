@@ -20,6 +20,9 @@
                 <td>{{ $fbm->cesuur }}</td>
                 <td>{{ $fbm->pivot->week }}</td>
                 <td>
+                    @if($fbm->checks == null)
+                        <div class="btn btn-link" style="cursor: initial !important;"><i class="fa-solid fa-fw fa-triangle-exclamation text-warning" title="Checks niet ingevuld"></i></div>
+                    @endif
                     <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#fbmEditModal" wire:click="setFbmItem({{ $fbm }}, {{ $fbm->pivot->week }})"><i class="fa-solid fa-fw fa-edit hover-hide"></i></button>
                     <button class="btn btn-link" data-bs-toggle="modal" data-bs-target="#fbmDeleteModal" wire:click="setFbmItem({{ $fbm }}, {{ $fbm->pivot->week }})"><i class="fa-solid fa-fw fa-trash hover-hide"></i></button>
                 </td>
@@ -70,6 +73,7 @@
                             <div class="mb-3">
                                 <label for="checks">Checks:</label>
                                 <textarea id="checks" class="form-control" wire:model="item.checks" rows="13"></textarea>
+                                @error('checks') <span class="text-danger error">{{ $message }}</span>@enderror
                             </div>
                         </div>
                     </div>
