@@ -30,47 +30,44 @@ class VakInUitvoer extends Model
     private function getColsArray()
     {
         $weeks = array();
-        for($i = 1; $i <= optional($this->uitvoer)->weeks; $i++) $weeks[$i] = 0;
-        
         $cols = array();
+        $modules_cols = array();
+        for($i = 1; $i <= optional($this->uitvoer)->weeks; $i++) $weeks[$i] = 0;
+
         foreach($this->modules as $module)
         {
-            //Pak het stukje uit $weeks wat voor deze module geldig is
-            $parts = array_slice($weeks, $module->pivot->week_start-1, ($module->pivot->week_eind-$module->pivot->week_start)+1, true);
-            //var_dump([$module->id => $parts, "------------"]);
+            $i = 0;
+            do{
+                if(!array_key_exists($i, $cols)) $cols[$i] = $weeks;
+                $parts = array_slice($cols[$i], $module->pivot->week_start-1, ($module->pivot->week_eind-$module->pivot->week_start)+1, true);
+                $i++;
+            } while(max($parts) > 0);
 
-            // ...voeg dan toe aan kolom 0
-            $cols[max($parts)][] = $module->id;
-            
-            // ...en zet dan de teller op weeks op 1:
-            for($i = $module->pivot->week_start; $i <= $module->pivot->week_eind; $i++)
+            // ...en zet dan de teller op weeks op +1:
+            for($j = $module->pivot->week_start; $j <= $module->pivot->week_eind; $j++)
             {
-                if(array_key_exists($i, $weeks)) $weeks[$i] += 1;
+                if(array_key_exists($j, $weeks)) $cols[$i-1][$j] += 1; //= $module->id;
             }
+
+            //En zet deze module in de juiste kolom;
+            $modules_cols[$module->id] = $i-1;
         }
-        return $cols;
+        return $modules_cols;
     }
 
     public function aantalKolommen() : Attribute
     {
+        $value = 1;
+        if(count($this->getColsArray())) $value = max($this->getColsArray())+1;
         return Attribute::make(
-            get: fn () => count($this->getColsArray()),
+            get: fn () => $value,
         );    
     }
 
     public function kolomIndeling() : Attribute
     {
-        $modules = array();
-        foreach($this->getColsArray() as $key => $col)
-        {
-            foreach($col as $module_id)
-            {
-                $modules[$module_id] = $key;
-            }
-        }
-
         return Attribute::make(
-            get: fn () => $modules,
+            get: fn () => $this->getColsArray(),
         );    
     }
 }
