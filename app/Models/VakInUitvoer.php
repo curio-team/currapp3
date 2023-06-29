@@ -45,7 +45,7 @@ class VakInUitvoer extends Model
             // ...en zet dan de teller op weeks op 1:
             for($i = $module->pivot->week_start; $i <= $module->pivot->week_eind; $i++)
             {
-                $weeks[$i] += 1;
+                if(array_key_exists($i, $weeks)) $weeks[$i] += 1;
             }
         }
         return $cols;
