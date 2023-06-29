@@ -17,6 +17,7 @@
                         <div class="mb-3">
                             <label for="leerlijn_id">Leerlijn *:</label>
                             <select class="form-select" id="leerlijn_id" name="leerlijn_id" wire:model="item.leerlijn_id" required>
+                                <option></option>
                                 @foreach($opleiding->leerlijnen as $leerlijn)
                                     <option value="{{ $leerlijn->id }}">{{ $leerlijn->naam }}</option>
                                 @endforeach
