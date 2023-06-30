@@ -155,6 +155,7 @@
                                 <div class="mb-3">
                                     <label for="naam">Onderwerp *:</label>
                                     <input type="text" class="form-control" id="naam" name="naam" required>
+                                    <div class="text-muted"><em>Het onderwerp kan niet meer gewijzigd worden na aanmaken.</em></div>
                                     @error('item.naam') <span class="text-danger error">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="mb-3">
@@ -168,6 +169,7 @@
                                         <input type="number" class="form-control" id="cesuur" name="cesuur" placeholder="70" required>
                                         <span class="input-group-text">%</span>
                                     </div>
+                                    <div class="text-muted"><em>Minstens 70%.</em></div>
                                     @error('item.cesuur') <span class="text-danger error">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="mb-3">

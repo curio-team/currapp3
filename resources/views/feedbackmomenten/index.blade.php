@@ -38,6 +38,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>
                 </div>
                 <div class="modal-body">
+                    <div class="alert alert-info">
+                        <i class="fa-solid fa-fw fa-exclamation"></i>
+                        Ga je veel en/of grote wijzigingen doen? Overweeg dan of je niet feitelijk met een <em>nieuw</em> feedbackmoment te maken hebt.
+                    </div>
                     <div class="row">
                         <div class="col-6">
                             <form>

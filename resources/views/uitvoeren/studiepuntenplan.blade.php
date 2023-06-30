@@ -28,7 +28,7 @@
                 <span class="input-group-text">van in totaal:</span>
                 <input type="number" class="form-control" wire:model="vak_voor_punten.points" required>
             </div>
-        @else
+        @elseif($mode == 'print' && $vak_voor_punten->points != $vak_voor_punten->modules->sum('points'))
             <div class="alert alert-secondary my-3">Aantal punten verdeeld: {{ $vak_voor_punten->modules->sum('points') }} / {{ $vak_voor_punten->points }}.</div>
         @endif
         <table class="table table-bordered">
