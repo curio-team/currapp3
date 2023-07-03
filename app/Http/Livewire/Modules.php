@@ -17,7 +17,7 @@ class Modules extends _MyComponent
         'item.omschrijving' => 'nullable',
         'item.map_url' => 'nullable',
         'item.leerlijn_id' => 'nullable',
-        'item.versie' => 'nullable'
+        'item.versie' => 'required'
     ];
 
     public function render()
