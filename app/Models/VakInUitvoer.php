@@ -70,4 +70,17 @@ class VakInUitvoer extends Model
             get: fn () => $this->getColsArray(),
         );    
     }
+
+    public function studiepuntenOke() : Attribute
+    {
+        $result = true;
+        if($this->points != $this->modules->sum('points')) $result = false;
+        if($this->modules->sum('aantal_feedbackmomenten') < 1) $result = false;
+        if($this->modules->max('max_punten') > optional($this->uitvoer)->points*0.10) $result = false;
+        if($this->modules->sum('aantal_checks_niet_oke') > 0) $result = false;
+
+        return Attribute::make(
+            get: fn () => $result,
+        );    
+    }
 }

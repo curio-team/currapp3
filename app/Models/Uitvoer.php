@@ -52,4 +52,17 @@ class Uitvoer extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function studiepuntenOke() : Attribute
+    {
+        $result = true;
+
+        // Als de minimumwaarde hiervan '1' is, dan is dan zijn dus alle vakken oke;
+        if($this->vakken->min('studiepunten_oke') == 0) $result = false;
+        if($this->points != $this->vakken->sum('points')) $result = false;
+
+        return Attribute::make(
+            get: fn () => $result,
+        );    
+    }
 }

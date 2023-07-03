@@ -11,11 +11,11 @@
             <div class="vak-header-left">
                 <strong>{{ $vak->parent->naam }}</strong><br>
                 <small>
-                    @if($vak->points != $vak->modules->sum('points') || $vak->modules->sum('aantal_feedbackmomenten') < 1 || $vak->modules->max('max_punten') > $uitvoer->points*0.10 || $vak->modules->sum('aantal_checks_niet_oke') > 0)
+                    @if($vak->studiepunten_oke)
+                        {{ $vak->points }}pts
+                    @else
                         {{ $vak->modules->sum('points') }} / {{ $vak->points }}pts
                         <i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i>
-                    @else
-                        {{ $vak->points }}pts
                     @endif
                 </small>
             </div>
