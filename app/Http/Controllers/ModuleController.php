@@ -40,8 +40,10 @@ class ModuleController extends Controller
         $fbm->cesuur = $request->cesuur;
         $fbm->checks = $request->checks;
 
+        $characters = "2345679ABCDEFGHJKMNPQRSTUVWXYZ";
+
         do{
-            $code = strtoupper("F" . Str::random(3));
+            $code = "F" . substr(str_shuffle($characters), 0, 3);
         } while(Feedbackmoment::where('code', $code)->count());
 
         $fbm->code = $code;
