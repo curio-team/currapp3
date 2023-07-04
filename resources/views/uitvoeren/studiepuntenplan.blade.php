@@ -7,7 +7,7 @@
         @endif
     </div>
     <div class="modal-body">
-        @if($vak_voor_punten->gelinkt_aan_vak_id)
+        @if($vak_voor_punten->gelinkt_aan_vak_id && $mode == 'modal')
             <div class="alert alert-secondary mb-4">Dit vak is gelinkt aan <strong>{{ \App\Models\VakInUitvoer::find($vak_voor_punten->gelinkt_aan_vak_id)->parent->naam }}</strong>. Het totaal aantal studiepunten wordt hiervan overgenomen. Je dient wel een eigen studiepuntenplan op te bouwen. In het totaal van blok telt slechts één van deze vakken mee, omdat studenten er maar eentje volgen.</div>
         @endif
         <div class="my-3">
