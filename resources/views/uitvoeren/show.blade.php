@@ -8,11 +8,11 @@
             <div class="navbar-brand">{{ $uitvoer->naam }}</div>
             <div class="d-print-none btn-group">
                 <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editStudiepuntenBlokModal">
-                    @if($uitvoer->points == $uitvoer->vakken->sum('points'))
+                    @if($uitvoer->points == $uitvoer->totaal_punten)
                         <i class="fa-solid fa-fw fa-check"></i>
                     @else
                         <i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i>
-                        {{ $uitvoer->vakken->sum('points') }} / 
+                        {{ $uitvoer->totaal_punten }} / 
                     @endif
                     {{ $uitvoer->points }} studiepunten</button>
                 <button class="btn btn-outline-light"><i class="fa-regular fa-comments fa-fw"></i> Comments</button>
@@ -50,6 +50,14 @@
                         @foreach (session('vakken_update_preview')['removed'] as $vak)
                             <div class="text-danger fw-bold"><i class="fa-solid fa-minus"></i> {{ \App\Models\Vak::find($vak)->naam }}</div>
                             <input type="hidden" name="removed[]" value="{{ $vak }}">
+                        @endforeach
+                        @foreach (session('vakken_update_preview')['keuzegroep_added'] as $key => $value)
+                            <div class="text-primary fw-bold"><i class="fa-solid fa-link"></i> {{ \App\Models\Vak::find($key)->naam }} koppelen aan {{ \App\Models\Vak::find($value)->naam }}</div>
+                            <input type="hidden" name="keuzegroep_added[{{ $key }}]" value="{{ $value }}">
+                        @endforeach
+                        @foreach (session('vakken_update_preview')['keuzegroep_removed'] as $key => $value)
+                            <div class="text-primary fw-bold"><i class="fa-solid fa-unlink"></i> {{ \App\Models\VakInUitvoer::find($value)->parent->naam }} niet meer gekoppeld aan een ander vak.</div>
+                            <input type="hidden" name="keuzegroep_removed[{{ $key }}]" value="{{ $value }}">
                         @endforeach
                         <hr class="my-3">
                         Wil je deze wijzigingen <strong>ook toepassen</strong> op de volgende niet-gestarte uitvoeren van dit blok?

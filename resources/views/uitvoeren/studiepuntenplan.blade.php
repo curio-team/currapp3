@@ -7,6 +7,9 @@
         @endif
     </div>
     <div class="modal-body">
+        @if($vak_voor_punten->gelinkt_aan_vak_id)
+            <div class="alert alert-secondary mb-4">Dit vak is gelinkt aan <strong>{{ \App\Models\VakInUitvoer::find($vak_voor_punten->gelinkt_aan_vak_id)->parent->naam }}</strong>. Het totaal aantal studiepunten wordt hiervan overgenomen. Je dient wel een eigen studiepuntenplan op te bouwen. In het totaal van blok telt slechts één van deze vakken mee, omdat studenten er maar eentje volgen.</div>
+        @endif
         <div class="my-3">
             @if($vak_voor_punten->points != $vak_voor_punten->modules->sum('points'))
                 <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i> Aantal punten verdeeld niet gelijk aan totaal punten voor vak.</strong></div>
@@ -21,16 +24,18 @@
                 <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i> Niet alle checks zijn ingevuld.</strong></div>
             @endif
         </div>
+
         @if($mode == 'modal')
             <div class="input-group my-3">
                 <span class="input-group-text">Aantal punten nu verdeeld voor {{ optional(optional($vak_voor_punten)->parent)->naam }}:</span>
                 <input type="number" disabled class="form-control" value="{{ $vak_voor_punten->modules->sum('points') }}">
                 <span class="input-group-text">van in totaal:</span>
-                <input type="number" class="form-control" wire:model="vak_voor_punten.points" required>
+                <input type="number" class="form-control" wire:model="vak_voor_punten.points" required @if($vak_voor_punten->gelinkt_aan_vak_id) disabled @endif>
             </div>
         @elseif($mode == 'print' && $vak_voor_punten->points != $vak_voor_punten->modules->sum('points'))
             <div class="alert alert-secondary my-3">Aantal punten verdeeld: {{ $vak_voor_punten->modules->sum('points') }} / {{ $vak_voor_punten->points }}.</div>
         @endif
+
         <table class="table table-bordered">
             <tr class="table-primary">
                 <th>Code</th>

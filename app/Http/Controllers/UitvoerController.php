@@ -40,9 +40,19 @@ class UitvoerController extends Controller
             }
         }
 
-        if(count($added) || count($removed))
+        $keuzegroep_added = array_filter($request->keuzegroep);
+        $keuzegroep_removed = [];
+        foreach($uitvoer->vakken as $vak)
         {
-            return redirect()->back()->with('vakken_update_preview', ['added' => $added, 'removed' => $removed]);
+            if($vak->gelinkt_aan_vak_id && !array_key_exists($vak->parent->id, $keuzegroep_added))
+            {
+                $keuzegroep_removed[] = $vak->id;
+            }
+        }
+
+        if(count($added) || count($removed) || count($keuzegroep_added) || count($keuzegroep_removed))
+        {
+            return redirect()->back()->with('vakken_update_preview', ['added' => $added, 'removed' => $removed, 'keuzegroep_added' => $keuzegroep_added, 'keuzegroep_removed' => $keuzegroep_removed]);
         }
         else
         {
@@ -53,7 +63,9 @@ class UitvoerController extends Controller
     public function link_vak(Uitvoer $uitvoer, Request $request)
     {
         $removed = collect($request->removed);
-        $added   = collect($request->added);
+        $added = collect($request->added);
+        $keuzegroep_added = collect($request->keuzegroep_added);
+        $keuzegroep_removed = collect($request->keuzegroep_removed);
 
         foreach($request->uitvoeren as $uitvoer_id)
         {
@@ -77,6 +89,24 @@ class UitvoerController extends Controller
                     $vak->modules()->detach();
                     $vak->delete();
                 }
+            }
+            
+            foreach($keuzegroep_added as $vak1_id => $vak2_id)
+            {
+                //vak1 is slave, vak2 is master
+
+                $vak1 = VakInUitvoer::where('vak_id', $vak1_id)->where('uitvoer_id', $uitvoer->id)->first();
+                $vak2 = VakInUitvoer::where('vak_id', $vak2_id)->where('uitvoer_id', $uitvoer->id)->first();
+                $vak1->gelinkt_aan_vak_id = $vak2->id;
+                $vak1->points = $vak2->points;
+                $vak1->save();
+            }            
+
+            foreach($keuzegroep_removed as $rem)
+            {
+                $vak = VakInUitvoer::find($rem);
+                $vak->gelinkt_aan_vak_id = null;
+                $vak->save();
             }
         }
 

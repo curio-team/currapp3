@@ -27,6 +27,19 @@ class VakInUitvoer extends Model
             ->orderBy('week_start');
     }
 
+    public function points() : Attribute
+    {
+        return Attribute::make(
+            get: function ($value) {
+                if($this->gelinkt_aan_vak_id)
+                {
+                    return VakInUitvoer::find($this->gelinkt_aan_vak_id)->points;
+                }
+                return $value;
+            },
+        );    
+    }
+
     private function getColsArray()
     {
         $weeks = array();
