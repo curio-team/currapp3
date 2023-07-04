@@ -16,6 +16,7 @@
                     </ul>
                 </div>
                 <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#linkVakModal"><i class="fa-regular fa-plus fa-fw"></i></button>
+                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#updateModuleModal"><i class="fa-regular fa-edit fa-fw"></i></button>
             </div>
         </div>
     </nav>
@@ -195,6 +196,38 @@
             </div>
         </div>
     </div>
-    
+
+    <div class="modal fade" id="updateModuleModal" tabindex="-1" role="dialog" aria-labelledby="updateModuleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen-md-down" role="document">
+            <form method="POST" action="{{ route('opleidingen.modules.update', [$opleiding, $module]) }}">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="updateModuleModalLabel">Aanpassen</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>
+                    </div>
+                    <div class="modal-body">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="naam">Naam *:</label>
+                                <input type="text" class="form-control" id="naam" name="naam" value="{{ $module->naam }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="omschrijving">Omschrijving:</label>
+                                <input type="text" class="form-control" id="omschrijving" name="omschrijving" value="{{ $module->omschrijving }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="map_url">Link naar map:</label>
+                                <input type="text" class="form-control" id="map_url" name="map_url" value="{{ $module->map_url }}">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuleren</button>
+                        <button type="submit" class="btn btn-success"><i class="fa-regular fa-floppy-disk fa-fw"></i>Opslaan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
 @endsection

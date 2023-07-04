@@ -53,4 +53,18 @@ class ModuleController extends Controller
 
         return redirect()->back();
     }
+
+    public function update(Opleiding $opleiding, Module $module, Request $request)
+    {
+        $request->validate([
+            'naam' => 'required'
+        ]);
+
+        $module->naam = $request->naam;
+        $module->omschrijving = $request->omschrijving;
+        $module->map_url = $request->map_url;
+        $module->save();
+        
+        return redirect()->back();
+    }
 }
