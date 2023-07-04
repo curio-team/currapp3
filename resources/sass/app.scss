@@ -116,3 +116,12 @@ td{
     --bs-btn-hover-color: white;
     --bs-btn-hover-bg: black;
 }
+
+.vak-header .btn{
+    background: white;
+    white-space: nowrap;
+}
+
+.vak-header .btn:hover{
+    background-color: var(--bs-btn-hover-bg);
+}

@@ -1,4 +1,4 @@
-<div class="leerplan" style="display: grid; grid-template-columns: auto repeat({{ $uitvoer->vakken->sum('aantal_kolommen') }}, 1fr) auto; column-gap: 1rem;">
+<div class="leerplan" style="display: grid; grid-template-columns: auto repeat({{ $uitvoer->vakken->sum('aantal_kolommen') }}, 1fr) auto; column-gap: @if($uitvoer->vakken->sum('aantal_kolommen') > 10) 0.5rem; @else 1rem; @endif">
     @for ($i = 1; $i <= $uitvoer->weeks; $i++)
         <div class="d-flex justify-content-center align-items-center" style="grid-column: 1; grid-row: {{ $i+1 }}; text-align: center;"><em>{{ $i }}</em></div>
         <div class="d-flex justify-content-center align-items-center" style="grid-column: {{ $uitvoer->vakken->sum('aantal_kolommen')+2 }}; grid-row: {{ $i+1 }}; text-align: center;"><em>{{ $i }}</em></div>
