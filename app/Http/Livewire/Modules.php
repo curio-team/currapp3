@@ -20,6 +20,13 @@ class Modules extends _MyComponent
         'item.versie' => 'required'
     ];
 
+    protected $updateRules = [
+        'item.naam' => 'required',
+        'item.omschrijving' => 'nullable',
+        'item.map_url' => 'nullable',
+        'item.leerlijn_id' => 'nullable',
+    ];
+
     public function render()
     {
         return view('modules.index')
@@ -40,7 +47,7 @@ class Modules extends _MyComponent
 
     public function update()
     {
-        $this->validate($this->rules);
+        $this->validate($this->updateRules);
         unset($this->item->versie);
         $this->item->save();
         $this->endModal();

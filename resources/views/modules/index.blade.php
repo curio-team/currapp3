@@ -24,7 +24,7 @@
                     <td>{{ $module->omschrijving }}</td>
                     <td>
                         @if(!empty($module->map_url))
-                            <a target="_blank" href="{{ $module->map_url }}">link</a>
+                            <a target="_blank" class="force-show" href="{{ $module->map_url }}">link</a>
                         @endif
                     </td>
                     <td class="text-end">
