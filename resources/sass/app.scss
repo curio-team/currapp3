@@ -103,6 +103,10 @@ td{
     page-break-before: always;
 }
 
+.break-my-page .trix-content h1{
+    page-break-before: auto;
+}
+
 .btn-outline-white {
     --bs-btn-color: white;
     --bs-btn-border-color: white;

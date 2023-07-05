@@ -6,6 +6,8 @@
         <title>CurrApp</title>
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
         @livewireStyles
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+  	    <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark d-print-none">

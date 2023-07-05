@@ -24,6 +24,7 @@ class Leerplan extends _MyComponent
         'item.pivot.week_eind' => 'required',
         'item.pivot.vak_in_uitvoer_id' => 'required',
         'vak_voor_punten.points' => 'integer',
+        'vak_voor_punten.bpoints' => 'nullable',
     ];
 
     public function mount()
@@ -51,6 +52,7 @@ class Leerplan extends _MyComponent
 
     public function setVakItem(VakInUitvoer $vak)
     {
+        $vak->bpoints = $vak->bpoints ?? "";
         $this->vak_voor_punten = $vak;
     }
 
@@ -99,6 +101,7 @@ class Leerplan extends _MyComponent
                 if($vak)
                 {
                     $vak->points = $this->vak_voor_punten->points;
+                    $vak->bpoints = $this->vak_voor_punten->bpoints;
                     $vak->save();
                 }
             }

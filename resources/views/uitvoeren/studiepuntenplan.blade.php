@@ -23,6 +23,9 @@
             @if($vak_voor_punten->modules->sum('aantal_checks_niet_oke') > 0)
                 <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i> Niet alle checks zijn ingevuld.</strong></div>
             @endif
+            @if(!$vak_voor_punten->bpoints)
+                <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i> B-punten nog niet ingevuld.</strong></div>
+            @endif
         </div>
 
         @if($mode == 'modal')
@@ -107,6 +110,45 @@
                 @endforeach
             </table>
         @endif
+
+        @if($mode == 'modal')
+            <div wire:ignore>
+                <hr class="my-4">
+                <h2 class="fs-5">B-punten</h2>
+                <p class="text-muted">Geef hier aan waar studenten op kunnen letten voor het wel/niet behalen van de twee B-punten voor dit vak. Let op: aanwezigheid mag hierin alleen een onderdeel zijn als dat heel duidelijk is aangekondigd en als studenten die ziek of RA zijn hiervan geen nadeel ondervinden.</p>
+                <trix-editor
+                    class="trix-content"
+                    x-data
+                    x-on:trix-change="$dispatch('input', event.target.value)"
+                    x-ref="trix"
+                    wire:model.debounce.60s="vak_voor_punten.bpoints"
+                    wire:key="uniqueKey"
+                ></trix-editor>
+
+                <script type="text/javascript">
+                (function() {
+                    addEventListener("trix-initialize", function(e) {
+                        const file_tools = document.querySelector(".trix-button-group--file-tools");
+                        file_tools.remove();
+                    })
+                    addEventListener("trix-file-accept", function(e) {
+                        e.preventDefault();
+                    })
+                })();
+                </script>
+            </div>
+        @else
+            <hr class="my-4">
+            <h2 class="fs-6">B-punten</h2>
+            @if($vak_voor_punten->bpoints)
+                <div class="alert alert-secondary trix-content" style="background-color: white !important;">
+                    {!! $vak_voor_punten->bpoints !!}
+                </div>
+            @else
+                <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i> B-punten nog niet ingevuld.</strong></div>
+            @endif
+        @endif
+
     </div>
     @if($mode == 'modal')
         <div class="modal-footer">
