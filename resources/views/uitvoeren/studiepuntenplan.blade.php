@@ -34,39 +34,79 @@
             </div>
         @elseif($mode == 'print' && $vak_voor_punten->points != $vak_voor_punten->modules->sum('points'))
             <div class="alert alert-secondary my-3">Aantal punten verdeeld: {{ $vak_voor_punten->modules->sum('points') }} / {{ $vak_voor_punten->points }}.</div>
+        @else
+            <div class="alert alert-secondary my-3">Totaal punten: {{ $vak_voor_punten->points }}.</div>
         @endif
 
-        <table class="table table-bordered">
-            <tr class="table-primary">
-                <th>Code</th>
-                <th>Blokweek</th>
-                <th>Onderwerp</th>
-                <th>Punten</th>
-                <th>Cesuur</th>
-                <th style="width: 50%;">Checks</th>
-            </tr>
-            @foreach ($vak_voor_punten->modules as $m)
-                <tr class="table-light">
-                    <td colspan="6">{{ $m->parent->naam }}</td>
+        @if($mode == 'modal')
+            <table class="table table-bordered">
+                <tr class="table-primary">
+                    <th>Code</th>
+                    <th>Blokweek</th>
+                    <th>Onderwerp</th>
+                    <th>Punten</th>
+                    <th>Cesuur</th>
+                    <th>Checks</th>
                 </tr>
-                @foreach ($m->feedbackmomenten()->orderBy('pivot_week')->get() as $fbm)
-                    <tr>
-                        <td>{{ $fbm->code }}</td>
-                        <td>{{ $fbm->pivot->week }}</td>
-                        <td>{{ $fbm->naam }}</td>
-                        <td>{{ $fbm->points }}</td>
-                        <td>{{ $fbm->cesuur }}%</td>
-                        <td>
-                            @if($fbm->checks)
-                                {!! nl2br($fbm->checks) !!}
-                            @else
-                                <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i>
-                            @endif
-                        </td>
+                @foreach ($vak_voor_punten->modules as $m)
+                    <tr class="table-secondary">
+                        <td colspan="6">{{ $m->parent->naam }}</td>
                     </tr>
+                    @foreach ($m->feedbackmomenten()->orderBy('pivot_week')->get() as $fbm)
+                        <tr>
+                            <td>{{ $fbm->code }}</td>
+                            <td>{{ $fbm->pivot->week }}</td>
+                            <td>{{ $fbm->naam }}</td>
+                            <td>{{ $fbm->points }}</td>
+                            <td>{{ $fbm->cesuur }}%</td>
+                            <td>
+                                @if($fbm->checks)
+                                    {!! nl2br($fbm->checks) !!}
+                                @else
+                                    <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i></strong></div>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
                 @endforeach
-            @endforeach
-        </table>
+            </table>
+        @else
+            <table class="table table-bordered">
+                <tr class="table-primary">
+                    <th>Code</th>
+                    <th>Blokweek</th>
+                    <th>Onderwerp</th>
+                    <th>Punten</th>
+                    <th>Cesuur</th>
+                </tr>
+                @foreach ($vak_voor_punten->modules as $m)
+                    <tr><td colspan="5" style="border: none;"></td></tr>
+                    <tbody style="page-break-inside: avoid;">
+                        <tr class="table-secondary">
+                            <td colspan="5">Module {{ $m->parent->naam }}</td>
+                        </tr>
+                        @foreach ($m->feedbackmomenten()->orderBy('pivot_week')->get() as $fbm)
+                            <tr class="table-light">
+                                <td>{{ $fbm->code }}</td>
+                                <td>Week {{ $fbm->pivot->week }}</td>
+                                <td>{{ $fbm->naam }}</td>
+                                <td>{{ $fbm->points }}pt</td>
+                                <td>{{ $fbm->cesuur }}%</td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    @if($fbm->checks)
+                                        {!! nl2br($fbm->checks) !!}
+                                    @else
+                                        <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i></strong> Checks nog niet ingevuld</div>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                @endforeach
+            </table>
+        @endif
     </div>
     @if($mode == 'modal')
         <div class="modal-footer">
