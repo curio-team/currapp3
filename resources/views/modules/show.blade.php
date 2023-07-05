@@ -152,7 +152,7 @@
                     <div class="modal-body">
                         @csrf
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-5">
                                 <div class="mb-3">
                                     <label for="naam">Onderwerp *:</label>
                                     <input type="text" class="form-control" id="naam" name="naam" required>
@@ -179,10 +179,23 @@
                                     @error('item.week') <span class="text-danger error">{{ $message }}</span>@enderror
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-7">
                                 <div class="mb-3">
                                     <label for="checks">Checks:</label>
-                                    <textarea id="checks" name="checks" class="form-control" rows="13"></textarea>
+                                    <input id="checks" type="hidden" name="checks">
+                                    <trix-editor class="trix-content" input="checks"></trix-editor>
+
+                                    <script type="text/javascript">
+                                    (function() {
+                                        addEventListener("trix-initialize", function(e) {
+                                            const file_tools = document.querySelector(".trix-button-group--file-tools");
+                                            file_tools.remove();
+                                        })
+                                        addEventListener("trix-file-accept", function(e) {
+                                            e.preventDefault();
+                                        })
+                                    })();
+                                    </script>
                                     <div class="text-muted"><em>Tip: bij leeglaten verschijnt een waarschuwing dat je de checks nog moet invullen.</em></div>
                                 </div>
                             </div>

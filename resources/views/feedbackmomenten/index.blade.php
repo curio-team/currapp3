@@ -43,7 +43,7 @@
                         Ga je veel en/of grote wijzigingen doen? Overweeg dan of je niet feitelijk met een <em>nieuw</em> feedbackmoment te maken hebt.
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-5">
                             <form>
                                 <div class="mb-3">
                                     <label>Code:</label>
@@ -73,10 +73,29 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-6">
-                            <div class="mb-3">
+                        <div class="col-7">
+                            <div class="mb-3" wire:ignore>
                                 <label for="checks">Checks:</label>
-                                <textarea id="checks" class="form-control" wire:model="item.checks" rows="13"></textarea>
+                                <trix-editor
+                                    class="trix-content"
+                                    x-data
+                                    x-on:trix-change="$dispatch('input', event.target.value)"
+                                    x-ref="trix"
+                                    wire:model.debounce.60s="item.checks"
+                                    wire:key="uniqueKey"
+                                ></trix-editor>
+
+                                <script type="text/javascript">
+                                (function() {
+                                    addEventListener("trix-initialize", function(e) {
+                                        const file_tools = document.querySelector(".trix-button-group--file-tools");
+                                        file_tools.remove();
+                                    })
+                                    addEventListener("trix-file-accept", function(e) {
+                                        e.preventDefault();
+                                    })
+                                })();
+                                </script>
                                 @error('checks') <span class="text-danger error">{{ $message }}</span>@enderror
                             </div>
                         </div>

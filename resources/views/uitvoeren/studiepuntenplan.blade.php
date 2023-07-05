@@ -64,7 +64,7 @@
                             <td>{{ $fbm->cesuur }}%</td>
                             <td>
                                 @if($fbm->checks)
-                                    {!! nl2br($fbm->checks) !!}
+                                    <div class="trix-content>"{!! $fbm->checks !!}</div>
                                 @else
                                     <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i></strong></div>
                                 @endif
@@ -99,7 +99,7 @@
                             <tr>
                                 <td colspan="5">
                                     @if($fbm->checks)
-                                        {!! nl2br($fbm->checks) !!}
+                                        <div class="trix-content>"{!! $fbm->checks !!}</div>
                                     @else
                                         <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i></strong> Checks nog niet ingevuld</div>
                                     @endif

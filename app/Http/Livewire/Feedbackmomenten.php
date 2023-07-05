@@ -22,6 +22,7 @@ class Feedbackmomenten extends _MyComponent
 
     public function render()
     {
+        $this->item->checks = $this->item->checks ?? "";
         return view('feedbackmomenten.index');
     }
 
