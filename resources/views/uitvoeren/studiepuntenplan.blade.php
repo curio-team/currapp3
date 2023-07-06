@@ -64,7 +64,7 @@
                             <td>{{ $fbm->cesuur }}%</td>
                             <td>
                                 @if($fbm->checks)
-                                    <div class="trix-content>"{!! $fbm->checks !!}</div>
+                                    <div class="trix-content">{!! $fbm->checks !!}</div>
                                 @else
                                     <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i></strong></div>
                                 @endif
