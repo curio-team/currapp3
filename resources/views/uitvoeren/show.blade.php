@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title', $uitvoer->naam)
 @section('container-class', 'container-fluid')
 
 @section('subnav')

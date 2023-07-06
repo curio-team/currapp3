@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Printen: ' . $uitvoer->naam)
 @section('container-class', 'container-fluid mt4 break-my-page')
 @section('main')
 

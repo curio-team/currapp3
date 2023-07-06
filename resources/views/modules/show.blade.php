@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title', 'Module ' . $versie->parent->naam)
 @section('container-class', 'container-fluid mt-3')
 
 @section('subnav')
