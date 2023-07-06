@@ -122,12 +122,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>
                 </div>
                 @if(isset($fbm))
-                    <div class="modal-body">
-                        Dit feedbackmoment is gekoppeld aan in totaal {{ $fbm->modules->count() }} module(versie).
-                        @if($fbm->modules->count() > 1)
-                            Dit kan onverwachte gevolgen hebben voor de andere gekoppelde versies!
-                        @endif
-                    </div>
+                    <div class="modal-body">Als je verder gaat, wordt het feedbackmoment alleen ontkoppeld van de huidige versie.</div>
                 @endif
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light"   data-bs-dismiss="modal" wire:click.prevent="clearItem()">Annuleren</button>

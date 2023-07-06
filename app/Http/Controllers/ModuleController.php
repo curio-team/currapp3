@@ -67,4 +67,23 @@ class ModuleController extends Controller
         
         return redirect()->back();
     }
+
+    public function create_version(Opleiding $opleiding, Module $module, Request $request)
+    {
+        $old = $module->versies()->orderByDesc('versie')->first();
+
+        $new = new ModuleVersie();
+        $new->module_id = $old->module_id;
+        $new->hoofdauteur_id = $old->hoofdauteur_id;
+        $new->versie = $old->versie + 1;
+        $new->save();
+
+        foreach($old->feedbackmomenten as $fbm)
+        {
+            $new->feedbackmomenten()->attach($fbm, ['week' => $fbm->pivot->week]);
+        }
+        
+        return redirect()->route('opleidingen.modules.show.versie', [$opleiding, $module, $new]);
+    }
+    
 }

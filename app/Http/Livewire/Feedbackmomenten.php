@@ -45,9 +45,8 @@ class Feedbackmomenten extends _MyComponent
     }
 
     public function destroy()
-    {
-        $this->item->modules()->detach();
-        $this->item->delete();
+    {   
+        $this->item->modules()->detach($this->versie);        
         $this->endModal();
     }
 }

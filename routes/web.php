@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::get('opleidingen/{opleiding}/modules/{module}/v/{versie}', [ModuleController::class, 'show_versie'])->name('opleidingen.modules.show.versie');
     Route::post('opleidingen/{opleiding}/modules/{module}/v/{versie}/fbm', [ModuleController::class, 'create_fbm'])->name('opleidingen.modules.fbm.create');
     Route::post('opleidingen/{opleiding}/modules/{module}/update', [ModuleController::class, 'update'])->name('opleidingen.modules.update');
+    Route::post('opleidingen/{opleiding}/modules/{module}/create', [ModuleController::class, 'create_version'])->name('opleidingen.modules.versie.create');
     Route::get('opleidingen/{opleiding}/cohorten', Cohorten::class)->name('opleidingen.cohorten');
     Route::get('opleidingen/{opleiding}/cohorten/{cohort}', CohortShow::class)->name('opleidingen.cohorten.show');
     

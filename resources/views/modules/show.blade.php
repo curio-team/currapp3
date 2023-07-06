@@ -16,7 +16,7 @@
                         @endforeach
                     </ul>
                 </div>
-                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#linkVakModal"><i class="fa-regular fa-plus fa-fw"></i></button>
+                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#newVersionModal"><i class="fa-regular fa-plus fa-fw"></i></button>
                 <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#updateModuleModal"><i class="fa-regular fa-edit fa-fw"></i></button>
             </div>
         </div>
@@ -237,6 +237,28 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuleren</button>
                         <button type="submit" class="btn btn-success"><i class="fa-regular fa-floppy-disk fa-fw"></i>Opslaan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="newVersionModal" tabindex="-1" role="dialog" aria-labelledby="newVersionModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen-md-down" role="document">
+            <form method="POST" action="{{ route('opleidingen.modules.versie.create', [$opleiding, $module]) }}">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="newVersionModalLabel">Nieuwe versie maken</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>
+                    </div>
+                    <div class="modal-body">
+                            @csrf
+                            <p>Je gaat nu een nieuwe versie maken van deze module. Alle gegevens worden gekopieerd vanaf de huidige hoogste versie. De feedbackmomenten blijven bestaan en worden ook gelinkt aan deze nieuwe versie.</p>
+                            <p>Hierna kun je deze nieuwe versie aan een vak koppelen, bijvoorbeeld in het blok dat volgend jaar start. Je kunt dan op de nieuwe versie wijzingen doen, terwijl het huidige blok met de vorige versie blijft werken.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Annuleren</button>
+                        <button type="submit" class="btn btn-success"><i class="fa-regular fa-plus fa-fw"></i>Nieuwe versie</button>
                     </div>
                 </div>
             </form>
