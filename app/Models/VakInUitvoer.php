@@ -43,8 +43,8 @@ class VakInUitvoer extends Model
     public function sumPoints() : Attribute
     {
         $sum = 0;
-        $modules = $this->modules->unique('module_id');
-        foreach($modules as $m)
+        //$modules = $this->modules->unique('module_id');
+        foreach($this->modules as $m)
         {
             $start = $m->pivot->week_start;
             $eind = $m->pivot->week_eind;
