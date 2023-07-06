@@ -8,6 +8,7 @@
         <div class="container-fluid">
             <div class="navbar-brand">{{ $versie->parent->naam }}</div>
             <div class="d-print-none btn-group">
+                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#updateModuleModal"><i class="fa-solid fa-user-tie fa-fw"></i> {{ $versie->parent->eigenaar->id }}</button>
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">{{ $versie->naam }}</button>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -224,6 +225,10 @@
                             <div class="mb-3">
                                 <label for="naam">Naam *:</label>
                                 <input type="text" class="form-control" id="naam" name="naam" value="{{ $module->naam }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="eigenaar_id">Eigenaar:</label>
+                                <input type="text" class="form-control" id="eigenaar_id" name="eigenaar_id" value="{{ $module->eigenaar_id }}" placeholder="ab01">
                             </div>
                             <div class="mb-3">
                                 <label for="omschrijving">Omschrijving:</label>

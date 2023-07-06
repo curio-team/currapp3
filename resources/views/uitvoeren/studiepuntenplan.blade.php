@@ -30,6 +30,10 @@
 
         @if($mode == 'modal')
             <div class="input-group my-3">
+                <span class="input-group-text">
+                    <i class="fa-solid fa-user-tie fa-fw me-2"></i>
+                    {{ $vak_voor_punten->eigenaars }}
+                </span>
                 <span class="input-group-text">Aantal punten nu verdeeld voor {{ optional(optional($vak_voor_punten)->parent)->naam }}:</span>
                 <input type="number" disabled class="form-control" value="{{ $vak_voor_punten->sum_points }}">
                 <span class="input-group-text">van in totaal:</span>

@@ -61,6 +61,7 @@ class ModuleController extends Controller
         ]);
 
         $module->naam = $request->naam;
+        $module->eigenaar_id = $request->eigenaar_id;
         $module->omschrijving = $request->omschrijving;
         $module->map_url = $request->map_url;
         $module->save();

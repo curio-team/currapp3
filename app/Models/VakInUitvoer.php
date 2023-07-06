@@ -115,4 +115,17 @@ class VakInUitvoer extends Model
             get: fn () => $result,
         );    
     }
+
+    public function eigenaars() : Attribute
+    {
+        $eigenaars = [];
+        foreach($this->modules as $versie)
+        {
+            $eigenaars[] = $versie->parent->eigenaar->id;
+        }
+
+        return Attribute::make(
+            get: fn () => collect($eigenaars)->unique()->implode(', '),
+        );    
+    }
 }

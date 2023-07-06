@@ -16,12 +16,7 @@ class Module extends Model
         }
         
         // Als deze module geen eigenaar heeft, default dan naar eigenaar van de opleiding;
-        return $this->opleiding->eigenaar();
-    }
-
-    public function opleiding()
-    {
-        return $this->hasOneThrough(Opleiding::class, Leerlijn::class);
+        return $this->leerlijn->opleiding->eigenaar();
     }
 
     public function leerlijn()
