@@ -14,7 +14,7 @@
                     @if($vak->studiepunten_oke)
                         {{ $vak->points }}pts
                     @else
-                        {{ $vak->modules->sum('points') }} / {{ $vak->points }}pts
+                        {{ $vak->sum_points }} / {{ $vak->points }}pts
                         <i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i>
                     @endif
                 </small>
@@ -26,7 +26,6 @@
                 </button>
             </div>
         </div>
-        {{-- {{ var_dump($vak->kolom_indeling) }} --}}
         @foreach ($vak->modules as $module)
             <div class="position-relative module p-2 text-center hover-show" style="background-color: {{ $module->parent->leerlijn->color }}; color: {{ $module->parent->leerlijn->textcolor }}; grid-column: {{ $counter - ($vak->kolom_indeling[$module->id]) }}; grid-row: {{ $module->pivot->week_start+1 }} / {{ $module->pivot->week_eind+2 }};">
                 <div class="module-titel">{{ $module->parent->naam }}</div>

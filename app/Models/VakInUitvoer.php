@@ -40,6 +40,14 @@ class VakInUitvoer extends Model
         );    
     }
 
+    public function sumPoints() : Attribute
+    {
+        $sum = $this->modules->unique('module_id')->sum('points');
+        return Attribute::make(
+            get: fn () => $sum,
+        );    
+    }
+
     private function getColsArray()
     {
         $weeks = array();
@@ -87,7 +95,7 @@ class VakInUitvoer extends Model
     public function studiepuntenOke() : Attribute
     {
         $result = true;
-        if($this->points != $this->modules->sum('points')) $result = false;
+        if($this->points != $this->sum_points) $result = false;
         if($this->modules->sum('aantal_feedbackmomenten') < 1) $result = false;
         if($this->modules->max('max_punten') > optional($this->uitvoer)->points*0.10) $result = false;
         if($this->modules->sum('aantal_checks_niet_oke') > 0) $result = false;
