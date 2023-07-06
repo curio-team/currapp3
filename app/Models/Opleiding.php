@@ -35,7 +35,7 @@ class Opleiding extends Model
 
     public function leerlijnen()
     {
-        return $this->hasMany(Leerlijn::class);
+        return $this->hasMany(Leerlijn::class)->orderBy('naam');
     }
 
     public function acceptatiecriteria()
