@@ -51,7 +51,7 @@
                     <th>Cesuur</th>
                     <th>Checks</th>
                 </tr>
-                @foreach ($vak_voor_punten->modules as $m)
+                @foreach ($vak_voor_punten->modules->unique('module_id') as $m)
                     <tr class="table-secondary">
                         <td colspan="6">{{ $m->parent->naam }}</td>
                     </tr>
@@ -82,7 +82,7 @@
                     <th>Punten</th>
                     <th>Cesuur</th>
                 </tr>
-                @foreach ($vak_voor_punten->modules as $m)
+                @foreach ($vak_voor_punten->modules->unique('module_id') as $m)
                     <tr><td colspan="5" style="border: none;"></td></tr>
                     <tbody style="page-break-inside: avoid;">
                         <tr class="table-secondary">
