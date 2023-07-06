@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>
             </div>
             <div class="modal-body">
-                @if($uitvoer->points == $uitvoer->vakken->sum('points'))
+                @if($uitvoer->points == $uitvoer->totaal_punten)
                     <i class="fa-solid fa-fw fa-check"></i>
                 @else
                     <i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i>
