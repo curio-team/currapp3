@@ -1,15 +1,5 @@
 
-# Status 27-jun-2023
-* Hele zwarte deel van ERD is af en crud'able.
-* Je ziet op de homepage de actuele uitvoeren.
-* Je kunt een uitvoer bekijken; je ziet dan de vakken en modules van die uitvoer (= 'leerplan' uit blokboek).
-* Je kunt de leerplannen volledig beheren (vakken en modules toevoegen/wijzigen/verwijderen).
-* Je kunt voor een leerplan de studiepunten inrichten (op het blok totaal instellen, verdelen over de vakken).
-* Je kunt een cohort kopieeren (alle uitvoeren worden gekopieerd).
-
-### Next:
-* Meekopieeren inrichting studiepunten op uitvoeren + vakkeninuitvoer bij aanmaken nieuw cohort
-* CRUD'en blauwe gedeelte ERD.
+## Next:
 * Daarna... door met rode deel (comments). Zodat het product als eerste de docentenfora kan gaan vervangen. Daarna acceptatiecriteria.
 * Wellicht leerdoelen helemaal niet meer bouwen... in afwachting van pilot studiepunten.
 
@@ -22,10 +12,10 @@ Doel van de app: het team krijgt eigenaarschap over de staat van het onderwijs. 
   * Een opleiding koppelen aan een team (één opleiding heeft één team).
   * Gebruikers koppelen aan een team (veel-op-veel), zodat bijhorende opleidingen kunnen zien.
   * Andere gebruikers admin maken.
-* Als onderwijscoördinator wil ik de structuur inrichten, zodat mijn collega's hun werk kunnen doen (commentaar invullen, enzovoort).
-  * Dit mag niet teveel tijd kosten > oplossing: structuur is geheel kopieerbaar en bij wijzigingen wordt gevraagd "wil je wijzigen voor alleen deze uitvoer, of ook toekomstige?"
-  * Zie ERD (zwarte deel) voor hoofdstructuur, waarbij geldt: een "uitvoer" is een blok-in-een-jaar. Dus niet een globaal blok, maar specifiek "Blok X (2022-sep)".
-  * Wanneer het aantal blokken van een opleiding verandert, of er een heel nieuw blok bijkomt bijvoorbeeld, dan is het dús een hele nieuwe opleiding.
+* ~~Als onderwijscoördinator wil ik de structuur inrichten, zodat mijn collega's hun werk kunnen doen (commentaar invullen, enzovoort).~~
+  * ~~Dit mag niet teveel tijd kosten > oplossing: structuur is geheel kopieerbaar en bij wijzigingen wordt gevraagd "wil je wijzigen voor alleen deze uitvoer, of ook toekomstige?"~~
+  * ~~Zie ERD (zwarte deel) voor hoofdstructuur, waarbij geldt: een "uitvoer" is een blok-in-een-jaar. Dus niet een globaal blok, maar specifiek "Blok X (2022-sep)".~~
+  * ~~Wanneer het aantal blokken van een opleiding verandert, of er een heel nieuw blok bijkomt bijvoorbeeld, dan is het dús een hele nieuwe opleiding.~~
 * Als blok- of module-eigenaar wil ik zien van welke modules ik eigenaar ben, zodat ik me daarop kan focussen.
   * Eigenaarschap is niet uitvoer-gebonden. Zodra de eigenaar wisselt, vallen alle historische en toekomstige verantwoordelijkheden over op de nieuwe eigenaar.
   * Een blok of module zonder eigenaar komt op een waarschuwingslijst en default voorlopig naar de opleidingseigenaar.
@@ -68,29 +58,3 @@ Doel van de app: het team krijgt eigenaarschap over de staat van het onderwijs. 
 
 [Volledig ERD op LucidChart](https://lucid.app/lucidchart/b64482a9-95fb-46fe-bef5-d679b203f222/edit?invitationId=inv_ab7f8d7b-f481-4027-b2ac-2af9fdbedf12)
 ![erd](erd.png)
-
-# Klad
-
-## Details m.b.t. kopiëren en aanpassen toekomst
-
-Idee van cascade loslaten? In plaats daarvan.. Alle links zijn gelegd enzovoort, en wanneer je iets aanpast in een uitvoer, krijg je de vraag;
-
-- [X] Voor deze uitvoer
-- [ ] Historische uitvoeren (_kan eigenlijk niet?!_)
-- [ ] Voorliggende maar nog toekomstige uitvoeren
-- [ ] Hierna liggende uitvoeren
-
-Vanuit het blokscherm kun je dus de vraag krijgen "Je gaat module WED-II met een week vervroegen in uitvoer 22sep". Wil je dit ook aanpassen voor.... (alle bovenstaande opties).
-
-Hiervoor moet een uitvoer dus ook echt een startdatum hebben (zodat je weet of de uitvoer historisch is (en dus gelockt) of niet). Ook onderscheid maken tussen lopende cohorten en toekomstige cohorten!
-
-In het blokscherm kun je van een module alleen aanvinken welke versie je wil gebruiken. Ook daarvoor krijg je bovenstaande vraag.
-
-
-### Feedbackmomenten
-FBM hoort bij een moduleversie en is onwijzigbaar.
-Naast id krijgen ze een unieke 3cijferige code, zoals FX9B, bij aanmaken wordt uniekheid in DB gecheckt.
-Bij maken van een nieuwe versie worden de bestaande fbm's ook aan die versie gekoppeld.
-Zodra je een fbm wil wijzigen, moet je dus een nieuwe code aanvragen. Je krijgt wel de optie om een kopie te maken obv huidige gegevens.
-Zijn de checks ook onwijzigbaar?! Eigenlijk heb je dan wel een andere toets dus...
-Een moduleversie heeft meerdere fbm's, en op deze koppeltabel worden ook zaken als weeknummer, aantal studiepunten opgeslagen

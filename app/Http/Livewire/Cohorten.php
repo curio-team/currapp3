@@ -112,6 +112,7 @@ class Cohorten extends _MyComponent
                 $uitvoer_nieuw->schooljaar = $schooljaar_nieuw;
                 $uitvoer_nieuw->blok_in_schooljaar = $uitvoer_oud->blok_in_schooljaar;
                 $uitvoer_nieuw->points = $uitvoer_oud->points;
+                $uitvoer_nieuw->weeks = $uitvoer_oud->weeks;
 
                 $maanden_per_blok = 11 / $this->opleiding->blokken_per_jaar;
                 $start_schooljaar = new \Carbon\CarbonImmutable("{$schooljaar_nieuw}-09-01");
@@ -130,6 +131,9 @@ class Cohorten extends _MyComponent
                 {
                     $vak_nieuw = new VakInUitvoer();
                     $vak_nieuw->vak_id = $vak_oud->vak_id;
+                    $vak_nieuw->points = $vak_oud->points;
+                    $vak_nieuw->gelinkt_aan_vak_id = $vak_oud->gelinkt_aan_vak_id;
+                    $vak_nieuw->bpoints = $vak_oud->bpoints;
                     $uitvoer_nieuw->vakken()->save($vak_nieuw);
 
                     foreach($vak_oud->modules as $module_oud)
