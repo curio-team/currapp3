@@ -12,7 +12,7 @@
                 @else
                     <i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i>
                 @endif
-                {{ $uitvoer->vakken->sum('points') }} / {{ $uitvoer->points }} punten verdeeld over de vakken
+                {{ $uitvoer->totaal_punten }} / {{ $uitvoer->points }} punten verdeeld over de vakken
                 <div class="my-3">
                     <div class="input-group">
                         <span class="input-group-text">Totaal punten:</span>
