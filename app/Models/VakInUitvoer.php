@@ -42,7 +42,17 @@ class VakInUitvoer extends Model
 
     public function sumPoints() : Attribute
     {
-        $sum = $this->modules->unique('module_id')->sum('points');
+        $sum = 0;
+        $modules = $this->modules->unique('module_id');
+        foreach($modules as $m)
+        {
+            $start = $m->pivot->week_start;
+            $eind = $m->pivot->week_eind;
+
+            $fbms = $m->feedbackmomenten()->whereBetween('week', [$start, $eind])->get();
+            $sum += $fbms->sum('points');
+        }
+
         return Attribute::make(
             get: fn () => $sum,
         );    

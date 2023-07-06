@@ -55,7 +55,7 @@
                     <tr class="table-secondary">
                         <td colspan="6">{{ $m->parent->naam }}</td>
                     </tr>
-                    @foreach ($m->feedbackmomenten()->orderBy('pivot_week')->get() as $fbm)
+                    @foreach ($m->feedbackmomenten()->whereBetween('week', [$m->pivot->week_start, $m->pivot->week_eind])->orderBy('pivot_week')->get() as $fbm)
                         <tr>
                             <td>{{ $fbm->code }}</td>
                             <td>{{ $fbm->pivot->week }}</td>
@@ -88,7 +88,7 @@
                         <tr class="table-secondary">
                             <td colspan="5">Module {{ $m->parent->naam }}</td>
                         </tr>
-                        @foreach ($m->feedbackmomenten()->orderBy('pivot_week')->get() as $fbm)
+                        @foreach ($m->feedbackmomenten()->whereBetween('week', [$m->pivot->week_start, $m->pivot->week_eind])->orderBy('pivot_week')->get() as $fbm)
                             <tr class="table-light">
                                 <td>{{ $fbm->code }}</td>
                                 <td>Week {{ $fbm->pivot->week }}</td>
