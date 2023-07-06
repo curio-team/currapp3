@@ -99,7 +99,7 @@
                             <tr>
                                 <td colspan="5">
                                     @if($fbm->checks)
-                                        <div class="trix-content>"{!! $fbm->checks !!}</div>
+                                        <div class="trix-content">{!! $fbm->checks !!}</div>
                                     @else
                                         <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i></strong> Checks nog niet ingevuld</div>
                                     @endif
