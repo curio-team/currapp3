@@ -40,7 +40,7 @@ class Opleiding extends Model
 
     public function modules()
     {
-        return $this->hasManyThrough(Module::class, Leerlijn::class);
+        return $this->hasManyThrough(Module::class, Leerlijn::class)->orderBy('naam');
     }
 
     public function taken()
