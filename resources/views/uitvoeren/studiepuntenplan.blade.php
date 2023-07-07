@@ -79,40 +79,44 @@
             </table>
         @else
             <table class="table table-bordered">
-                <tr class="table-primary">
-                    <th>Code</th>
-                    <th>Blokweek</th>
-                    <th>Onderwerp</th>
-                    <th>Punten</th>
-                    <th>Cesuur</th>
-                </tr>
-                @foreach ($vak_voor_punten->modules as $m)
-                    <tr><td colspan="5" style="border: none;"></td></tr>
-                    <tr class="table-secondary">
-                        <td colspan="5">Module {{ $m->parent->naam }}</td>
+                <tbody>
+                    <tr class="table-primary">
+                        <th>Code</th>
+                        <th>Blokweek</th>
+                        <th>Onderwerp</th>
+                        <th>Punten</th>
+                        <th>Cesuur</th>
                     </tr>
-                    @foreach ($m->feedbackmomenten()->whereBetween('week', [$m->pivot->week_start, $m->pivot->week_eind])->orderBy('pivot_week')->get() as $fbm)
-                        <tbody>
-                            <tr class="table-light">
-                                <td>{{ $fbm->code }}</td>
-                                <td>Week {{ $fbm->pivot->week }}</td>
-                                <td>{{ $fbm->naam }}</td>
-                                <td>{{ $fbm->points }}pt</td>
-                                <td>{{ $fbm->cesuur }}%</td>
-                            </tr>
-                            <tr>
-                                <td colspan="5">
-                                    @if($fbm->checks)
-                                        <div class="trix-content">{!! $fbm->checks !!}</div>
-                                    @else
-                                        <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i></strong> Checks nog niet ingevuld</div>
-                                    @endif
-                                </td>
-                            </tr>
-                        </tbody>
-                    @endforeach
-                @endforeach
+                </tbody>
             </table>
+            @foreach ($vak_voor_punten->modules as $m)
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr class="table-secondary">
+                            <td colspan="5" style="page-break-after: avoid;">Module {{ $m->parent->naam }}</td>
+                        </tr>                        
+                        @foreach ($m->feedbackmomenten()->whereBetween('week', [$m->pivot->week_start, $m->pivot->week_eind])->orderBy('pivot_week')->get() as $fbm)
+                            @if(!$loop->first) <tbody> @endif
+                                <tr class="table-light">
+                                    <td>{{ $fbm->code }}</td>
+                                    <td>Week {{ $fbm->pivot->week }}</td>
+                                    <td>{{ $fbm->naam }}</td>
+                                    <td>{{ $fbm->points }}pt</td>
+                                    <td>{{ $fbm->cesuur }}%</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5">
+                                        @if($fbm->checks)
+                                            <div class="trix-content">{!! $fbm->checks !!}</div>
+                                        @else
+                                            <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i></strong> Checks nog niet ingevuld</div>
+                                        @endif
+                                    </td>
+                                </tr>
+                            </tbody>
+                        @endforeach
+                </table>
+            @endforeach
         @endif
 
         @if($mode == 'modal')
@@ -143,14 +147,16 @@
             </div>
         @else
             <hr class="my-4">
-            <h2 class="fs-6">B-punten</h2>
-            @if($vak_voor_punten->bpoints)
-                <div class="alert alert-secondary trix-content" style="background-color: white !important;">
-                    {!! $vak_voor_punten->bpoints !!}
-                </div>
-            @else
-                <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i> B-punten nog niet ingevuld.</strong></div>
-            @endif
+            <div style="page-break-inside: avoid">
+                <h2 class="fs-6">B-punten</h2>
+                @if($vak_voor_punten->bpoints)
+                    <div class="alert alert-secondary trix-content" style="background-color: white !important;">
+                        {!! $vak_voor_punten->bpoints !!}
+                    </div>
+                @else
+                    <div class="text-primary"><strong><i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i> B-punten nog niet ingevuld.</strong></div>
+                @endif
+            </div>
         @endif
 
     </div>

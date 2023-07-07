@@ -107,6 +107,15 @@ td{
     page-break-before: auto !important;
 }
 
+tbody{
+    page-break-inside: avoid;
+}
+
+@page{
+    margin-top: 12mm;
+    margin-bottom: 12mm;
+}
+
 .btn-outline-white {
     --bs-btn-color: white;
     --bs-btn-border-color: white;
