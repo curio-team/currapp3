@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Blok extends Model
 {
@@ -11,15 +12,11 @@ class Blok extends Model
 
     protected $table = 'blokken';
 
-    public function eigenaar()
+    public function eigenaarId() : Attribute
     {
-        if($this->belongsTo(User::class, 'eigenaar_id')->exists())
-        {
-            return $this->belongsTo(User::class, 'eigenaar_id');
-        }
-        
-        // Als dit blok geen eigenaar heeft, default dan naar eigenaar van de opleiding;
-        return $this->opleiding->eigenaar();
+        return Attribute::make(
+            get: fn ($value) => $value ?? $this->opleiding->eigenaar_id,
+        );    
     }
 
     public function opleiding()

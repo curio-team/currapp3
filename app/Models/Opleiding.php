@@ -13,11 +13,6 @@ class Opleiding extends Model
         return $this->belongsTo(Team::class);
     }
 
-    public function eigenaar()
-    {
-        return $this->belongsTo(User::class, 'eigenaar_id');
-    }
-
     public function cohorten()
     {
         return $this->hasMany(Cohort::class)->orderBy('datum_start');

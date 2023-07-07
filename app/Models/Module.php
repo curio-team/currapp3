@@ -3,22 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Module extends Model
 {
     protected $table = 'modules';
 
-    public function eigenaar()
+    public function eigenaarId() : Attribute
     {
-        if($this->belongsTo(User::class, 'eigenaar_id')->exists())
-        {
-            return $this->belongsTo(User::class, 'eigenaar_id');
-        }
-        
-        // Als deze module geen eigenaar heeft, default dan naar eigenaar van de opleiding;
-        return $this->leerlijn->opleiding->eigenaar();
+        return Attribute::make(
+            get: fn ($value) => $value ?? $this->leerlijn->opleiding->eigenaar_id,
+        );    
     }
-
     public function leerlijn()
     {
         return $this->belongsTo(Leerlijn::class);

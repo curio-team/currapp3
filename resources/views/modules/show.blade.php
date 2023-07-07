@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="navbar-brand">{{ $versie->parent->naam }}</div>
             <div class="d-print-none btn-group">
-                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#updateModuleModal"><i class="fa-solid fa-user-tie fa-fw"></i> {{ $versie->parent->eigenaar->id }}</button>
+                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#updateModuleModal"><i class="fa-solid fa-user-tie fa-fw"></i> {{ $versie->parent->eigenaar_id }}</button>
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">{{ $versie->naam }}</button>
                     <ul class="dropdown-menu dropdown-menu-end">

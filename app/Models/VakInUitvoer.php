@@ -122,7 +122,7 @@ class VakInUitvoer extends Model
         $eigenaars = [];
         foreach($this->modules as $versie)
         {
-            $eigenaars[] = optional($versie->parent->eigenaar)->id;
+            $eigenaars[] = $versie->parent->eigenaar_id;
         }
 
         return Attribute::make(
