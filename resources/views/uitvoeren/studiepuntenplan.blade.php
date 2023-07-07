@@ -92,7 +92,7 @@
                         <td colspan="5">Module {{ $m->parent->naam }}</td>
                     </tr>
                     @foreach ($m->feedbackmomenten()->whereBetween('week', [$m->pivot->week_start, $m->pivot->week_eind])->orderBy('pivot_week')->get() as $fbm)
-                        <tbody style="page-break-inside: avoid;">
+                        <tbody>
                             <tr class="table-light">
                                 <td>{{ $fbm->code }}</td>
                                 <td>Week {{ $fbm->pivot->week }}</td>
