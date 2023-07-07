@@ -88,11 +88,11 @@
                 </tr>
                 @foreach ($vak_voor_punten->modules as $m)
                     <tr><td colspan="5" style="border: none;"></td></tr>
-                    <tbody style="page-break-inside: avoid;">
-                        <tr class="table-secondary">
-                            <td colspan="5">Module {{ $m->parent->naam }}</td>
-                        </tr>
-                        @foreach ($m->feedbackmomenten()->whereBetween('week', [$m->pivot->week_start, $m->pivot->week_eind])->orderBy('pivot_week')->get() as $fbm)
+                    <tr class="table-secondary">
+                        <td colspan="5">Module {{ $m->parent->naam }}</td>
+                    </tr>
+                    @foreach ($m->feedbackmomenten()->whereBetween('week', [$m->pivot->week_start, $m->pivot->week_eind])->orderBy('pivot_week')->get() as $fbm)
+                        <tbody style="page-break-inside: avoid;">
                             <tr class="table-light">
                                 <td>{{ $fbm->code }}</td>
                                 <td>Week {{ $fbm->pivot->week }}</td>
@@ -109,8 +109,8 @@
                                     @endif
                                 </td>
                             </tr>
-                        @endforeach
-                    </tbody>
+                        </tbody>
+                    @endforeach
                 @endforeach
             </table>
         @endif
