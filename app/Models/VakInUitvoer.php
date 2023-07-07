@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Support\Facades\Log;
 
 class VakInUitvoer extends Model
 {
@@ -121,7 +122,7 @@ class VakInUitvoer extends Model
         $eigenaars = [];
         foreach($this->modules as $versie)
         {
-            $eigenaars[] = $versie->parent->eigenaar->id;
+            $eigenaars[] = optional($versie->parent->eigenaar)->id;
         }
 
         return Attribute::make(
