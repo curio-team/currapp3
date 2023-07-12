@@ -192,14 +192,13 @@
                                         // check if button file tools group is present
                                         if(document.querySelector(".trix-button-group--file-tools")) {
                                             addEventListener("trix-initialize", function(e) {
-                                            const file_tools = document.querySelector(".trix-button-group--file-tools");
-                                            file_tools.remove();
-                                        })
+                                                const file_tools = document.querySelector(".trix-button-group--file-tools");
+                                                file_tools.remove();
+                                            })
                                             addEventListener("trix-file-accept", function(e) {
                                                 e.preventDefault();
                                             })
                                         }
-                                        
                                     })();
                                     </script>
                                     <div class="text-muted"><em>Tip: bij leeglaten verschijnt een waarschuwing dat je de checks nog moet invullen.</em></div>
