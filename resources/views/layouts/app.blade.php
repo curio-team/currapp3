@@ -77,8 +77,10 @@
         });
 
         document.addEventListener("trix-initialize", function(e) {
-            const file_tools = document.querySelector(".trix-button-group--file-tools");
-            file_tools.remove();
+            if (document.querySelector(".trix-button-group--file-tools") !== null) {
+                const file_tools = document.querySelector(".trix-button-group--file-tools");
+                file_tools.remove();
+            }
         })
         document.addEventListener("trix-file-accept", function(e) {
             e.preventDefault();
