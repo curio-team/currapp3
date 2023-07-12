@@ -75,6 +75,14 @@
             var modal = bootstrap.Modal.getInstance(element);
             modal.hide();
         });
+
+        document.addEventListener("trix-initialize", function(e) {
+            const file_tools = document.querySelector(".trix-button-group--file-tools");
+            file_tools.remove();
+        })
+        document.addEventListener("trix-file-accept", function(e) {
+            e.preventDefault();
+        })
         </script>
     </body>
 </html>

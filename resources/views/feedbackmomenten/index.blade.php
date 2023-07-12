@@ -84,18 +84,6 @@
                                     wire:model.debounce.60s="item.checks"
                                     wire:key="uniqueKey"
                                 ></trix-editor>
-
-                                <script type="text/javascript">
-                                (function() {
-                                    addEventListener("trix-initialize", function(e) {
-                                        const file_tools = document.querySelector(".trix-button-group--file-tools");
-                                        file_tools.remove();
-                                    })
-                                    addEventListener("trix-file-accept", function(e) {
-                                        e.preventDefault();
-                                    })
-                                })();
-                                </script>
                                 @error('checks') <span class="text-danger error">{{ $message }}</span>@enderror
                             </div>
                         </div>
