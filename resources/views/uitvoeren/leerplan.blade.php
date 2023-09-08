@@ -34,7 +34,7 @@
                     <button class="btn btn-outline-{{ $module->parent->leerlijn->textcolor }}"><i class="fa-regular fa-comments fa-fw"></i></button>
                     <button class="btn btn-outline-{{ $module->parent->leerlijn->textcolor }}" data-bs-toggle="modal" data-bs-target="#editModuleModal" wire:click="setVersieItem({{ $module->id }}, {{ $vak->id }})"><i class="fa-regular fa-edit fa-fw"></i></button>
                     <button class="btn btn-outline-{{ $module->parent->leerlijn->textcolor }}" data-bs-toggle="modal" data-bs-target="#unlinkModuleModal" wire:click="setVersieItem({{ $module->id }}, {{ $vak->id }})"><i class="fa-solid fa-unlink fa-fw"></i></button>
-                    <a class="btn btn-outline-{{ $module->parent->leerlijn->textcolor }}" target="_blank" href="{{ route('opleidingen.modules.show.versie', [$opleiding, $module->parent, $module]) }}"><i class="fa-solid fa-eye fa-fw"></i></a>
+                    <a class="btn btn-outline-{{ $module->parent->leerlijn->textcolor }}" href="{{ route('opleidingen.modules.show.versie', [$opleiding, $module->parent, $module]) }}"><i class="fa-solid fa-eye fa-fw"></i></a>
                 </div>
             </div>
         @endforeach
