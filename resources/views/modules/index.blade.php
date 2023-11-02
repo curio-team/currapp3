@@ -11,8 +11,8 @@
                 <th>Eigenaar</th>
                 <th class="ps-4">Naam</th>
                 <th>Omschrijving</th>
-                <th>Link naar map</th>
-                <th></th>
+                <th>Link</th>
+                <th style="min-width: 200px;"></th>
             </tr>
         </thead>
         <tbody>
