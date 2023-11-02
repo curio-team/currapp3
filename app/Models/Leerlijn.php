@@ -15,7 +15,7 @@ class Leerlijn extends Model
     protected function eigenaarId() : Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value ?? optional($this->opleiding)->eigenaar_id,
+            get: fn ($value) => $value ?? "?",
         );    
     }
 
