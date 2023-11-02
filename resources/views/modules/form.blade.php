@@ -13,18 +13,16 @@
             </div>
             <div class="modal-body">
                 <form>
-                    @if($action == 'create')
-                        <div class="mb-3">
-                            <label for="leerlijn_id">Leerlijn *:</label>
-                            <select class="form-select" id="leerlijn_id" name="leerlijn_id" wire:model="item.leerlijn_id" required>
-                                <option></option>
-                                @foreach($opleiding->leerlijnen as $leerlijn)
-                                    <option value="{{ $leerlijn->id }}">{{ $leerlijn->naam }}</option>
-                                @endforeach
-                            </select>
-                            @error('item.leerlijn_id') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                    @endif
+                    <div class="mb-3">
+                        <label for="leerlijn_id">Leerlijn *:</label>
+                        <select class="form-select" id="leerlijn_id" name="leerlijn_id" wire:model="item.leerlijn_id" required>
+                            <option></option>
+                            @foreach($opleiding->leerlijnen as $leerlijn)
+                                <option value="{{ $leerlijn->id }}">{{ $leerlijn->naam }}</option>
+                            @endforeach
+                        </select>
+                        @error('item.leerlijn_id') <span class="text-danger error">{{ $message }}</span>@enderror
+                    </div>
                     <div class="mb-3">
                         <label for="naam">Naam *:</label>
                         <input type="text" class="form-control" id="naam" name="naam" wire:model="item.naam" required>
