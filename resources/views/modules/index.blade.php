@@ -7,7 +7,8 @@
     <table class="table">
         <thead>
             <tr>
-                <th></th>
+                <th>Leerlijn</th>
+                <th>Eigenaar</th>
                 <th class="ps-4">Naam</th>
                 <th>Omschrijving</th>
                 <th>Link naar map</th>
@@ -20,14 +21,15 @@
                     <td style="background-color: {{ $module->leerlijn->color }}; color: {{ $module->leerlijn->textColor }}">
                         <div class="d-flex justify-content-center align-items-center"><small>{{ $module->leerlijn->naam }}</small></div>
                     </td>
+                    <td class="ps-4 text-muted"><small>{{ $module->leerlijn->eigenaar_id }}</small></td>
                     <td class="ps-4">{{ $module->naam }}</td>
                     <td>{{ $module->omschrijving }}</td>
-                    <td>
+                    <td class="text-muted">
                         @if(!empty($module->map_url))
                             <a target="_blank" class="force-show" href="{{ $module->map_url }}">link</a>
                         @endif
                     </td>
-                    <td class="text-end">
+                    <td class="text-end p-0">
                         <a class="btn btn-lg p-1 p-md-3 btn-link link-primary" href="{{ route('opleidingen.modules.show', [$opleiding, $module]) }}"><i class="fa-regular fa-eye"></i></a>
                         <button class="btn btn-lg p-1 p-md-3 btn-link link-secondary" data-bs-toggle="modal" data-bs-target="#updateModal" wire:click="setItem({{ $module->id }})"><i class="fa-solid   fa-pen-to-square"></i></button>
                         <button class="btn btn-lg p-1 p-md-3 btn-link link-danger"    data-bs-toggle="modal" data-bs-target="#deleteModal" wire:click="setItem({{ $module->id }})"><i class="fa-regular fa-trash-can">  </i></button>

@@ -19,6 +19,11 @@
                         @error('item.naam') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                     <div class="mb-3">
+                        <label for="eigenaar_id">Eigenaar:</label>
+                        <input type="text" class="form-control" id="eigenaar_id" name="eigenaar_id" wire:model="item.eigenaar_id" placeholder="ab01">
+                        @error('item.eigenaar_id') <span class="text-danger error">{{ $message }}</span>@enderror
+                    </div>
+                    <div class="mb-3">
                         <label for="color">Kleur</span>:</label>
                         <input type="color" class="form-control" id="color" name="color" wire:model="item.color">
                         @error('item.color') <span class="text-danger error">{{ $message }}</span>@enderror

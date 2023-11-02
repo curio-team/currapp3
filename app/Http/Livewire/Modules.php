@@ -14,7 +14,6 @@ class Modules extends _MyComponent
     protected $className = \App\Models\Module::class;
     protected $rules = [
         'item.naam' => 'required',
-        'item.eigenaar_id' => 'nullable',
         'item.omschrijving' => 'nullable',
         'item.map_url' => 'nullable',
         'item.leerlijn_id' => 'nullable',
@@ -23,7 +22,6 @@ class Modules extends _MyComponent
 
     protected $updateRules = [
         'item.naam' => 'required',
-        'item.eigenaar_id' => 'nullable',
         'item.omschrijving' => 'nullable',
         'item.map_url' => 'nullable',
         'item.leerlijn_id' => 'nullable',

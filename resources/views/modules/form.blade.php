@@ -42,11 +42,6 @@
                         </div>
                     @endif
                     <div class="mb-3">
-                        <label for="eigenaar_id">Eigenaar:</label>
-                        <input type="text" class="form-control" id="eigenaar_id" name="eigenaar_id" wire:model="item.eigenaar_id" placeholder="ab01">
-                        @error('item.eigenaar_id') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                    <div class="mb-3">
                         <label for="omschrijving">Omschrijving:</label>
                         <input type="text" class="form-control" id="omschrijving" name="omschrijving" wire:model="item.omschrijving">
                         @error('item.omschrijving') <span class="text-danger error">{{ $message }}</span>@enderror

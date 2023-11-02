@@ -6,9 +6,12 @@
 @section('subnav')
     <nav class="navbar navbar-dark bg-secondary subnav">
         <div class="container-fluid">
-            <div class="navbar-brand">{{ $versie->parent->naam }}</div>
+            <div class="navbar-brand">
+                <span class="badge me-2" style="background-color: {{ $module->leerlijn->color }}; color: {{ $module->leerlijn->textColor }}">{{ $versie->parent->leerlijn->naam }}</span>
+                <strong>{{ $versie->parent->naam }}</strong>
+            </div>
             <div class="d-print-none btn-group">
-                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#updateModuleModal"><i class="fa-solid fa-user-tie fa-fw"></i> {{ $versie->parent->eigenaar_id }}</button>
+                <div class="btn btn-outline-light"><i class="fa-solid fa-user-tie fa-fw"></i> {{ $versie->parent->eigenaar_id }}</div>
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">{{ $versie->naam }}</button>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -69,10 +72,10 @@
                     </div>
                 </div>
                 <div class="accordion-item">
-                    <button class="accordion-header accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panel3" aria-expanded="true" aria-controls="panel3">
+                    <button class="accordion-header accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panel3" aria-controls="panel3">
                         Koppeling module aan vakken (<em>huidige versie</em>)
                     </button>
-                    <div id="panel3" class="accordion-collapse collapse show">
+                    <div id="panel3" class="accordion-collapse collapse">
                         <div class="accordion-body">
                             <table class="table table-bordered table-hover">
                                 <tr class="table-light">
@@ -228,10 +231,6 @@
                             <div class="mb-3">
                                 <label for="naam">Naam *:</label>
                                 <input type="text" class="form-control" id="naam" name="naam" value="{{ $module->naam }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="eigenaar_id">Eigenaar:</label>
-                                <input type="text" class="form-control" id="eigenaar_id" name="eigenaar_id" value="{{ $module->eigenaar_id }}" placeholder="ab01">
                             </div>
                             <div class="mb-3">
                                 <label for="omschrijving">Omschrijving:</label>

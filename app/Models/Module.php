@@ -12,7 +12,7 @@ class Module extends Model
     public function eigenaarId() : Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value ?? optional(optional($this->leerlijn)->opleiding)->eigenaar_id,
+            get: fn ($value) => optional($this->leerlijn)->eigenaar_id,
         );    
     }
     public function leerlijn()

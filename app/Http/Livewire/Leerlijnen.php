@@ -10,6 +10,7 @@ class Leerlijnen extends _MyComponent
     protected $className = \App\Models\Leerlijn::class;
     protected $rules = [
         'item.naam' => 'required',
+        'item.eigenaar_id' => 'nullable',
         'item.color' => 'required',
     ];
 
