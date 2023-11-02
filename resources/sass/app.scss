@@ -138,3 +138,7 @@ tbody{
 .vak-header .btn:hover{
     background-color: var(--bs-btn-hover-bg);
 }
+
+.fcode::first-letter{
+    font-weight: bold;;
+}

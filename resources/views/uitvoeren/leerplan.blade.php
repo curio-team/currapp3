@@ -1,4 +1,4 @@
-<div class="leerplan" style="display: grid; grid-template-columns: auto repeat({{ $uitvoer->vakken->sum('aantal_kolommen') }}, 1fr) auto; column-gap: @if($uitvoer->vakken->sum('aantal_kolommen') > 10) 0.5rem; @else 1rem; @endif">
+<div class="leerplan" style="display: grid; grid-template-columns: auto repeat({{ $uitvoer->vakken->sum('aantal_kolommen') }}, 1fr) auto; column-gap: @if($uitvoer->vakken->sum('aantal_kolommen') > 10) 0.5rem; @else 1rem; @endif grid-auto-rows: 1fr;">
     @for ($i = 1; $i <= $uitvoer->weeks; $i++)
         <div class="d-flex justify-content-center align-items-center" style="grid-column: 1; grid-row: {{ $i+1 }}; text-align: center;"><em>{{ $i }}</em></div>
         <div class="d-flex justify-content-center align-items-center" style="grid-column: {{ $uitvoer->vakken->sum('aantal_kolommen')+2 }}; grid-row: {{ $i+1 }}; text-align: center;"><em>{{ $i }}</em></div>
@@ -27,9 +27,26 @@
             </div>
         </div>
         @foreach ($vak->modules as $module)
-            <div class="position-relative module p-2 text-center hover-show" style="background-color: {{ $module->parent->leerlijn->color }}; color: {{ $module->parent->leerlijn->textcolor }}; grid-column: {{ $counter - ($vak->kolom_indeling[$module->id]) }}; grid-row: {{ $module->pivot->week_start+1 }} / {{ $module->pivot->week_eind+2 }};">
-                <div class="module-titel">{{ $module->parent->naam }}</div>
-                <div class="fw-light hover-hide">{{ $module->naam }}</div>
+            <div class="position-relative module text-center hover-show" style="background-color: {{ $module->parent->leerlijn->color }}; color: {{ $module->parent->leerlijn->textcolor }}; grid-column: {{ $counter - ($vak->kolom_indeling[$module->id]) }}; grid-row: {{ $module->pivot->week_start+1 }} / {{ $module->pivot->week_eind+2 }};">
+                <div style="display: grid; height: 100%; grid-template-rows: repeat({{ $module->pivot->week_eind - $module->pivot->week_start + 1 }}, 1fr);">
+                    <div style="grid-row: 1; grid-column: 1; align-self: center;">
+                        <div class="module-titel">
+                            {{ $module->parent->naam }}
+                            @foreach ($module->feedbackmomenten as $fbm)
+                                @if($fbm->pivot->week == $module->pivot->week_start)
+                                    <small class="fcode ps-1" style="font-size: 0.7rem; color: {{ $module->parent->leerlijn->textcolorsubtle }}; display: inline-block;">{{ $fbm->code}}</small>
+                                @endif
+                            @endforeach
+                        </div>
+                        {{-- <div class="fw-light hover-hide">{{ $module->naam }}</div> --}}
+                    </div>
+
+                    @foreach ($module->feedbackmomenten as $fbm)
+                        @if($fbm->pivot->week > $module->pivot->week_start && $fbm->pivot->week <= $module->pivot->week_eind)
+                            <small class="fcode" style="font-size: 0.7rem; color: {{ $module->parent->leerlijn->textcolorsubtle }}; text-align: center; align-self: center; grid-row: {{ $fbm->pivot->week - $module->pivot->week_start + 1 }}; grid-column: 1;">{{ $fbm->code}}</small>
+                        @endif
+                    @endforeach
+                </div>
                 <div class="d-print-none btn-group btn-group-sm position-absolute top-50 left-50 translate-middle shadow" style="background-color: {{ $module->parent->leerlijn->color }};">
                     <button class="btn btn-outline-{{ $module->parent->leerlijn->textcolor }}"><i class="fa-regular fa-comments fa-fw"></i></button>
                     <button class="btn btn-outline-{{ $module->parent->leerlijn->textcolor }}" data-bs-toggle="modal" data-bs-target="#editModuleModal" wire:click="setVersieItem({{ $module->id }}, {{ $vak->id }})"><i class="fa-regular fa-edit fa-fw"></i></button>
