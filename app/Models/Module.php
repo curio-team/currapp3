@@ -15,6 +15,7 @@ class Module extends Model
             get: fn ($value) => optional($this->leerlijn)->eigenaar_id,
         );    
     }
+    
     public function leerlijn()
     {
         return $this->belongsTo(Leerlijn::class);

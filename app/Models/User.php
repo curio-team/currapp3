@@ -31,9 +31,9 @@ class User extends Authenticatable
         return $this->hasMany(Opleiding::class, 'eigenaar_id');
     }
 
-    public function modules()
+    public function leerlijnen()
     {
-        return $this->hasMany(Module::class, 'eigenaar_id');
+        return $this->hasMany(Leerlijn::class, 'eigenaar_id');
     }
 
     public function comments()

@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OpleidingController;
 use App\Http\Controllers\UitvoerController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\RapportController;
 use App\Http\Livewire\Blokken;
 use App\Http\Livewire\Leerlijnen;
 use App\Http\Livewire\Vakken;
@@ -44,6 +45,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('studiepuntenplan/uitvoer/{uitvoer}', [UitvoerController::class, 'studiepuntenplan_uitvoer'])->name('studiepuntenplan.uitvoer.show');
     Route::get('studiepuntenplan/vak/{vak}', [UitvoerController::class, 'studiepuntenplan_vak'])->name('studiepuntenplan.vak.show');
+
+    Route::get('opleidingen/{opleiding}/rapportage/llc', [RapportController::class, 'llc'])->name('opleidingen.rapportage.llc');
+    Route::get('opleidingen/{opleiding}/rapportage/llc/2', [RapportController::class, 'llc2'])->name('opleidingen.rapportage.llc.2');
 
     Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
         // TODO

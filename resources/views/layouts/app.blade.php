@@ -29,6 +29,17 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('opleidingen.cohorten', $opleiding) }}">Cohorten</a>
                             </li>
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Rapportages
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="{{ route('opleidingen.rapportage.llc', $opleiding) }}">LLC's</a></li>
+                                    </ul>
+                                </li>
+                                
+                            </ul>
                         @endif
                     </ul>
                     @if(isset($opleiding))
