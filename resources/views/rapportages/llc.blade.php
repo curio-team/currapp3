@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title', 'LLC\'s')
 @section('container-class', 'container-fluid p-0')
 
 @section('subnav')

@@ -19,7 +19,7 @@
             @foreach ($opleiding->modules as $module)
                 <tr class="hover-show">
                     <td style="background-color: {{ $module->leerlijn->color }}; color: {{ $module->leerlijn->textColor }}">
-                        <div class="d-flex justify-content-center align-items-center"><small>{{ $module->leerlijn->naam }}</small></div>
+                        <div class="d-flex justify-content-center align-items-center"><small style="text-align: center;">{{ $module->leerlijn->naam }}</small></div>
                     </td>
                     <td class="ps-4 text-muted"><small>{{ $module->leerlijn->eigenaar_id }}</small></td>
                     <td class="ps-4">{{ $module->naam }}</td>

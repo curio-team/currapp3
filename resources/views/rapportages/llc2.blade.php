@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title', 'LLC\'s')
 
 @section('subnav')
     <nav class="navbar navbar-dark navbar-expand bg-secondary subnav">
