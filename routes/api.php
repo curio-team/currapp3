@@ -17,3 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::prefix('feedbackmomenten')->group(function () {
+    Route::get('all', function () {
+        return App\Models\Feedbackmoment::all();
+    });
+
+    Route::get('get/{id}', function ($id) {
+        return App\Models\Feedbackmoment::find($id);
+    });
+
+    Route::get('get/{id}/modules', function ($id) {
+        return App\Models\Feedbackmoment::find($id)->modules;
+    });
+});

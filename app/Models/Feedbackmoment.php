@@ -13,4 +13,15 @@ class Feedbackmoment extends Model
     {
         return $this->belongsToMany(ModuleVersie::class);
     }
+
+    public static function generateCode()
+    {
+        $characters = "2345679ABCDEFGHJKMNPQRSTUVWXYZ";
+
+        do{
+            $code = "F" . substr(str_shuffle($characters), 0, 3);
+        } while(Feedbackmoment::where('code', $code)->count());
+
+        return $code;
+    }
 }

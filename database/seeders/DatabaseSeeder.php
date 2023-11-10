@@ -265,5 +265,22 @@ class DatabaseSeeder extends Seeder
                 $leerlijn->acceptatiecriteria()->attach(fake()->randomElement($ids));
             }
         }
+
+        //
+        // Feedbackmomenten
+        //
+        \App\Models\Feedbackmoment::factory()
+            ->count(100)
+            ->create();
+
+        //
+        // Feedbackmomenten aan modules
+        //
+        foreach(\App\Models\Feedbackmoment::all() as $moment)
+        {
+            $moment->modules()->attach(\App\Models\ModuleVersie::inRandomOrder()->first(), [
+                'week' => rand(1, 16),
+            ]);
+        }
     }
 }
