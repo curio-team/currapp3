@@ -13,8 +13,19 @@ use App\Http\Livewire\Vakken;
 use App\Http\Livewire\Modules;
 use App\Http\Livewire\Cohorten;
 use App\Http\Livewire\CohortShow;
+use Illuminate\Http\Request;
 
 Route::middleware('auth')->group(function () {
+    Route::get('/tokens/create', function (Request $request) {
+        $token = $request->user()->createToken(strval(time()));
+
+        return <<<HTML
+            <div>
+                <p>API Token: <input value="{$token->plainTextToken}" /></p>
+                <p>You'll never see this token again, so make sure to copy it now!</p>
+            </div>
+        HTML;
+    });
 
     Route::get('/', [HomeController::class, 'show'])->name('home');
     Route::post('/standaard', [HomeController::class, 'store'])->name('standaard.store');
@@ -32,7 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::post('opleidingen/{opleiding}/modules/{module}/create', [ModuleController::class, 'create_version'])->name('opleidingen.modules.versie.create');
     Route::get('opleidingen/{opleiding}/cohorten', Cohorten::class)->name('opleidingen.cohorten');
     Route::get('opleidingen/{opleiding}/cohorten/{cohort}', CohortShow::class)->name('opleidingen.cohorten.show');
-    
+
     Route::get('opleidingen/{opleiding}/uitvoeren/{uitvoer}', [UitvoerController::class, 'show'])->name('opleidingen.uitvoeren.show');
     Route::post('uitvoeren/{uitvoer}/vak/preview', [UitvoerController::class, 'link_vak_preview'])->name('uitvoeren.link.vak.preview');
     Route::post('uitvoeren/{uitvoer}/vak', [UitvoerController::class, 'link_vak'])->name('uitvoeren.link.vak');

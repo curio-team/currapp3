@@ -14,20 +14,47 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::prefix('feedbackmomenten')->group(function () {
-    Route::get('all', function () {
-        return App\Models\Feedbackmoment::all();
+Route::middleware('auth:sanctum')->group(function(){
+    Route::get('/user', function (Request $request) {
+        return $request->user();
     });
 
-    Route::get('get/{id}', function ($id) {
-        return App\Models\Feedbackmoment::find($id);
-    });
-
-    Route::get('get/{id}/modules', function ($id) {
-        return App\Models\Feedbackmoment::find($id)->modules;
+    Route::prefix('feedbackmomenten')->group(function () {
+        Route::get('active-sorted-by-module', function () {
+            return App\Models\Uitvoer::with('vakken.modules.parent', 'vakken.modules.feedbackmomenten')
+                ->where('datum_start', '<=', now())
+                ->where('datum_eind', '>=', now())
+                ->get()
+                ->map(function ($uitvoer) {
+                    return [
+                        'blok' => $uitvoer->blok->naam,
+                        'datum_start' => $uitvoer->datum_start,
+                        'datum_eind' => $uitvoer->datum_eind,
+                        'vakken' => $uitvoer->vakken->map(function ($vak) {
+                            return [
+                                'vak' => $vak->parent->naam,
+                                'volgorde' => $vak->parent->volgorde,
+                                'modules' =>  $vak->modules->map(function ($module) {
+                                    return [
+                                        'module' => $module->parent->naam,
+                                        'leerlijn' => $module->parent->leerlijn->naam,
+                                        'week_start' => $module->pivot->week_start,
+                                        'week_eind' => $module->pivot->week_eind,
+                                        'feedbackmomenten' => $module->feedbackmomenten->map(function ($fbm) {
+                                            return [
+                                                'code' => $fbm->code,
+                                                'naam' => $fbm->naam,
+                                                'week' => $fbm->pivot->week,
+                                                'points' => $fbm->points,
+                                            ];
+                                        })
+                                        ->sortBy('week'),
+                                    ];
+                                })
+                            ];
+                        }),
+                    ];
+                });
+        });
     });
 });

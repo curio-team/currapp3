@@ -58,3 +58,57 @@ Doel van de app: het team krijgt eigenaarschap over de staat van het onderwijs. 
 
 [Volledig ERD op LucidChart](https://lucid.app/lucidchart/b64482a9-95fb-46fe-bef5-d679b203f222/edit?invitationId=inv_ab7f8d7b-f481-4027-b2ac-2af9fdbedf12)
 ![erd](erd.png)
+
+# API
+
+`/api/v1/` is de prefix voor alle API-calls. 
+
+Voor toegang tot de API is een API token nodig. Deze vraag je op voor jezelf door ingelogd naar deze route te gaan: `/tokens/create`.
+Stuur in alle verzoeken de header `Authorization` met waarde `Bearer #|####` (waar `#|####` jouw API token is).
+
+## Feedbackmomenten
+
+### GET `/api/v1/feedbackmomenten/active-sorted-by-module`
+
+Geeft alle actieve blokken, met vakken, modules, en daarin feedbackmomenten terug.
+
+**Voorbeeld uitvoer:**
+```json
+[
+    {
+        "blok": "Blok B",
+        "datum_start": "2023-08-01T00:00:00.000000Z",
+        "datum_eind": "2024-02-01T00:00:00.000000Z",
+        "vakken": [
+            {
+                "vak": "NAT",
+                "volgorde": 3,
+                "modules": [
+                    {
+                        "module": "LHK-I",
+                        "leerlijn": "LHK",
+                        "week_start": 1,
+                        "week_eind": 5,
+                        "feedbackmomenten": [
+                            {
+                                "code": "FDJG",
+                                "naam": "Quam et qui.",
+                                "week": 12,
+                                "points": 10
+                            }
+                        ]
+                    },
+                    {
+                        "module": "FBE-IV",
+                        "leerlijn": "FBE",
+                        "week_start": 6,
+                        "week_eind": 16,
+                        "feedbackmomenten": []
+                    }
+                ]
+            },
+            // ...
+        ]
+    }
+]
+```
