@@ -78,7 +78,7 @@ class DatabaseSeeder extends Seeder
             ))
             ->for($opleiding)
             ->create();
-        
+
         //
         // Cohorten
         //
@@ -94,7 +94,7 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
-        
+
         //
         // Uitvoeren
         //
@@ -142,6 +142,11 @@ class DatabaseSeeder extends Seeder
         \App\Models\Leerlijn::factory()
             ->count(20)
             ->for($opleiding)
+            ->state(function (array $attributes) {
+                return [
+                    'eigenaar_id' => fake()->randomElement(['br10', 'ab01', null]),
+                ];
+            })
             ->create();
 
         //
@@ -153,7 +158,6 @@ class DatabaseSeeder extends Seeder
             for($i = 0; $i < rand(1, 4); $i++)
             {
                 \App\Models\Module::create([
-                    'eigenaar_id' => fake()->randomElement(['br10', 'ab01', null]),
                     'leerlijn_id' => $leerlijn->id,
                     'naam'        => $leerlijn->naam . '-' . $numbers[$i],
                 ]);
