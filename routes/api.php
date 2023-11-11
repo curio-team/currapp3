@@ -37,16 +37,19 @@ Route::middleware('auth:sanctum')->group(function(){
                                 'modules' =>  $vak->modules->map(function ($module) {
                                     return [
                                         'module' => $module->parent->naam,
-                                        'versie' => $module->versie,
+                                        'version_number' => $module->versie,
+                                        'version_id' => $module->id,
                                         'leerlijn' => $module->parent->leerlijn->naam,
                                         'week_start' => $module->pivot->week_start,
                                         'week_eind' => $module->pivot->week_eind,
                                         'feedbackmomenten' => $module->feedbackmomenten->map(function ($fbm) {
                                             return [
+                                                'id' => $fbm->id,
                                                 'code' => $fbm->code,
                                                 'naam' => $fbm->naam,
                                                 'week' => $fbm->pivot->week,
                                                 'points' => $fbm->points,
+                                                'cesuur' => $fbm->cesuur,
                                             ];
                                         })
                                         ->sortBy('week')
