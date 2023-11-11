@@ -27,6 +27,7 @@ Route::middleware('auth:sanctum')->group(function(){
                 ->get()
                 ->map(function ($uitvoer) {
                     return [
+                        'id' => $uitvoer->id,
                         'blok' => $uitvoer->blok->naam,
                         'datum_start' => $uitvoer->datum_start,
                         'datum_eind' => $uitvoer->datum_eind,
