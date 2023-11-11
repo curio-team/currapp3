@@ -276,9 +276,16 @@ class DatabaseSeeder extends Seeder
         //
         // Feedbackmomenten aan modules
         //
+        $modules = \App\Models\ModuleVersie::inRandomOrder()->get();
         foreach(\App\Models\Feedbackmoment::all() as $moment)
         {
-            $moment->modules()->attach(\App\Models\ModuleVersie::inRandomOrder()->first(), [
+            $module = $modules->pop();
+
+            if(!$module) {
+                break;
+            }
+
+            $moment->modules()->attach($module, [
                 'week' => rand(1, 16),
             ]);
         }
