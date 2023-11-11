@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class FeedbackmomentFactory extends Factory
 {
+    private $batchCodes = [];
+
     /**
      * Define the model's default state.
      *
@@ -18,7 +20,7 @@ class FeedbackmomentFactory extends Factory
     public function definition()
     {
         return [
-            'code' => Feedbackmoment::generateCode(),
+            'code' => Feedbackmoment::generateCode($this->batchCodes),
             'naam' => fake()->sentence(3),
             'points' => fake()->numberBetween(1, 10),
             'cesuur' => fake()->numberBetween(70, 100),

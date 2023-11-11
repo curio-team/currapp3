@@ -37,6 +37,7 @@ Route::middleware('auth:sanctum')->group(function(){
                                 'modules' =>  $vak->modules->map(function ($module) {
                                     return [
                                         'module' => $module->parent->naam,
+                                        'versie' => $module->versie,
                                         'leerlijn' => $module->parent->leerlijn->naam,
                                         'week_start' => $module->pivot->week_start,
                                         'week_eind' => $module->pivot->week_eind,
@@ -48,9 +49,11 @@ Route::middleware('auth:sanctum')->group(function(){
                                                 'points' => $fbm->points,
                                             ];
                                         })
-                                        ->sortBy('week'),
+                                        ->sortBy('week')
+                                        ->values(),
                                     ];
                                 })
+                                ->sortBy('week_start'),
                             ];
                         }),
                     ];

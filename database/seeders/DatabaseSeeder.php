@@ -269,25 +269,15 @@ class DatabaseSeeder extends Seeder
         //
         // Feedbackmomenten
         //
-        \App\Models\Feedbackmoment::factory()
-            ->count(100)
-            ->create();
-
-        //
-        // Feedbackmomenten aan modules
-        //
-        $modules = \App\Models\ModuleVersie::inRandomOrder()->get();
-        foreach(\App\Models\Feedbackmoment::all() as $moment)
+        foreach(\App\Models\VakInUitvoer::with('modules')->get() as $vak)
         {
-            $module = $modules->pop();
+            // Add the same feedbackmoment to each version of the module
+            $fbm = \App\Models\Feedbackmoment::factory()->make();
 
-            if(!$module) {
-                break;
+            foreach($vak->modules as $moduleVersie)
+            {
+                $moduleVersie->feedbackmomenten()->save($fbm, ['week' => rand($moduleVersie->pivot->week_start, $moduleVersie->pivot->week_eind)]);
             }
-
-            $moment->modules()->attach($module, [
-                'week' => rand(1, 16),
-            ]);
         }
     }
 }
