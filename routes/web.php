@@ -7,17 +7,20 @@ use App\Http\Controllers\OpleidingController;
 use App\Http\Controllers\UitvoerController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\RapportController;
+use App\Http\Controllers\TokenController;
 use App\Http\Livewire\Blokken;
 use App\Http\Livewire\Leerlijnen;
 use App\Http\Livewire\Vakken;
 use App\Http\Livewire\Modules;
 use App\Http\Livewire\Cohorten;
 use App\Http\Livewire\CohortShow;
+use Illuminate\Http\Request;
 
 Route::middleware('auth')->group(function () {
-
+    
     Route::get('/', [HomeController::class, 'show'])->name('home');
     Route::post('/standaard', [HomeController::class, 'store'])->name('standaard.store');
+    Route::get('/tokens/create', [TokenController::class, 'create'])->name('token.create');
 
     Route::resource('opleidingen', OpleidingController::class)->parameter('opleidingen', 'opleiding');
 
@@ -32,7 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::post('opleidingen/{opleiding}/modules/{module}/create', [ModuleController::class, 'create_version'])->name('opleidingen.modules.versie.create');
     Route::get('opleidingen/{opleiding}/cohorten', Cohorten::class)->name('opleidingen.cohorten');
     Route::get('opleidingen/{opleiding}/cohorten/{cohort}', CohortShow::class)->name('opleidingen.cohorten.show');
-    
+
     Route::get('opleidingen/{opleiding}/uitvoeren/{uitvoer}', [UitvoerController::class, 'show'])->name('opleidingen.uitvoeren.show');
     Route::post('uitvoeren/{uitvoer}/vak/preview', [UitvoerController::class, 'link_vak_preview'])->name('uitvoeren.link.vak.preview');
     Route::post('uitvoeren/{uitvoer}/vak', [UitvoerController::class, 'link_vak'])->name('uitvoeren.link.vak');

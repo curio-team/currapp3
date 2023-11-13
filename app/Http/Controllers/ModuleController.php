@@ -33,22 +33,15 @@ class ModuleController extends Controller
             'cesuur' => 'required|integer|min:70|max:100',
             'week' => 'required|integer|min:1',
         ]);
-        
+
         $fbm = new Feedbackmoment();
         $fbm->naam = $request->naam;
         $fbm->points = $request->points;
         $fbm->cesuur = $request->cesuur;
         $fbm->checks = $request->checks;
-
-        $characters = "2345679ABCDEFGHJKMNPQRSTUVWXYZ";
-
-        do{
-            $code = "F" . substr(str_shuffle($characters), 0, 3);
-        } while(Feedbackmoment::where('code', $code)->count());
-
-        $fbm->code = $code;
+        $fbm->code = Feedbackmoment::generateCode();
         $fbm->save();
-        
+
         $versie->feedbackmomenten()->attach($fbm, ['week' => $request->week]);
 
         return redirect()->back();
@@ -64,7 +57,7 @@ class ModuleController extends Controller
         $module->omschrijving = $request->omschrijving;
         $module->map_url = $request->map_url;
         $module->save();
-        
+
         return redirect()->back();
     }
 
@@ -82,8 +75,8 @@ class ModuleController extends Controller
         {
             $new->feedbackmomenten()->attach($fbm, ['week' => $fbm->pivot->week]);
         }
-        
+
         return redirect()->route('opleidingen.modules.show.versie', [$opleiding, $module, $new]);
     }
-    
+
 }

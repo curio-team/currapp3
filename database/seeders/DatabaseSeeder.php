@@ -265,5 +265,19 @@ class DatabaseSeeder extends Seeder
                 $leerlijn->acceptatiecriteria()->attach(fake()->randomElement($ids));
             }
         }
+
+        //
+        // Feedbackmomenten
+        //
+        foreach(\App\Models\VakInUitvoer::with('modules')->get() as $vak)
+        {
+            // Add the same feedbackmoment to each version of the module
+            $fbm = \App\Models\Feedbackmoment::factory()->make();
+
+            foreach($vak->modules as $moduleVersie)
+            {
+                $moduleVersie->feedbackmomenten()->save($fbm, ['week' => rand($moduleVersie->pivot->week_start, $moduleVersie->pivot->week_eind)]);
+            }
+        }
     }
 }
