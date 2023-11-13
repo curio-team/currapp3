@@ -16,9 +16,9 @@ Doel van de app: het team krijgt eigenaarschap over de staat van het onderwijs. 
   * ~~Dit mag niet teveel tijd kosten > oplossing: structuur is geheel kopieerbaar en bij wijzigingen wordt gevraagd "wil je wijzigen voor alleen deze uitvoer, of ook toekomstige?"~~
   * ~~Zie ERD (zwarte deel) voor hoofdstructuur, waarbij geldt: een "uitvoer" is een blok-in-een-jaar. Dus niet een globaal blok, maar specifiek "Blok X (2022-sep)".~~
   * ~~Wanneer het aantal blokken van een opleiding verandert, of er een heel nieuw blok bijkomt bijvoorbeeld, dan is het dús een hele nieuwe opleiding.~~
-* Als blok- of module-eigenaar wil ik zien van welke modules ik eigenaar ben, zodat ik me daarop kan focussen.
-  * Eigenaarschap is niet uitvoer-gebonden. Zodra de eigenaar wisselt, vallen alle historische en toekomstige verantwoordelijkheden over op de nieuwe eigenaar.
-  * Een blok of module zonder eigenaar komt op een waarschuwingslijst en default voorlopig naar de opleidingseigenaar.
+* ~~Als blok- of module-eigenaar wil ik zien van welke modules ik eigenaar ben, zodat ik me daarop kan focussen.~~
+  * ~~Eigenaarschap is niet uitvoer-gebonden. Zodra de eigenaar wisselt, vallen alle historische en toekomstige verantwoordelijkheden over op de nieuwe eigenaar.~~
+  * ~~Een blok of module zonder eigenaar komt op een waarschuwingslijst en default voorlopig naar de opleidingseigenaar.~~
 * Als docent wil ik na/tijdens het uitvoeren van een module opmerkingen kunnen noteren, zodat de lessen voor een volgende uitvoer beter worden.
   * Ik zie hiervoor het leer/toetsplan waarbij ik een module of het gehele blok kan aanklikken (comment-knop).
   * Een opmerking is gekoppeld aan een module of blok (=uitvoer).
