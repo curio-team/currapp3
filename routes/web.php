@@ -7,6 +7,7 @@ use App\Http\Controllers\OpleidingController;
 use App\Http\Controllers\UitvoerController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\RapportController;
+use App\Http\Controllers\TokenController;
 use App\Http\Livewire\Blokken;
 use App\Http\Livewire\Leerlijnen;
 use App\Http\Livewire\Vakken;
@@ -16,19 +17,10 @@ use App\Http\Livewire\CohortShow;
 use Illuminate\Http\Request;
 
 Route::middleware('auth')->group(function () {
-    Route::get('/tokens/create', function (Request $request) {
-        $token = $request->user()->createToken(strval(time()));
-
-        return <<<HTML
-            <div>
-                <p>API Token: <input value="{$token->plainTextToken}" /></p>
-                <p>You'll never see this token again, so make sure to copy it now!</p>
-            </div>
-        HTML;
-    });
-
+    
     Route::get('/', [HomeController::class, 'show'])->name('home');
     Route::post('/standaard', [HomeController::class, 'store'])->name('standaard.store');
+    Route::get('/tokens/create', [TokenController::class, 'create'])->name('token.create');
 
     Route::resource('opleidingen', OpleidingController::class)->parameter('opleidingen', 'opleiding');
 
