@@ -196,52 +196,6 @@ class DatabaseSeeder extends Seeder
         }
 
         //
-        // Leerdoelen
-        //
-        foreach(\App\Models\Leerlijn::all() as $leerlijn)
-        {
-            for ($i = 1; $i < rand(2, 20); $i++)
-            {
-               $leerdoel = new \App\Models\Leerdoel();
-               $leerdoel->volgorde = $i;
-               $leerdoel->nummer = $i;
-               $leerdoel->tekst_lang = fake()->sentence(nbWords: 10);
-               $leerdoel->tekst_kort = implode(' ', array_slice(explode(' ', $leerdoel->tekst_lang), 0, 3));
-               $leerlijn->leerdoelen()->save($leerdoel);
-            }
-        }
-
-        //
-        // Leerdoelen aan modules en blokken
-        //
-        $ids = \App\Models\Leerdoel::all()->pluck('id')->toArray();
-        foreach(\App\Models\ModuleVersie::all() as $versie)
-        {
-            $start = rand(0, count($ids) / 2);
-            $end = rand($start+1, $start+20);
-            $versie->leerdoelen()->attach(array_slice($ids, $start, $end));
-        }
-        foreach(\App\Models\Uitvoer::all() as $blok)
-        {
-            $start = rand(0, count($ids) / 2);
-            $end = rand($start+1, $start+20);
-            $blok->leerdoelen()->attach(array_slice($ids, $start, $end));
-        }
-
-        //
-        // Aspecten
-        //
-        foreach(\App\Models\Leerdoelable::all() as $leerdoelable)
-        {
-            for($i = 0; $i < rand(1, 3); $i++)
-            {
-                $aspect = new \App\Models\Aspect();
-                $aspect->voldoende = fake()->sentence(nbWords: 4);
-                $leerdoelable->aspecten()->save($aspect);
-            }
-        }
-
-        //
         // Acceptatiecriteria
         //
         \App\Models\Acceptatiecriterium::factory()
@@ -255,14 +209,6 @@ class DatabaseSeeder extends Seeder
             for($i = 0; $i < rand(1, 4); $i++)
             {
                 $module->acceptatiecriteria()->attach(fake()->randomElement($ids), ['voldoet' => rand(0, 1)]);
-            }
-        }
-
-        foreach(\App\Models\Leerlijn::all() as $leerlijn)
-        {
-            for($i = 0; $i < rand(5, 10); $i++)
-            {
-                $leerlijn->acceptatiecriteria()->attach(fake()->randomElement($ids));
             }
         }
 
