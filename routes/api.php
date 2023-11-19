@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Cohort;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -62,6 +63,63 @@ Route::middleware('auth:sanctum')->group(function(){
                         }),
                     ];
                 });
+        });
+    });
+
+    Route::prefix('cohorts')->group(function () {
+        Route::get('/', function () {
+            return Cohort::orderBy('naam', 'desc')->get();
+        });
+
+        Route::get('/{cohort}/active-uitvoer', function (Cohort $cohort) {
+
+            $uitvoer = $cohort->uitvoeren()
+                    ->where('datum_start', '<=', now())
+                    ->where('datum_eind', '>=', now())
+                    ->with('blok')
+                    ->first();
+
+            $output = array (
+                'id' => $uitvoer->id,
+                'blok' => $uitvoer->blok->naam,
+                'datum_start' => $uitvoer->datum_start,
+                'datum_eind' => $uitvoer->datum_eind,
+                'vakken' => $uitvoer->vakken->map(function ($vak) {
+
+                    $feedbackmomenten = array();
+                    foreach($vak->modules as $module)
+                    {
+                        foreach($module->feedbackmomenten as $fbm)
+                        {
+                            if(($fbm->pivot->week >= $module->pivot->week_start) && ($fbm->pivot->week <= $module->pivot->week_eind))
+                            {
+                                $feedbackmomenten[] = array(
+                                    'id' => $fbm->id,
+                                    'code' => $fbm->code,
+                                    'naam' => $fbm->naam,
+                                    'week' => $fbm->pivot->week,
+                                    'points' => $fbm->points,
+                                    'cesuur' => $fbm->cesuur,
+                                );
+                            }
+                        }
+                    }
+
+                    usort($feedbackmomenten, function ($a, $b) {
+                        if($a['week'] == $b['week']) return 0;
+                        return ($a['week'] < $b['week']) ? -1 : 1;
+                    });
+
+                    return [
+                        'vak' => $vak->parent->naam,
+                        'volgorde' => $vak->parent->volgorde,
+                        'feedbackmomenten' => $feedbackmomenten,
+                    ];
+                }),
+            );
+
+            return $output;
+
         });
     });
 });
