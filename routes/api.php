@@ -85,7 +85,7 @@ Route::middleware('auth:sanctum')->group(function(){
                 });
         });
 
-        Route::get('/{cohort}/uitvoer/{uitvoer_id}', function (Cohort $cohort, string $uitvoer_id) {
+        function getUitvoer(Cohort $cohort, string $uitvoer_id) {
             $uitvoerId = intval($uitvoer_id);
 
             if ($uitvoerId === -1) {
@@ -148,6 +148,12 @@ Route::middleware('auth:sanctum')->group(function(){
 
             return $output;
 
+        };
+
+        Route::get('/{cohort}/active-uitvoer', function (Cohort $cohort) {
+            return getUitvoer($cohort, '-1');
         });
+
+        Route::get('/{cohort}/uitvoer/{uitvoer_id}', fn(Cohort $cohort, string $uitvoer_id) => getUitvoer($cohort, $uitvoer_id));
     });
 });
