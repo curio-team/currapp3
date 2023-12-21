@@ -15,7 +15,7 @@ class RapportController extends Controller
                                         ->whereDate('uitvoeren.datum_eind', '>=', $today)
                                         ->get();
 
-        $per_vak = array();                                        
+        $per_vak = [];
         foreach($uitvoeren_actueel as $uitvoer)
         {
             $blok = $uitvoer->blok->naam;
@@ -25,7 +25,7 @@ class RapportController extends Controller
             }
 
             foreach($uitvoer->vakken as $vak)
-            {    
+            {
                 $per_vak[$vak->parent->naam][$blok] = $vak->eigenaars;
             }
         }

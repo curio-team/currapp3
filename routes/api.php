@@ -71,36 +71,63 @@ Route::middleware('auth:sanctum')->group(function(){
             return Cohort::orderBy('naam', 'desc')->get();
         });
 
-        Route::get('/{cohort}/active-uitvoer', function (Cohort $cohort) {
+        Route::get('/{cohort}/uitvoeren', function (Cohort $cohort) {
+            return $cohort->uitvoeren()
+                ->with('blok')
+                ->get()
+                ->map(function ($uitvoer) {
+                    return [
+                        'id' => $uitvoer->id,
+                        'blok' => $uitvoer->blok->naam,
+                        'datum_start' => $uitvoer->datum_start,
+                        'datum_eind' => $uitvoer->datum_eind,
+                    ];
+                });
+        });
 
-            $uitvoer = $cohort->uitvoeren()
+        Route::get('/{cohort}/uitvoer/{uitvoer_id}', function (Cohort $cohort, string $uitvoer_id) {
+            $uitvoerId = intval($uitvoer_id);
+
+            if ($uitvoerId === -1) {
+                $uitvoer = $cohort->uitvoeren()
                     ->where('datum_start', '<=', now())
                     ->where('datum_eind', '>=', now())
                     ->with('blok')
                     ->first();
+            } else {
+                $uitvoer = $cohort->uitvoeren()
+                    ->with('blok')
+                    ->findOrFail($uitvoerId);
+            }
 
-            $output = array (
+            if (!$uitvoer) {
+                return response()->json([
+                    'message' => 'Geen actieve uitvoer gevonden voor dit cohort',
+                ], 404);
+            }
+
+            $output = [
                 'id' => $uitvoer->id,
                 'blok' => $uitvoer->blok->naam,
                 'datum_start' => $uitvoer->datum_start,
                 'datum_eind' => $uitvoer->datum_eind,
                 'vakken' => $uitvoer->vakken->map(function ($vak) {
+                    $feedbackmomenten = [];
 
-                    $feedbackmomenten = array();
                     foreach($vak->modules as $module)
                     {
                         foreach($module->feedbackmomenten as $fbm)
                         {
                             if(($fbm->pivot->week >= $module->pivot->week_start) && ($fbm->pivot->week <= $module->pivot->week_eind))
                             {
-                                $feedbackmomenten[] = array(
+                                $feedbackmomenten[] = [
                                     'id' => $fbm->id,
                                     'code' => $fbm->code,
                                     'naam' => $fbm->naam,
                                     'week' => $fbm->pivot->week,
                                     'points' => $fbm->points,
                                     'cesuur' => $fbm->cesuur,
-                                );
+                                ];
                             }
                         }
                     }
@@ -111,12 +138,13 @@ Route::middleware('auth:sanctum')->group(function(){
                     });
 
                     return [
+                        'uitvoer_id' => $vak->id,
                         'vak' => $vak->parent->naam,
                         'volgorde' => $vak->parent->volgorde,
                         'feedbackmomenten' => $feedbackmomenten,
                     ];
                 }),
-            );
+            ];
 
             return $output;
 

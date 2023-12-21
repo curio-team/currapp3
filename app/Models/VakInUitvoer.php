@@ -38,7 +38,7 @@ class VakInUitvoer extends Model
                 }
                 return $value;
             },
-        );    
+        );
     }
 
     public function sumPoints() : Attribute
@@ -56,14 +56,14 @@ class VakInUitvoer extends Model
 
         return Attribute::make(
             get: fn () => $sum,
-        );    
+        );
     }
 
     private function getColsArray()
     {
-        $weeks = array();
-        $cols = array();
-        $modules_cols = array();
+        $weeks = [];
+        $cols = [];
+        $modules_cols = [];
         for($i = 1; $i <= optional($this->uitvoer)->weeks; $i++) $weeks[$i] = 0;
 
         foreach($this->modules as $module)
@@ -93,14 +93,14 @@ class VakInUitvoer extends Model
         if(count($this->getColsArray())) $value = max($this->getColsArray())+1;
         return Attribute::make(
             get: fn () => $value,
-        );    
+        );
     }
 
     public function kolomIndeling() : Attribute
     {
         return Attribute::make(
             get: fn () => $this->getColsArray(),
-        );    
+        );
     }
 
     public function studiepuntenOke() : Attribute
@@ -114,7 +114,7 @@ class VakInUitvoer extends Model
 
         return Attribute::make(
             get: fn () => $result,
-        );    
+        );
     }
 
     public function eigenaars() : Attribute
@@ -127,6 +127,6 @@ class VakInUitvoer extends Model
 
         return Attribute::make(
             get: fn () => collect($eigenaars)->unique()->implode(', '),
-        );    
+        );
     }
 }
