@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ac7736dacfb22cc6d00c6947a951e5b1",
+    "content-hash": "c96aad2b5964f23ba648ced3ef3efa16",
     "packages": [
         {
             "name": "brick/math",
@@ -3550,21 +3550,21 @@
         },
         {
             "name": "studiokaa/amoclient",
-            "version": "v3.1.0-alpha",
+            "version": "v3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/StudioKaa/amoclient.git",
-                "reference": "b83ca04d9314ba62cb7fa1a14b882b3ffabbf4f5"
+                "reference": "ea8547c16ef597e7065b2d96d1814dce41646d9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/StudioKaa/amoclient/zipball/b83ca04d9314ba62cb7fa1a14b882b3ffabbf4f5",
-                "reference": "b83ca04d9314ba62cb7fa1a14b882b3ffabbf4f5",
+                "url": "https://api.github.com/repos/StudioKaa/amoclient/zipball/ea8547c16ef597e7065b2d96d1814dce41646d9d",
+                "reference": "ea8547c16ef597e7065b2d96d1814dce41646d9d",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^7.0",
-                "lcobucci/jwt": "^4.0"
+                "lcobucci/jwt": "4.0.4"
             },
             "type": "library",
             "extra": {
@@ -3592,9 +3592,9 @@
             "description": "Client for amologin",
             "support": {
                 "issues": "https://github.com/StudioKaa/amoclient/issues",
-                "source": "https://github.com/StudioKaa/amoclient/tree/v3.1.0-alpha"
+                "source": "https://github.com/StudioKaa/amoclient/tree/v3.3.0"
             },
-            "time": "2022-04-19T13:10:49+00:00"
+            "time": "2023-12-15T14:34:07+00:00"
         },
         {
             "name": "symfony/console",
@@ -8583,5 +8583,5 @@
         "php": "^8.0.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
