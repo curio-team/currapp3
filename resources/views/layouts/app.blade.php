@@ -15,7 +15,7 @@
     </head>
     <body>
         @if(App::environment() == "staging")
-            <div style="position: fixed; top: 0; width: 100%; padding: 5px; text-align: center;">TESTOMGEVING: data wordt iedere nacht overschreven door kopie uit live-omgeving</div>
+            <div style="position: sticky; top: 0; width: 100%; padding: 4px; font-size: 10px; text-align: center; background: darkorange;">TESTOMGEVING: data wordt iedere nacht overschreven door kopie uit live-omgeving</div>
         @endif
         <nav class="navbar navbar-expand-md navbar-dark bg-dark d-print-none">
             <div class="container-fluid">
