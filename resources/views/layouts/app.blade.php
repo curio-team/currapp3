@@ -3,7 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>@yield('title', 'CurrApp')</title>
+        <title>
+            @if(App::environment() == "staging") TESTOMGEVING @endif
+            @yield('title', 'CurrApp')
+        </title>
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
         @livewireStyles
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
