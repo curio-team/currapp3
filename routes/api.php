@@ -2,6 +2,7 @@
 
 use App\Models\Cohort;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -89,9 +90,13 @@ Route::middleware('auth:sanctum')->group(function(){
             $uitvoerId = intval($uitvoer_id);
 
             if ($uitvoerId === -1) {
+                $week = Http::get('https://week.curio.codes/api/')->json();
+                $schooljaar = substr($week['schooljaar']['start'] , 0, 4);
+                $volgorde = ($week['semester']['volgorde'] == 'sep') ? 1 : 2;
+
                 $uitvoer = $cohort->uitvoeren()
-                    ->where('datum_start', '<=', now())
-                    ->where('datum_eind', '>=', now())
+                    ->where('schooljaar', $schooljaar)
+                    ->where('blok_in_schooljaar', $volgorde)
                     ->with('blok')
                     ->first();
             } else {

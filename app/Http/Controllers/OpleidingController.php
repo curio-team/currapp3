@@ -4,34 +4,38 @@ namespace App\Http\Controllers;
 
 use App\Models\Opleiding;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class OpleidingController extends Controller
 {
     public function show(Opleiding $opleiding)
     {
-        $today = new \Carbon\CarbonImmutable();
-        $maanden_per_blok = 11 / $opleiding->blokken_per_jaar;
-        $dagen = 28 * ($maanden_per_blok - floor($maanden_per_blok));
-        
-        $prev_period = $today->subMonths($maanden_per_blok)->subDays($dagen);
-        if($prev_period->month == 8) $prev_period = $prev_period->subMonth();
+        $week = Http::get('https://week.curio.codes/api/')->json();
+        $schooljaar = substr($week['schooljaar']['start'] , 0, 4);
+        $volgorde = ($week['semester']['volgorde'] == 'sep') ? 1 : 2;
 
-        $next_period = $today->addMonths($maanden_per_blok)->subDays($dagen);
-        if($next_period->month == 8) $next_period = $next_period->addMonth();
+        $prev_volgorde = ($volgorde == 2) ? 1 : 2;
+        $prev_schooljaar = ($volgorde == 2) ? $schooljaar : $schooljaar-1;
+
+        $next_volgorde = ($volgorde == 2) ? 1 : 2;
+        $next_schooljaar = ($volgorde == 2) ? $schooljaar+1 : $schooljaar;
 
         $uitvoeren_verleden = $opleiding->uitvoeren()
-                                        ->whereDate('uitvoeren.datum_start', '<=', $prev_period)
-                                        ->whereDate('uitvoeren.datum_eind', '>=', $prev_period)
+                                        ->where('schooljaar', $prev_schooljaar)
+                                        ->where('blok_in_schooljaar', $prev_volgorde)
+                                        ->orderBy('blokken.volgorde')
                                         ->get();
 
         $uitvoeren_actueel = $opleiding->uitvoeren()
-                                        ->whereDate('uitvoeren.datum_start', '<=', $today)
-                                        ->whereDate('uitvoeren.datum_eind', '>=', $today)
+                                        ->where('schooljaar', $schooljaar)
+                                        ->where('blok_in_schooljaar', $volgorde)
+                                        ->orderBy('blokken.volgorde')
                                         ->get();
 
         $uitvoeren_toekomst = $opleiding->uitvoeren()
-                                        ->whereDate('uitvoeren.datum_start', '<=', $next_period)
-                                        ->whereDate('uitvoeren.datum_eind', '>=', $next_period)
+                                        ->where('schooljaar', $next_schooljaar)
+                                        ->where('blok_in_schooljaar', $next_volgorde)
+                                        ->orderBy('blokken.volgorde')
                                         ->get();
 
         return view('opleidingen.show')
