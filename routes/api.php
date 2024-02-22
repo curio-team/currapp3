@@ -99,6 +99,16 @@ Route::middleware('auth:sanctum')->group(function(){
                     ->where('blok_in_schooljaar', $volgorde)
                     ->with('blok')
                     ->first();
+
+                // TODO: Fix hardcoded workaround for Blok E lasting 24 weeks...
+                if($uitvoer->blok->naam == "Blok F") {
+                    $uitvoer = $cohort->uitvoeren()
+                    ->where('schooljaar', $schooljaar)
+                    ->where('blok_in_schooljaar', ($volgorde - 1))
+                    ->with('blok')
+                    ->first();
+                }
+                
             } else {
                 $uitvoer = $cohort->uitvoeren()
                     ->with('blok')
