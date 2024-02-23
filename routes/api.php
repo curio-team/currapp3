@@ -89,11 +89,11 @@ Route::middleware('auth:sanctum')->group(function(){
         function getUitvoer(Cohort $cohort, string $uitvoer_id) {
             $uitvoerId = intval($uitvoer_id);
 
+            $cohortNumeric = preg_match('/\D*([0-9]{2,})/', $cohort->naam, $matches);
+            $cohortNumeric = $matches[1];
+            $week = Http::get('https://week.curio.codes/api/cohort/' . $cohortNumeric)->json();
+
             if ($uitvoerId === -1) {
-                $cohortNumeric = preg_match('/\D*([0-9]{2,})/', $cohort->naam, $matches);
-                $cohortNumeric = $matches[1];
-                
-                $week = Http::get('https://week.curio.codes/api/cohort/' . $cohortNumeric)->json();
                 $schooljaar = substr($week['schooljaar']['start'] , 0, 4);
                 $volgorde = ($week['semester']['volgorde'] == 'sep') ? 1 : 2;
 
@@ -117,6 +117,7 @@ Route::middleware('auth:sanctum')->group(function(){
             $output = [
                 'id' => $uitvoer->id,
                 'blok' => $uitvoer->blok->naam,
+                'currentWeek' => $week['week']['nummer'],
                 'datum_start' => $uitvoer->datum_start,
                 'datum_eind' => $uitvoer->datum_eind,
                 'vakken' => $uitvoer->vakken->map(function ($vak) {
