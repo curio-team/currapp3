@@ -90,7 +90,10 @@ Route::middleware('auth:sanctum')->group(function(){
             $uitvoerId = intval($uitvoer_id);
 
             if ($uitvoerId === -1) {
-                $week = Http::get('https://week.curio.codes/api/')->json();
+                $cohortNumeric = preg_match('/\D*([0-9]{2,})/', $cohort->naam, $matches);
+                $cohortNumeric = $matches[1];
+                
+                $week = Http::get('https://week.curio.codes/api/cohort/' . $cohortNumeric)->json();
                 $schooljaar = substr($week['schooljaar']['start'] , 0, 4);
                 $volgorde = ($week['semester']['volgorde'] == 'sep') ? 1 : 2;
 
@@ -99,16 +102,6 @@ Route::middleware('auth:sanctum')->group(function(){
                     ->where('blok_in_schooljaar', $volgorde)
                     ->with('blok')
                     ->first();
-
-                // TODO: Fix hardcoded workaround for Blok E lasting 24 weeks...
-                if($uitvoer->blok->naam == "Blok F") {
-                    $uitvoer = $cohort->uitvoeren()
-                    ->where('schooljaar', $schooljaar)
-                    ->where('blok_in_schooljaar', ($volgorde - 1))
-                    ->with('blok')
-                    ->first();
-                }
-                
             } else {
                 $uitvoer = $cohort->uitvoeren()
                     ->with('blok')
