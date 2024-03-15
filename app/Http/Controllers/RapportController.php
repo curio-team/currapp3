@@ -21,11 +21,15 @@ class RapportController extends Controller
         foreach ($uitvoeren_actueel as $uitvoer) {
             $blok = $uitvoer->blok->naam;
             foreach ($opleiding->vakken as $vak) {
-                $per_vak[$vak->naam][$blok] = "";
+                if (!isset($per_vak[$vak->naam][$blok])) {
+                    $per_vak[$vak->naam][$blok] = "";
+                }
             }
 
             foreach ($uitvoer->vakken as $vak) {
-                $per_vak[$vak->parent->naam][$blok] = $vak->eigenaars;
+                if (!str_contains($per_vak[$vak->parent->naam][$blok], $vak->eigenaars)) {
+                    $per_vak[$vak->parent->naam][$blok] .= $vak->eigenaars;
+                }
             }
         }
 
