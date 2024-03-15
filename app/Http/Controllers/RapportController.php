@@ -28,7 +28,7 @@ class RapportController extends Controller
 
             foreach ($uitvoer->vakken as $vak) {
                 if (!str_contains($per_vak[$vak->parent->naam][$blok], $vak->eigenaars)) {
-                    $per_vak[$vak->parent->naam][$blok] .= $vak->eigenaars;
+                    $per_vak[$vak->parent->naam][$blok] .= " " . $vak->eigenaars;
                 }
             }
         }
