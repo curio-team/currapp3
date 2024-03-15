@@ -3,37 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Models\Opleiding;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class RapportController extends Controller
 {
     public function llc(Opleiding $opleiding)
     {
-        $today = new \Carbon\CarbonImmutable();
+        $week = Http::get('https://week.curio.codes/api/')->json();
+        $schooljaar = substr($week['schooljaar']['start'], 0, 4);
+
         $uitvoeren_actueel = $opleiding->uitvoeren()
-                                        ->whereDate('uitvoeren.datum_start', '<=', $today)
-                                        ->whereDate('uitvoeren.datum_eind', '>=', $today)
-                                        ->get();
+            ->where('schooljaar', $schooljaar)
+            ->orderBy('blokken.volgorde')
+            ->get();
 
         $per_vak = [];
-        foreach($uitvoeren_actueel as $uitvoer)
-        {
+        foreach ($uitvoeren_actueel as $uitvoer) {
             $blok = $uitvoer->blok->naam;
-            foreach($opleiding->vakken as $vak)
-            {
+            foreach ($opleiding->vakken as $vak) {
                 $per_vak[$vak->naam][$blok] = "";
             }
 
-            foreach($uitvoer->vakken as $vak)
-            {
+            foreach ($uitvoer->vakken as $vak) {
                 $per_vak[$vak->parent->naam][$blok] = $vak->eigenaars;
             }
         }
 
         return view('rapportages.llc')
-                ->with('opleiding', $opleiding)
-                ->with('per_vak', collect($per_vak));
-
+            ->with('opleiding', $opleiding)
+            ->with('per_vak', collect($per_vak));
     }
 
     public function llc2(Opleiding $opleiding)
@@ -42,7 +40,7 @@ class RapportController extends Controller
         ksort($per_eigenaar);
 
         return view('rapportages.llc2')
-                ->with('opleiding', $opleiding)
-                ->with('per_eigenaar', $per_eigenaar);
+            ->with('opleiding', $opleiding)
+            ->with('per_eigenaar', $per_eigenaar);
     }
 }
