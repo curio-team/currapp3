@@ -18,13 +18,13 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('type');
-            $table->string('login')->default('amoclient');
+            $table->string('login')->default('sdclient');
             $table->string('password')->nullable();
             $table->boolean('admin')->default(false);
             $table->foreignId('standaard_opleiding')->nullable();
             $table->rememberToken();
             $table->timestamps();
-            
+
             $table->primary('id');
         });
     }

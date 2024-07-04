@@ -17,7 +17,7 @@ use App\Http\Livewire\CohortShow;
 use Illuminate\Http\Request;
 
 Route::middleware('auth')->group(function () {
-    
+
     Route::get('/', [HomeController::class, 'show'])->name('home');
     Route::post('/standaard', [HomeController::class, 'store'])->name('standaard.store');
     Route::get('/tokens/create', [TokenController::class, 'create'])->name('token.create');
@@ -58,7 +58,14 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::redirect('/login', '/amoclient/redirect')->name('login');
-Route::get('/amoclient/ready', function(){
+Route::redirect('/login', '/sdclient/redirect')->name('login');
+Route::get('/sdclient/ready', function(){
 	return redirect()->route('home');
+});
+
+Route::get('/sdclient/error', function() {
+    $error = session('sdclient.error');
+    $error_description = session('sdclient.error_description');
+
+    return 'There was an error signing in: ' . $error_description . ' (' . $error . ')<br><a href="/login">Try again</a>';
 });

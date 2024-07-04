@@ -56,6 +56,9 @@ Doel van de app: het team krijgt eigenaarschap over de staat van het onderwijs. 
 
 # ERD
 
+> [!WARNING]
+> Niet geheel up-to-date meer.
+
 [Volledig ERD op LucidChart](https://lucid.app/lucidchart/b64482a9-95fb-46fe-bef5-d679b203f222/edit?invitationId=inv_ab7f8d7b-f481-4027-b2ac-2af9fdbedf12)
 ![erd](erd.png)
 
