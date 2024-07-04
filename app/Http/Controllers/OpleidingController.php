@@ -12,7 +12,7 @@ class OpleidingController extends Controller
     {
         $week = Http::get('https://week.curio.codes/api/')->json();
         $schooljaar = substr($week['schooljaar']['start'] , 0, 4);
-        $volgorde = ($week['semester']['volgorde'] == 'sep') ? 1 : 2;
+        $volgorde = $week['semester']['volgorde'];
 
         $prev_volgorde = ($volgorde == 2) ? 1 : 2;
         $prev_schooljaar = ($volgorde == 2) ? $schooljaar : $schooljaar-1;

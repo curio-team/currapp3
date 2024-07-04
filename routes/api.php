@@ -95,7 +95,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
             if ($uitvoerId === -1) {
                 $schooljaar = substr($week['schooljaar']['start'] , 0, 4);
-                $volgorde = ($week['semester']['volgorde'] == 'sep') ? 1 : 2;
+                $volgorde = $week['semester']['volgorde'];
 
                 $uitvoer = $cohort->uitvoeren()
                     ->where('schooljaar', $schooljaar)
