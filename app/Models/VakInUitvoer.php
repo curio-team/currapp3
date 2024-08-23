@@ -34,7 +34,7 @@ class VakInUitvoer extends Model
             get: function ($value) {
                 if($this->gelinkt_aan_vak_id)
                 {
-                    return VakInUitvoer::find($this->gelinkt_aan_vak_id)->points;
+                    return VakInUitvoer::find($this->gelinkt_aan_vak_id)?->points ?? $value;
                 }
                 return $value;
             },
