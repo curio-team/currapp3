@@ -18,6 +18,10 @@ class CohortShow extends _MyComponent
         'item.schooljaar' => 'required|integer|min:0',
         'item.blok_in_schooljaar' => 'required|integer|min:0',
         'item.points' => 'required|integer|min:0',
+
+        // These are only for editting incorrectly calculated start and end dates
+        'item.datum_start' => 'nullable|date',
+        'item.datum_eind' => 'nullable|date',
     ];
 
     public function render()
@@ -26,6 +30,13 @@ class CohortShow extends _MyComponent
             ->extends('layouts.app', ['opleiding' => $this->opleiding])
             ->with('blokken', $this->opleiding->blokken)
             ->section('main');
+    }
+
+    public function update()
+    {
+        $this->validate($this->rules);
+        $this->item->save();
+        $this->endModal();
     }
 
     public function link()
@@ -45,7 +56,7 @@ class CohortShow extends _MyComponent
         {
             $maanden_per_blok = 11 / $this->opleiding->blokken_per_jaar;
             $start_schooljaar = new \Carbon\CarbonImmutable("{$this->item->schooljaar}-09-01");
-            
+
             $monthsToAdd = $maanden_per_blok * ($this->item->blok_in_schooljaar-1);
             $daysToAdd = 28 * ($monthsToAdd - floor($monthsToAdd));
             $this->item->datum_start = $start_schooljaar->addMonths($monthsToAdd)->addDays($daysToAdd);
