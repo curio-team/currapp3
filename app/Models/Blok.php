@@ -15,8 +15,8 @@ class Blok extends Model
     public function eigenaarId() : Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value ?? $this->opleiding->eigenaar_id,
-        );    
+            get: fn ($value) => $value ?? $this->opleiding?->eigenaar_id,
+        );
     }
 
     public function opleiding()
