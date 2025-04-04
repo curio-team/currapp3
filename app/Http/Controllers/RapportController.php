@@ -9,7 +9,7 @@ class RapportController extends Controller
 {
     public function llc(Opleiding $opleiding)
     {
-        $week = Http::get('https://week.curio.codes/api/')->json();
+        $week = Http::get(weeks_api_url())->json();
         $schooljaar = substr($week['schooljaar']['start'], 0, 4);
 
         $uitvoeren_actueel = $opleiding->uitvoeren()

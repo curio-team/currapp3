@@ -91,7 +91,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
             $cohortNumeric = preg_match('/\D*([0-9]{2,})/', $cohort->naam, $matches);
             $cohortNumeric = $matches[1];
-            $week = Http::get('https://week.curio.codes/api/cohort/' . $cohortNumeric)->json();
+            $week = Http::get(weeks_api_url('/cohort') . $cohortNumeric)->json();
 
             if ($uitvoerId === -1) {
                 $schooljaar = substr($week['schooljaar']['start'] , 0, 4);

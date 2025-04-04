@@ -10,7 +10,7 @@ class OpleidingController extends Controller
 {
     public function show(Opleiding $opleiding)
     {
-        $week = Http::get('https://week.curio.codes/api/')->json();
+        $week = Http::get(weeks_api_url())->json();
         $schooljaar = substr($week['schooljaar']['start'] , 0, 4);
         $volgorde = $week['semester']['volgorde'];
 
