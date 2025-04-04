@@ -23,8 +23,8 @@ if (!function_exists('weeks_api_url')) {
     {
         $apiUrl = config('app.weeks.api_url');
 
-        if ($path && $path[0] !== '/') {
-            $path = '/' . $path;
+        if ($path && $path[0] === '/') {
+            $path = substr($path, 1);
         }
 
         if ($apiUrl && substr($apiUrl, -1) !== '/') {
