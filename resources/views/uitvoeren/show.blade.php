@@ -6,16 +6,16 @@
 @section('subnav')
     <nav class="navbar navbar-dark bg-secondary subnav">
         <div class="container-fluid">
-            <div class="navbar-brand">{{ $uitvoer->naam }}</div>
+            <div class="navbar-brand ">{{ $uitvoer->naam }}</div>
             <div class="d-print-none btn-group">
-                <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editStudiepuntenBlokModal">
+                {{-- <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editStudiepuntenBlokModal">
                     @if($uitvoer->points == $uitvoer->totaal_punten)
                         <i class="fa-solid fa-fw fa-check"></i>
                     @else
                         <i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i>
-                        {{ $uitvoer->totaal_punten }} / 
+                        {{ $uitvoer->totaal_punten }} /
                     @endif
-                    {{ $uitvoer->points }} studiepunten</button>
+                    {{ $uitvoer->points }} studiepunten</button> --}}
                 <button class="btn btn-outline-light"><i class="fa-regular fa-comments fa-fw"></i> Comments</button>
                 <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#linkVakModal"><i class="fa-regular fa-edit fa-fw"></i> Vakken</button>
                 <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editWeeksModal"><i class="fa-regular fa-edit fa-fw"></i></button>
@@ -31,7 +31,7 @@
     <!-- Modals -->
     @include('uitvoeren.link_module')
     @include('uitvoeren.link_vak')
-    @include('uitvoeren.edit_studiepunten_blok')
+        {{-- @include('uitvoeren.edit_studiepunten_blok') --}}
 
     @if(session('vakken_update_preview'))
         <div class="modal fade" id="linkVakPreviewModal" tabindex="-1" role="dialog" aria-labelledby="linkVakPreviewModalLabel" aria-hidden="true">
@@ -140,7 +140,7 @@
         </script>
     @endif
 
-    @if(session('edit_points_preview'))
+    {{-- @if(session('edit_points_preview'))
         <div class="modal fade" id="editStudiepuntenBlokPreviewModal" tabindex="-1" role="dialog" aria-labelledby="editStudiepuntenBlokPreviewModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-fullscreen-md-down" role="document">
                 <form class="modal-content" method="POST" action="{{ route('uitvoeren.edit.points', $uitvoer) }}">
@@ -178,7 +178,7 @@
                 new bootstrap.Modal('#editStudiepuntenBlokPreviewModal').show();
             });
         </script>
-    @endif
+    @endif --}}
 
     <div class="modal fade" id="editWeeksModal" tabindex="-1" role="dialog" aria-labelledby="editWeeksModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-fullscreen-md-down" role="document">

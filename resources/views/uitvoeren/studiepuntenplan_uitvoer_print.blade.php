@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 @section('title', 'Printen: ' . $uitvoer->naam)
 @section('container-class', 'container-fluid mt4 break-my-page')
 @section('main')
@@ -11,9 +11,9 @@
     @foreach($uitvoer->vakken as $vak)
         @include('uitvoeren.studiepuntenplan', ['mode' => 'print', 'vak_voor_punten' => $vak])
     @endforeach
-    
+
     <script>
         window.onload = function() { window.print(); }
     </script>
 
-@endsection
+@endsection --}}

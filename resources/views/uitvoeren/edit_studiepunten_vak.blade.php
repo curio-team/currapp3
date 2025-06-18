@@ -1,12 +1,12 @@
-<div wire:ignore.self class="modal fade" id="editStudiepuntenVakModal" tabindex="-1" role="dialog" aria-labelledby="editStudiepuntenVakModalLabel" aria-hidden="true">
+{{-- <div wire:ignore.self class="modal fade" id="editStudiepuntenVakModal" tabindex="-1" role="dialog" aria-labelledby="editStudiepuntenVakModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-scrollable modal-fullscreen-md-down" role="document">
         @if($vak_voor_punten)
             @include('uitvoeren.studiepuntenplan', ['mode' => 'modal'])
         @endif
     </div>
-</div>
+</div> --}}
 
-<div wire:ignore.self class="modal fade" id="editStudiepuntenVakPreviewModal" tabindex="-1" role="dialog" aria-labelledby="editStudiepuntenVakPreviewModalLabel" aria-hidden="true">
+{{-- <div wire:ignore.self class="modal fade" id="editStudiepuntenVakPreviewModal" tabindex="-1" role="dialog" aria-labelledby="editStudiepuntenVakPreviewModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-fullscreen-md-down" role="document">
         <form class="modal-content">
             <div class="modal-header">
@@ -36,4 +36,4 @@
             </div>
         </form>
     </div>
-</div>
+</div> --}}

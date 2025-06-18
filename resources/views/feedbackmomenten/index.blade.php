@@ -1,13 +1,15 @@
 <div>
     <table class="table table-bordered table-hover">
         <tr class="table-primary">
-            <td colspan="3">Totaal: <strong>{{ $versie->feedbackmomenten->sum('points') }}pts</strong></td>
+            <td colspan="3">
+                {{-- Totaal: <strong>{{ $versie->feedbackmomenten->sum('points') }}pts</strong> --}}
+            </td>
             <td colspan="3"><button class="btn btn-link link-primary" data-bs-toggle="modal" data-bs-target="#fbmCreateModal"><i class="fa-solid fa-fw fa-plus"></i> nieuw</button></td>
         </tr>
         <tr class="table-light">
             <th>Code</th>
             <th>Onderwerp</th>
-            <th>Punten</th>
+            {{-- <th>Punten</th> --}}
             <th>Cesuur</th>
             <th>Week</th>
             <th></th>
@@ -16,7 +18,7 @@
             <tr class="hover-show">
                 <td>{{ $fbm->code }}</td>
                 <td>{{ $fbm->naam }}</td>
-                <td>{{ $fbm->points }}</td>
+                {{-- <td>{{ $fbm->points }}</td> --}}
                 <td>{{ $fbm->cesuur }}</td>
                 <td>{{ $fbm->pivot->week }}</td>
                 <td>
@@ -29,7 +31,7 @@
             </tr>
         @endforeach
     </table>
-    
+
     <div wire:ignore.self class="modal fade" id="fbmEditModal" tabindex="-1" role="dialog" aria-labelledby="fbmEditModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-fullscreen-md-down" role="document">
             <div class="modal-content">
@@ -53,11 +55,11 @@
                                     <label>Onderwerp:</label>
                                     <input type="text" disabled class="form-control" value="{{ $item->naam }}">
                                 </div>
-                                <div class="mb-3">
+                                {{-- <div class="mb-3">
                                     <label for="points">Punten</span>:</label>
                                     <input type="number" class="form-control" id="points" name="points" wire:model="item.points">
                                     @error('item.points') <span class="text-danger error">{{ $message }}</span>@enderror
-                                </div>
+                                </div> --}}
                                 <div class="mb-3">
                                     <label for="cesuur">Cesuur</span>:</label>
                                     <div class="input-group">

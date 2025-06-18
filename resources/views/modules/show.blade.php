@@ -81,14 +81,14 @@
                                 <tr class="table-light">
                                     <th>Vak</th>
                                     <th>Blok</th>
-                                    <th>Punten vak</th>
+                                    {{-- <th>Punten vak</th> --}}
                                     <th>Weken</th>
                                 </tr>
                                 @foreach($versie->vakken as $vak)
                                     <tr>
                                         <td>{{ $vak->parent->naam }}</td>
                                         <td>{{ $vak->uitvoer->naam }}</td>
-                                        <td>{{ $vak->points }}</td>
+                                        {{-- <td>{{ $vak->points }}</td> --}}
                                         <td>{{ $vak->pivot->week_start }} - {{ $vak->pivot->week_eind }}</td>
                                     </tr>
                                 @endforeach
@@ -164,18 +164,18 @@
                                     <div class="text-muted"><em>Het onderwerp kan niet meer gewijzigd worden na aanmaken.</em></div>
                                     @error('item.naam') <span class="text-danger error">{{ $message }}</span>@enderror
                                 </div>
-                                <div class="mb-3">
+                                {{-- <div class="mb-3">
                                     <label for="points">Punten *:</label>
                                     <input type="number" class="form-control" id="points" name="points" required>
                                     @error('item.points') <span class="text-danger error">{{ $message }}</span>@enderror
-                                </div>
+                                </div> --}}
                                 <div class="mb-3">
                                     <label for="cesuur">Cesuur *:</label>
                                     <div class="input-group">
                                         <input type="number" class="form-control" id="cesuur" name="cesuur" placeholder="70" required>
                                         <span class="input-group-text">%</span>
                                     </div>
-                                    <div class="text-muted"><em>Minstens 70%.</em></div>
+                                    <div class="text-muted"><em>Minstens 50%, maximaal 70%</em></div>
                                     @error('item.cesuur') <span class="text-danger error">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="mb-3">

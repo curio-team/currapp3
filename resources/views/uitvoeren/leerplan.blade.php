@@ -3,27 +3,27 @@
         <div class="d-flex justify-content-center align-items-center" style="grid-column: 1; grid-row: {{ $i+1 }}; text-align: center;"><em>{{ $i }}</em></div>
         <div class="d-flex justify-content-center align-items-center" style="grid-column: {{ $uitvoer->vakken->sum('aantal_kolommen')+2 }}; grid-row: {{ $i+1 }}; text-align: center;"><em>{{ $i }}</em></div>
     @endfor
-    
+
     <?php $counter = 1; ?>
     @foreach($uitvoer->vakken as $vak)
         <div class="vak-header lh-1 mt-1 mb-2" style="grid-column: {{ $counter+1 }} / span {{ $vak->aantal_kolommen }}; grid-row: 1;">
             <?php $counter += $vak->aantal_kolommen; ?>
             <div class="vak-header-left">
                 <strong>{{ $vak->parent->naam }}</strong><br>
-                <small>
+                {{-- <small>
                     @if($vak->studiepunten_oke)
                         {{ $vak->points }}pts
                     @else
                         {{ $vak->sum_points }} / {{ $vak->points }}pts
                         <i class="fa-solid fa-fw fa-triangle-exclamation text-warning"></i>
                     @endif
-                </small>
+                </small> --}}
             </div>
             <div class="vak-header-right btn-group">
                 <button class="btn btn-sm btn-outline-primary" onclick="prefillModal({{ $vak->id }})" data-bs-toggle="modal" data-bs-target="#linkModuleModal"><i class="fa-solid fa-plus fa-fw"></i> Module</button>
-                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editStudiepuntenVakModal" wire:click="setVakItem({{ $vak }})">
+                {{-- <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editStudiepuntenVakModal" wire:click="setVakItem({{ $vak }})">
                     <i class="fa-solid fa-eye fa-fw"></i> punten
-                </button>
+                </button> --}}
             </div>
         </div>
         @foreach ($vak->modules as $module)
@@ -48,7 +48,7 @@
                     @endforeach
                 </div>
                 <div class="d-print-none btn-group btn-group-sm position-absolute top-50 left-50 translate-middle shadow" style="background-color: {{ $module->parent->leerlijn->color }};">
-                    <button class="btn btn-outline-{{ $module->parent->leerlijn->textcolor }}"><i class="fa-regular fa-comments fa-fw"></i></button>
+                    {{-- <button class="btn btn-outline-{{ $module->parent->leerlijn->textcolor }}"><i class="fa-regular fa-comments fa-fw"></i></button> --}}
                     <button class="btn btn-outline-{{ $module->parent->leerlijn->textcolor }}" data-bs-toggle="modal" data-bs-target="#editModuleModal" wire:click="setVersieItem({{ $module->id }}, {{ $vak->id }})"><i class="fa-regular fa-edit fa-fw"></i></button>
                     <button class="btn btn-outline-{{ $module->parent->leerlijn->textcolor }}" data-bs-toggle="modal" data-bs-target="#unlinkModuleModal" wire:click="setVersieItem({{ $module->id }}, {{ $vak->id }})"><i class="fa-solid fa-unlink fa-fw"></i></button>
                     <a class="btn btn-outline-{{ $module->parent->leerlijn->textcolor }}" href="{{ route('opleidingen.modules.show.versie', [$opleiding, $module->parent, $module]) }}"><i class="fa-solid fa-eye fa-fw"></i></a>

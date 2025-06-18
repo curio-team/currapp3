@@ -29,14 +29,14 @@ class ModuleController extends Controller
     {
         $request->validate([
             'naam' => 'required',
-            'points' => 'required|integer|min:1',
-            'cesuur' => 'required|integer|min:70|max:100',
+            // 'points' => 'required|integer|min:1',
+            'cesuur' => 'required|integer|min:50|max:70',
             'week' => 'required|integer|min:1',
         ]);
 
         $fbm = new Feedbackmoment();
         $fbm->naam = $request->naam;
-        $fbm->points = $request->points;
+        $fbm->points = 100;
         $fbm->cesuur = $request->cesuur;
         $fbm->checks = $request->checks;
         $fbm->code = Feedbackmoment::generateCode();

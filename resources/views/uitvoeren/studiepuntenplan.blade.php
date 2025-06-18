@@ -1,4 +1,4 @@
-<form class="modal-content">
+{{-- <form class="modal-content">
     @csrf
     <div class="modal-header">
         <h1 class="modal-title fs-5" id="editStudiepuntenVakModalLabel"><span class="fw-normal">Studiepuntenplan</span> {{ optional(optional($vak_voor_punten)->parent)->naam }} <span class="fw-normal">in</span> {{ $uitvoer->naam }}</h1>
@@ -43,9 +43,9 @@
             <div class="alert alert-secondary my-3">Aantal punten verdeeld: {{ $vak_voor_punten->sum_points }} / {{ $vak_voor_punten->points }}.</div>
         @else
             <div class="alert alert-secondary my-3">Totaal punten: {{ $vak_voor_punten->points }}.</div>
-        @endif
+        @endif --}}
 
-        @if($mode == 'modal')
+        {{-- @if($mode == 'modal')
             <table class="table table-bordered">
                 <tr class="table-primary">
                     <th>Code</th>
@@ -94,7 +94,7 @@
                     <tbody>
                         <tr class="table-secondary">
                             <td colspan="5" style="page-break-after: avoid;">Module {{ $m->parent->naam }}</td>
-                        </tr>                        
+                        </tr>
                         @foreach ($m->feedbackmomenten()->whereBetween('week', [$m->pivot->week_start, $m->pivot->week_eind])->orderBy('pivot_week')->get() as $fbm)
                             @if(!$loop->first) <tbody> @endif
                                 <tr class="table-light">
@@ -117,9 +117,9 @@
                         @endforeach
                 </table>
             @endforeach
-        @endif
+        @endif --}}
 
-        @if($mode == 'modal')
+        {{-- @if($mode == 'modal')
             <div wire:ignore>
                 <hr class="my-4">
                 <h2 class="fs-5">B-punten</h2>
@@ -171,4 +171,4 @@
             </button>
         </div>
     @endif
-</form>
+</form> --}}

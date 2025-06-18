@@ -15,7 +15,7 @@ class Feedbackmomenten extends _MyComponent
     protected $rules = [
         'item.naam' => 'required',
         'item.checks' => 'nullable',
-        'item.points' => 'required|integer|min:1',
+        // 'item.points' => 'required|integer|min:1',
         'item.cesuur' => 'required|integer|min:70|max:100',
         'week' => 'required|integer|min:1',
     ];
@@ -45,8 +45,8 @@ class Feedbackmomenten extends _MyComponent
     }
 
     public function destroy()
-    {   
-        $this->item->modules()->detach($this->versie);        
+    {
+        $this->item->modules()->detach($this->versie);
         $this->endModal();
     }
 }

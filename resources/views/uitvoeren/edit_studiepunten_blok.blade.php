@@ -1,4 +1,4 @@
-<div class="modal fade" id="editStudiepuntenBlokModal" tabindex="-1" role="dialog" aria-labelledby="editStudiepuntenBlokModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="editStudiepuntenBlokModal" tabindex="-1" role="dialog" aria-labelledby="editStudiepuntenBlokModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-fullscreen-md-down" role="document">
         <form class="modal-content" method="POST" action="{{ route('uitvoeren.edit.points.preview', $uitvoer) }}">
             @csrf
@@ -30,4 +30,4 @@
             </div>
         </form>
     </div>
-</div>
+</div> --}}
