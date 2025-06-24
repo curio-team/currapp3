@@ -1,10 +1,10 @@
 <div class="card-body d-flex justify-content-between align-items-center">
     <h5 class="card-title"><a class="force-show stretched-link text-decoration-none" href="{{ route('opleidingen.uitvoeren.show', [$opleiding, $uitvoer]) }}">{{ $uitvoer->naam }}</a></h5>
-    @if($uitvoer->studiepunten_oke)
+    {{-- @if($uitvoer->studiepunten_oke)
         <i class="fa-solid fa-fw fa-check text-secondary hover-hide"></i>
     @else
         <i class="fa-solid fa-fw fa-triangle-exclamation text-primary"></i>
-    @endif
+    @endif --}}
 </div>
 <ul class="list-group list-group-flush">
     @foreach($uitvoer->cohorten as $cohort)
