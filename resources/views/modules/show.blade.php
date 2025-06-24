@@ -172,7 +172,7 @@
                                 <div class="mb-3">
                                     <label for="cesuur">Cesuur *:</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" id="cesuur" name="cesuur" placeholder="70" required>
+                                        <input type="number" class="form-control" id="cesuur" name="cesuur" placeholder="70" value="70" required>
                                         <span class="input-group-text">%</span>
                                     </div>
                                     <div class="text-muted"><em>Minstens 50%, maximaal 70%</em></div>
