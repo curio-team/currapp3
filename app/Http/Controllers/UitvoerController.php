@@ -90,7 +90,7 @@ class UitvoerController extends Controller
                     $vak->delete();
                 }
             }
-            
+
             foreach($keuzegroep_added as $vak1_id => $vak2_id)
             {
                 //vak1 is slave, vak2 is master
@@ -100,7 +100,7 @@ class UitvoerController extends Controller
                 $vak1->gelinkt_aan_vak_id = $vak2->id;
                 $vak1->points = $vak2->points;
                 $vak1->save();
-            }            
+            }
 
             foreach($keuzegroep_removed as $rem)
             {
