@@ -20,6 +20,7 @@
                 </small> --}}
             </div>
             <div class="vak-header-right btn-group">
+                <a class="btn btn-sm btn-outline-primary" href="{{ route('studiepuntenplan.vak.show', $vak) }}"><i class="fa-solid fa-list fa-fw"></i> Plan</a>
                 <button class="btn btn-sm btn-outline-primary" onclick="prefillModal({{ $vak->id }})" data-bs-toggle="modal" data-bs-target="#linkModuleModal"><i class="fa-solid fa-plus fa-fw"></i> Module</button>
                 {{-- <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editStudiepuntenVakModal" wire:click="setVakItem({{ $vak }})">
                     <i class="fa-solid fa-eye fa-fw"></i> punten
