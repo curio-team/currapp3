@@ -73,7 +73,7 @@ class VakInUitvoer extends Model
                 if(!array_key_exists($i, $cols)) $cols[$i] = $weeks;
                 $parts = array_slice($cols[$i], $module->pivot->week_start-1, ($module->pivot->week_eind-$module->pivot->week_start)+1, true);
                 $i++;
-            } while(max($parts) > 0);
+            } while($parts && max($parts) > 0);
 
             // ...en zet dan de teller op weeks op +1:
             for($j = $module->pivot->week_start; $j <= $module->pivot->week_eind; $j++)
