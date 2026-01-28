@@ -1,3 +1,14 @@
+## Getting started
+
+1. Clone the repository
+2. Install JS dependencies: `npm install`
+3. Install PHP dependencies: `composer install`
+4. Copy `.env.example` to `.env` and fill in the values
+5. Don't forget to `php artisan key:generate`
+6. Migrate and seed the database: `php artisan migrate --seed`
+8. Start this apps front-end compiler: `npm run dev`
+9. Start this apps back-end server: `php artisan serve --port=8080` (Port is different due to its relation to smartpoints)
+10. Go to `localhost:8080` in your browser
 
 ## Next:
 * Daarna... door met rode deel (comments). Zodat het product als eerste de docentenfora kan gaan vervangen. Daarna acceptatiecriteria.
