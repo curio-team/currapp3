@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Opleiding;
-use Illuminate\Support\Facades\Http;
+use App\Services\WeeksApi;
 
 class RapportController extends Controller
 {
     public function llc(Opleiding $opleiding)
     {
-        $week = Http::get(weeks_api_url())->json();
+        $week = WeeksApi::get();
         $schooljaar = substr($week['schooljaar']['start'], 0, 4);
 
         $uitvoeren_actueel = $opleiding->uitvoeren()

@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Opleiding;
+use App\Services\WeeksApi;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class OpleidingController extends Controller
 {
     public function show(Opleiding $opleiding)
     {
-        $week = Http::get(weeks_api_url())->json();
+        $week = WeeksApi::get();
         $schooljaar = substr($week['schooljaar']['start'] , 0, 4);
         $volgorde = $week['semester']['volgorde'];
 

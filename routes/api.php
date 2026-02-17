@@ -1,8 +1,8 @@
 <?php
 
 use App\Models\Cohort;
+use App\Services\WeeksApi;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -91,7 +91,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
             $cohortNumeric = preg_match('/\D*([0-9]{2,})/', $cohort->naam, $matches);
             $cohortNumeric = $matches[1];
-            $week = Http::get(weeks_api_url('/cohort/' . $cohortNumeric))->json();
+            $week = WeeksApi::get('/cohort/' . $cohortNumeric);
 
             if ($uitvoerId === -1) {
                 $schooljaar = substr($week['schooljaar']['start'] , 0, 4);
