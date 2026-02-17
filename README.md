@@ -10,9 +10,9 @@ Doel van de app: het team krijgt eigenaarschap over de staat van het onderwijs. 
 4. Copy `.env.example` to `.env` and fill in the values
 5. Don't forget to `php artisan key:generate`
 6. Migrate and seed the database: `php artisan migrate --seed`
-8. Start this apps front-end compiler: `npm run dev`
-9. Start this apps back-end server: `php artisan serve --port=8080` (Port is different due to its relation to smartpoints)
-10. Go to `localhost:8080` in your browser
+7. Start this apps front-end compiler: `npm run dev`
+8. Start this apps back-end server: `php artisan serve --port=8080` (Port is different due to its relation to smartpoints)
+9. Go to `localhost:8080` in your browser
 
 ## ERD
 
@@ -23,7 +23,7 @@ Doel van de app: het team krijgt eigenaarschap over de staat van het onderwijs. 
 
 ## API
 
-`/api/v1/` is de prefix voor alle API-calls. 
+`/api/v1/` is de prefix voor alle API-calls.
 
 Voor toegang tot de API is een API token nodig. Deze vraag je op voor jezelf door ingelogd naar deze route te gaan: `/tokens/create`.
 Stuur in alle verzoeken de header `Authorization` met waarde `Bearer #|####` (waar `#|####` jouw API token is).
@@ -35,6 +35,7 @@ Stuur in alle verzoeken de header `Authorization` met waarde `Bearer #|####` (wa
 Geeft alle actieve blokken, met vakken, modules, en daarin feedbackmomenten terug.
 
 **Voorbeeld uitvoer:**
+
 ```json
 [
     {
