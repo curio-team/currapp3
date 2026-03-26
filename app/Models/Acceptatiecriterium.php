@@ -13,10 +13,13 @@ class Acceptatiecriterium extends Model
 
     protected $table = 'acceptatiecriteria';
 
-    protected $casts = [
-        'datum_start' => 'date',
-        'datum_eind' => 'date',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'datum_start' => 'date',
+            'datum_eind' => 'date',
+        ];
+    }
 
     public function opleiding(): BelongsTo
     {

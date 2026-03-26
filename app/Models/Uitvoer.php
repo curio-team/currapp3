@@ -13,10 +13,13 @@ class Uitvoer extends Model
 {
     protected $table = 'uitvoeren';
 
-    protected $casts = [
-        'datum_start' => 'date',
-        'datum_eind' => 'date',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'datum_start' => 'date',
+            'datum_eind' => 'date',
+        ];
+    }
 
     protected function naam(): Attribute
     {
