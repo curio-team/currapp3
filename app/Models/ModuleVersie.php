@@ -2,14 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class ModuleVersie extends Model
 {
     protected $fillable = ['versie'];
+
     protected $table = 'module_versies';
-    
+
     protected function naam(): Attribute
     {
         return Attribute::make(
@@ -45,33 +50,33 @@ class ModuleVersie extends Model
         );
     }
 
-    public function parent()
+    public function parent(): BelongsTo
     {
         return $this->belongsTo(Module::class, 'module_id');
     }
 
-    public function vakken()
+    public function vakken(): BelongsToMany
     {
         return $this->belongsToMany(VakInUitvoer::class, 'module_vak')->withPivot(['week_start', 'week_eind'])->withTimestamps();
     }
-    
-    public function leerdoelen()
+
+    public function leerdoelen(): MorphToMany
     {
         return $this->morphToMany(Leerdoel::class, 'leerdoelable')->using(Leerdoelable::class)->withPivot('id');
     }
 
-    public function acceptatiecriteria()
+    public function acceptatiecriteria(): BelongsToMany
     {
         return $this->belongsToMany(Acceptatiecriterium::class, 'acceptatiecriterium_module')->withPivot(['voldoet', 'opmerking', 'reviewer_id']);
     }
 
-    public function comments()
+    public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
 
-    public function feedbackmomenten()
+    public function feedbackmomenten(): BelongsToMany
     {
-        return $this->belongsToMany(Feedbackmoment::class,)->withPivot(['week']);
+        return $this->belongsToMany(Feedbackmoment::class)->withPivot(['week']);
     }
 }

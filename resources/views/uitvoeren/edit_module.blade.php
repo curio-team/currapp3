@@ -8,12 +8,12 @@
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
-                        <strong>{{ optional($item->parent)->naam }}</strong> in <strong>{{ $uitvoer->naam }}</strong>
+                        <strong>{{ $item->parent?->naam }}</strong> in <strong>{{ $uitvoer->naam }}</strong>
                     </div>
                     <div class="mb-3">
                         <label for="versie_id">Versie *:</label>
-                        <select id="versie_id" wire:model="versie_id" class="form-select">
-                            @foreach (optional($item->parent)->versies ?? [] as $versie)
+                        <select id="versie_id" wire:model.live="versie_id" class="form-select">
+                            @foreach ($item->parent?->versies ?? [] as $versie)
                                 <option value="{{ $versie->id }}">{{ $versie->naam }}</option>
                             @endforeach
                         </select>
@@ -23,12 +23,12 @@
                         <label for="module_id">Weken *:</label>
                         <div class="input-group">
                             <span class="input-group-text">Week start:</span>
-                            <input type="number" wire:model="item.pivot.week_start" class="form-control" required>
+                            <input type="number" wire:model.live="item.pivot.week_start" class="form-control" required>
                             <span class="input-group-text">Week eind:</span>
-                            <input type="number" wire:model="item.pivot.week_eind" class="form-control" required>
+                            <input type="number" wire:model.live="item.pivot.week_eind" class="form-control" required>
                         </div>
                     </div>
-                    <input type="hidden" wire:model="item.pivot.vak_in_uitvoer_id">
+                    <input type="hidden" wire:model.live="item.pivot.vak_in_uitvoer_id">
                 </form>
             </div>
             <div class="modal-footer">
@@ -38,7 +38,7 @@
                     <i class="fa-regular fa-floppy-disk fa-fw" wire:loading.class="d-none" wire:target="editModule"></i>
                     Opslaan
                 </button>
-                <input type="hidden" name="id" wire:model="item.id">
+                <input type="hidden" name="id" wire:model.live="item.id">
             </div>
         </div>
     </div>
@@ -53,13 +53,13 @@
             </div>
             <div class="modal-body">
                 Je gaat de volgende wijzigingen toepassen op <strong>{{ $uitvoer->naam }}</strong>:
-                <div class="text-primary fw-bold"><i class="fa-solid fa-edit"></i> {{ optional($item->parent)->naam }}</div>
+                <div class="text-primary fw-bold"><i class="fa-solid fa-edit"></i> {{ $item->parent?->naam }}</div>
                 <hr class="my-3">
                 Wil je deze wijzigingen <strong>ook toepassen</strong> op de volgende niet-gestarte uitvoeren van dit blok?
-                <input type="hidden" wire:model="uitvoeren.0" value="{{ $uitvoer->id }}">
+                <input type="hidden" wire:model.live="uitvoeren.0" value="{{ $uitvoer->id }}">
                 @foreach(\App\Models\Uitvoer::where('blok_id', $uitvoer->blok_id)->whereDate('datum_start', '>', date('Y-m-d'))->where('id', '<>', $uitvoer->id)->orderBy('datum_start')->get() as $u)
                     <div>
-                        <input type="checkbox" wire:model="uitvoeren.{{ $loop->iteration }}" value="{{ $u->id }}" id="uitvoer_{{ $u->id }}" checked>
+                        <input type="checkbox" wire:model.live="uitvoeren.{{ $loop->iteration }}" value="{{ $u->id }}" id="uitvoer_{{ $u->id }}" checked>
                         <label for="uitvoer_{{ $u->id }}">{{ $u->naam }}</label>
                     </div>
                 @endforeach

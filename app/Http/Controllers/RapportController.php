@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Opleiding;
 use App\Services\WeeksApi;
+use Illuminate\View\View;
 
 class RapportController extends Controller
 {
-    public function llc(Opleiding $opleiding)
+    public function llc(Opleiding $opleiding): View
     {
         $week = WeeksApi::get();
         $schooljaar = substr($week['schooljaar']['start'], 0, 4);
@@ -21,14 +22,14 @@ class RapportController extends Controller
         foreach ($uitvoeren_actueel as $uitvoer) {
             $blok = $uitvoer->blok->naam;
             foreach ($opleiding->vakken as $vak) {
-                if (!isset($per_vak[$vak->naam][$blok])) {
-                    $per_vak[$vak->naam][$blok] = "";
+                if (! isset($per_vak[$vak->naam][$blok])) {
+                    $per_vak[$vak->naam][$blok] = '';
                 }
             }
 
             foreach ($uitvoer->vakken as $vak) {
-                if (!str_contains($per_vak[$vak->parent->naam][$blok], $vak->eigenaars)) {
-                    $per_vak[$vak->parent->naam][$blok] .= " " . $vak->eigenaars;
+                if (! str_contains($per_vak[$vak->parent->naam][$blok], $vak->eigenaars)) {
+                    $per_vak[$vak->parent->naam][$blok] .= ' '.$vak->eigenaars;
                 }
             }
         }
@@ -38,7 +39,7 @@ class RapportController extends Controller
             ->with('per_vak', collect($per_vak));
     }
 
-    public function llc2(Opleiding $opleiding)
+    public function llc2(Opleiding $opleiding): View
     {
         $per_eigenaar = $opleiding->leerlijnen->groupBy('eigenaar_id')->toArray();
         ksort($per_eigenaar);

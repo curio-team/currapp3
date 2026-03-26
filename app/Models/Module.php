@@ -2,26 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Module extends Model
 {
     protected $table = 'modules';
 
-    public function eigenaarId() : Attribute
+    public function eigenaarId(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => optional($this->leerlijn)->eigenaar_id,
-        );    
+            get: fn ($value) => $this->leerlijn?->eigenaar_id,
+        );
     }
-    
-    public function leerlijn()
+
+    public function leerlijn(): BelongsTo
     {
         return $this->belongsTo(Leerlijn::class);
     }
 
-    public function versies()
+    public function versies(): HasMany
     {
         return $this->hasMany(ModuleVersie::class);
     }

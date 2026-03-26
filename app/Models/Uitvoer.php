@@ -2,8 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Uitvoer extends Model
 {
@@ -18,37 +22,38 @@ class Uitvoer extends Model
     {
         return Attribute::make(
             get: function ($value) {
-                $month = optional($this->datum_start)->format('n');
+                $month = $this->datum_start?->format('n');
                 $month = ($month >= 6) ? 'sep' : 'feb';
-                return optional($this->blok)->naam . " (" . optional($this->datum_start)->format('y') . "-" . $month . ")";
+
+                return $this->blok?->naam.' ('.$this->datum_start?->format('y').'-'.$month.')';
             },
         );
     }
 
-    public function cohorten()
+    public function cohorten(): BelongsToMany
     {
         return $this->belongsToMany(Cohort::class)->orderBy('datum_start');
     }
 
-    public function blok()
+    public function blok(): BelongsTo
     {
         return $this->belongsTo(Blok::class);
     }
 
-    public function vakken()
+    public function vakken(): HasMany
     {
         return $this->hasMany(VakInUitvoer::class)
-                ->join('vakken', 'vakken.id', '=', 'vakken_in_uitvoer.vak_id')
-                ->select('vakken_in_uitvoer.*')
-                ->orderBy('vakken.volgorde');
+            ->join('vakken', 'vakken.id', '=', 'vakken_in_uitvoer.vak_id')
+            ->select('vakken_in_uitvoer.*')
+            ->orderBy('vakken.volgorde');
     }
 
-    public function leerdoelen()
+    public function leerdoelen(): MorphToMany
     {
         return $this->morphToMany(Leerdoel::class, 'leerdoelable')->using(Leerdoelable::class)->withPivot('id');
     }
 
-    public function comments()
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }
@@ -62,16 +67,20 @@ class Uitvoer extends Model
         );
     }
 
-    public function studiepuntenOke() : Attribute
+    public function studiepuntenOke(): Attribute
     {
         $result = true;
 
         // Als de minimumwaarde hiervan '1' is, dan is dan zijn dus alle vakken oke;
-        if($this->vakken->min('studiepunten_oke') == 0) $result = false;
-        if($this->points != $this->totaal_punten) $result = false;
+        if ($this->vakken->min('studiepunten_oke') == 0) {
+            $result = false;
+        }
+        if ($this->points != $this->totaal_punten) {
+            $result = false;
+        }
 
         return Attribute::make(
             get: fn () => $result,
-        );    
+        );
     }
 }

@@ -1,23 +1,21 @@
 <?php
 
-namespace App\Http\Livewire;
-use App\Models\Opleiding;
-use App\Models\Cohort;
-use App\Models\ModuleVersie;
-use App\Models\Uitvoer;
-use App\Models\VakInUitvoer;
+namespace App\Livewire;
 
-class Modules extends _MyComponent
+use App\Models\Opleiding;
+
+class Modules extends MyComponent
 {
     public Opleiding $opleiding;
 
     protected $className = \App\Models\Module::class;
+
     protected $rules = [
         'item.naam' => 'required',
         'item.omschrijving' => 'nullable',
         'item.map_url' => 'nullable',
         'item.leerlijn_id' => 'nullable',
-        'item.versie' => 'required'
+        'item.versie' => 'required',
     ];
 
     protected $updateRules = [

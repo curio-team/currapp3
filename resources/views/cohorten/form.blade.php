@@ -15,17 +15,17 @@
                 <form>
                     <div class="mb-3">
                         <label for="naam">Naam *:</label>
-                        <input type="text" class="form-control" id="naam" name="naam" wire:model="item.naam" required>
+                        <input type="text" class="form-control" id="naam" name="naam" wire:model.live="item.naam" required>
                         @error('item.naam') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                     <div class="mb-3">
                         <label for="datum_start">Startdatum *:</label>
-                        <input type="text" placeholder="yyyy-mm-dd" class="form-control" id="datum_start" name="datum_start" wire:model="item.datum_start" required>
+                        <input type="text" placeholder="yyyy-mm-dd" class="form-control" id="datum_start" name="datum_start" wire:model.live="item.datum_start" required>
                         @error('item.datum_start') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                     <div class="mb-3">
                         <label for="datum_eind">Einddatum *:</label>
-                        <input type="text" placeholder="yyyy-mm-dd" class="form-control" id="datum_eind" name="datum_eind" required wire:model="item.datum_eind">
+                        <input type="text" placeholder="yyyy-mm-dd" class="form-control" id="datum_eind" name="datum_eind" required wire:model.live="item.datum_eind">
                         @error('item.datum_eind') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                 </form>
@@ -37,7 +37,7 @@
                     <i class="fa-regular fa-floppy-disk fa-fw" wire:loading.class="d-none" wire:target="{{ $action }}"></i>
                     Opslaan
                 </button>
-                <input type="hidden" name="id" wire:model="item.id">
+                <input type="hidden" name="id" wire:model.live="item.id">
             </div>
         </div>
     </div>

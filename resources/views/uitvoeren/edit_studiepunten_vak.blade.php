@@ -15,13 +15,13 @@
             </div>
             <div class="modal-body">
                 Je gaat de volgende wijzigingen toepassen op <strong>{{ $uitvoer->naam }}</strong>:
-                <div class="text-primary"><i class="fa-regular fa-edit fa-fw"></i>Totaal <strong>{{ optional($vak_voor_punten)->points }}</strong> studiepunten voor het vak <strong>{{ optional(optional($vak_voor_punten)->parent)->naam }}</strong>.</div>
+                <div class="text-primary"><i class="fa-regular fa-edit fa-fw"></i>Totaal <strong>{{ $vak_voor_punten?->points }}</strong> studiepunten voor het vak <strong>{{ $vak_voor_punten?->parent?->naam }}</strong>.</div>
                 <hr class="my-3">
                 Wil je deze wijzigingen <strong>ook toepassen</strong> op de volgende niet-gestarte uitvoeren van dit blok?
-                <input type="hidden" wire:model="uitvoeren.0" value="{{ $uitvoer->id }}">
+                <input type="hidden" wire:model.live="uitvoeren.0" value="{{ $uitvoer->id }}">
                 @foreach(\App\Models\Uitvoer::where('blok_id', $uitvoer->blok_id)->whereDate('datum_start', '>', date('Y-m-d'))->where('id', '<>', $uitvoer->id)->orderBy('datum_start')->get() as $u)
                     <div>
-                        <input type="checkbox" wire:model="uitvoeren.{{ $loop->iteration }}" value="{{ $u->id }}" id="uitvoer_{{ $u->id }}" checked>
+                        <input type="checkbox" wire:model.live="uitvoeren.{{ $loop->iteration }}" value="{{ $u->id }}" id="uitvoer_{{ $u->id }}" checked>
                         <label for="uitvoer_{{ $u->id }}">{{ $u->naam }}</label>
                     </div>
                 @endforeach

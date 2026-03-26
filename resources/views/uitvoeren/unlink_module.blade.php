@@ -8,9 +8,9 @@
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
-                        Je gaat module <strong>{{ optional($item->parent)->naam }}</strong> verwijderen uit <strong>{{ $uitvoer->naam }}</strong>. De module blijft bestaan, maar is niet meer gekoppeld aan deze uitvoer.
+                        Je gaat module <strong>{{ $item->parent?->naam }}</strong> verwijderen uit <strong>{{ $uitvoer->naam }}</strong>. De module blijft bestaan, maar is niet meer gekoppeld aan deze uitvoer.
                     </div>
-                    <input type="hidden" wire:model="item.pivot.vak_in_uitvoer_id">
+                    <input type="hidden" wire:model.live="item.pivot.vak_in_uitvoer_id">
                 </form>
             </div>
             <div class="modal-footer">
@@ -20,7 +20,7 @@
                     <i class="fa-solid fa-unlink fa-fw" wire:loading.class="d-none" wire:target="unlinkModule"></i>
                     Ontkoppelen
                 </button>
-                <input type="hidden" name="id" wire:model="item.id">
+                <input type="hidden" name="id" wire:model.live="item.id">
             </div>
         </div>
     </div>
@@ -36,13 +36,13 @@
             </div>
             <div class="modal-body">
                 Je gaat de volgende wijzigingen toepassen op <strong>{{ $uitvoer->naam }}</strong>:
-                <div class="text-danger fw-bold"><i class="fa-solid fa-minus"></i> {{ optional($item->parent)->naam }} verwijderen uit {{ $vaknaam }}</div>
+                <div class="text-danger fw-bold"><i class="fa-solid fa-minus"></i> {{ $item->parent?->naam }} verwijderen uit {{ $vaknaam }}</div>
                 <hr class="my-3">
                 Wil je deze wijzigingen <strong>ook toepassen</strong> op de volgende niet-gestarte uitvoeren van dit blok?
-                <input type="hidden" wire:model="uitvoeren.0" value="{{ $uitvoer->id }}">
+                <input type="hidden" wire:model.live="uitvoeren.0" value="{{ $uitvoer->id }}">
                 @foreach(\App\Models\Uitvoer::where('blok_id', $uitvoer->blok_id)->whereDate('datum_start', '>', date('Y-m-d'))->where('id', '<>', $uitvoer->id)->orderBy('datum_start')->get() as $u)
                     <div>
-                        <input type="checkbox" wire:model="uitvoeren.{{ $loop->iteration }}" value="{{ $u->id }}" id="uitvoer_{{ $u->id }}" checked>
+                        <input type="checkbox" wire:model.live="uitvoeren.{{ $loop->iteration }}" value="{{ $u->id }}" id="uitvoer_{{ $u->id }}" checked>
                         <label for="uitvoer_{{ $u->id }}">{{ $u->naam }}</label>
                     </div>
                 @endforeach

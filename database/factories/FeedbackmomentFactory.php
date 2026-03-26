@@ -17,7 +17,7 @@ class FeedbackmomentFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'code' => Feedbackmoment::generateCode($this->batchCodes),

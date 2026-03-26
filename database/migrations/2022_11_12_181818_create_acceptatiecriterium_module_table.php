@@ -8,10 +8,8 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('acceptatiecriterium_module', function (Blueprint $table) {
             $table->foreignId('acceptatiecriterium_id')->constrained('acceptatiecriteria');
@@ -24,10 +22,8 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('acceptatiecriterium_module');
     }

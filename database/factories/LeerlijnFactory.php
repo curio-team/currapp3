@@ -3,11 +3,10 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 class LeerlijnFactory extends Factory
 {
-    public function definition()
+    public function definition(): array
     {
         return [
             'naam' => strtoupper(fake()->lexify('???')),

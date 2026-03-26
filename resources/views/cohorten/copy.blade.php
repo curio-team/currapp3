@@ -9,12 +9,12 @@
                 <form>
                     <div class="mb-3">
                         <label for="naam">Naam nieuwe cohort*:</label>
-                        <input type="text" class="form-control" id="naam" name="naam" wire:model="item.naam" required>
+                        <input type="text" class="form-control" id="naam" name="naam" wire:model.live="item.naam" required>
                         @error('item.naam') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                     <div class="mb-3">
                         <label for="kopieer_van">Kopieer inrichting van *:</label>
-                        <select placeholder="yyyy-mm-dd" class="form-select" id="kopieer_van" name="kopieer_van" required wire:model="kopieer_van">
+                        <select placeholder="yyyy-mm-dd" class="form-select" id="kopieer_van" name="kopieer_van" required wire:model.live="kopieer_van">
                             <option />
                             @foreach($opleiding->cohorten as $cohort)
                                 <option value="{{ $cohort->id }}">{{ $cohort->naam }}</option>
@@ -24,13 +24,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="kopieer_jaren">Kopieer aantal jaren later *:</label>
-                        <input type="number" class="form-control" id="kopieer_jaren" name="kopieer_jaren" wire:model="kopieer_jaren" required>
+                        <input type="number" class="form-control" id="kopieer_jaren" name="kopieer_jaren" wire:model.live="kopieer_jaren" required>
                         <div class="form-text">Het nieuwe cohort start ... jaar na het cohort waarvan je kopieert.</div>
                         @error('kopieer_jaren') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                     <div class="mb-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="1" id="nieuwste_versie" wire:model="nieuwste_versie">
+                            <input class="form-check-input" type="checkbox" value="1" id="nieuwste_versie" wire:model.live="nieuwste_versie">
                             <label class="form-check-label" for="nieuwste_versie">Update gekoppelde modules automatisch naar laatste versie.</label>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                     <i class="fa-regular fa-floppy-disk fa-fw" wire:loading.class="d-none" wire:target="copy"></i>
                     Opslaan
                 </button>
-                <input type="hidden" name="id" wire:model="item.id">
+                <input type="hidden" name="id" wire:model.live="item.id">
             </div>
         </div>
     </div>

@@ -20,27 +20,27 @@
                 <form>
                     <div class="mb-3">
                         <label for="datum_start">Startdatum *:</label>
-                        <input type="text" placeholder="yyyy-mm-dd" class="form-control" id="datum_start" name="datum_start" wire:model.defer="item.datum_start" required>
+                        <input type="text" placeholder="yyyy-mm-dd" class="form-control" id="datum_start" name="datum_start" wire:model="item.datum_start" required>
                         @error('item.datum_start') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                     <div class="mb-3">
                         <label for="datum_eind">Einddatum *:</label>
-                        <input type="text" placeholder="yyyy-mm-dd" class="form-control" id="datum_eind" name="datum_eind" wire:model.defer="item.datum_eind" required>
+                        <input type="text" placeholder="yyyy-mm-dd" class="form-control" id="datum_eind" name="datum_eind" wire:model="item.datum_eind" required>
                         @error('item.datum_eind') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                     {{-- <div class="mb-3">
                         <label for="schooljaar">Schooljaar *:</label>
-                        <input type="number" class="form-control" id="schooljaar" name="schooljaar" wire:model="item.schooljaar" required>
+                        <input type="number" class="form-control" id="schooljaar" name="schooljaar" wire:model.live="item.schooljaar" required>
                         @error('item.schooljaar') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                     <div class="mb-3">
                         <label for="blok_in_schooljaar">Blok in schooljaar *:</label>
-                        <input type="number" class="form-control" id="blok_in_schooljaar" name="blok_in_schooljaar" wire:model="item.blok_in_schooljaar" required>
+                        <input type="number" class="form-control" id="blok_in_schooljaar" name="blok_in_schooljaar" wire:model.live="item.blok_in_schooljaar" required>
                         @error('item.blok_in_schooljaar') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                     <div class="mb-3">
                         <label for="points">Punten *:</label>
-                        <input type="number" class="form-control" id="points" name="points" wire:model="item.points" required>
+                        <input type="number" class="form-control" id="points" name="points" wire:model.live="item.points" required>
                         @error('item.points') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div> --}}
                 </form>
@@ -52,7 +52,7 @@
                     <i class="fa-regular fa-floppy-disk fa-fw" wire:loading.class="d-none" wire:target="{{ $action }}"></i>
                     Opslaan
                 </button>
-                <input type="hidden" name="id" wire:model="item.id">
+                <input type="hidden" name="id" wire:model.live="item.id">
             </div>
         </div>
     </div>

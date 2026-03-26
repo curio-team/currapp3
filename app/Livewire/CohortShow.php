@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
-use App\Models\Blok;
 use App\Models\Cohort;
 use App\Models\Opleiding;
 use App\Models\Uitvoer;
 
-class CohortShow extends _MyComponent
+class CohortShow extends MyComponent
 {
     public Opleiding $opleiding;
+
     public Cohort $cohort;
 
     protected $className = \App\Models\Uitvoer::class;
+
     protected $rules = [
         'item.blok_id' => 'required',
         'item.schooljaar' => 'required|integer|min:0',
@@ -44,26 +45,23 @@ class CohortShow extends _MyComponent
         $this->validate($this->rules);
 
         $gevonden_uitvoer = Uitvoer::where('blok_id', $this->item->blok_id)
-                                    ->where('schooljaar', $this->item->schooljaar)
-                                    ->where('blok_in_schooljaar', $this->item->blok_in_schooljaar)
-                                    ->first();
+            ->where('schooljaar', $this->item->schooljaar)
+            ->where('blok_in_schooljaar', $this->item->blok_in_schooljaar)
+            ->first();
 
-        if($gevonden_uitvoer != null)
-        {
+        if ($gevonden_uitvoer != null) {
             $this->cohort->uitvoeren()->attach($gevonden_uitvoer);
-        }
-        else
-        {
+        } else {
             $maanden_per_blok = 11 / $this->opleiding->blokken_per_jaar;
             $start_schooljaar = new \Carbon\CarbonImmutable("{$this->item->schooljaar}-09-01");
 
-            $monthsToAdd = $maanden_per_blok * ($this->item->blok_in_schooljaar-1);
+            $monthsToAdd = $maanden_per_blok * ($this->item->blok_in_schooljaar - 1);
             $daysToAdd = 28 * ($monthsToAdd - floor($monthsToAdd));
             $this->item->datum_start = $start_schooljaar->addMonths($monthsToAdd)->addDays($daysToAdd);
 
             $monthsToAdd = $maanden_per_blok * ($this->item->blok_in_schooljaar);
             $daysToAdd = 28 * ($monthsToAdd - floor($monthsToAdd));
-            $this->item->datum_eind = $start_schooljaar->addMonths($monthsToAdd)->addDays($daysToAdd-1);
+            $this->item->datum_eind = $start_schooljaar->addMonths($monthsToAdd)->addDays($daysToAdd - 1);
 
             $this->cohort->uitvoeren()->save($this->item);
         }
@@ -79,24 +77,20 @@ class CohortShow extends _MyComponent
 
     public function destroy()
     {
-        foreach($this->item->vakken as $vak)
-        {
+        foreach ($this->item->vakken as $vak) {
             $vak->modules()->detach();
             $vak->delete();
         }
 
-        foreach($this->item->leerdoelen as $leerdoel)
-        {
-            foreach($leerdoel->pivot->aspecten as $aspect)
-            {
+        foreach ($this->item->leerdoelen as $leerdoel) {
+            foreach ($leerdoel->pivot->aspecten as $aspect) {
                 $aspect->delete();
             }
         }
 
         $this->item->leerdoelen()->detach();
 
-        foreach($this->item->comments as $comment)
-        {
+        foreach ($this->item->comments as $comment) {
             $comment->delete();
         }
 

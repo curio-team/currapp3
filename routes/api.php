@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function(){
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
@@ -37,7 +37,7 @@ Route::middleware('auth:sanctum')->group(function(){
                             return [
                                 'vak' => $vak->parent->naam,
                                 'volgorde' => $vak->parent->volgorde,
-                                'modules' =>  $vak->modules->map(function ($module) {
+                                'modules' => $vak->modules->map(function ($module) {
                                     return [
                                         'module' => $module->parent->naam,
                                         'version_number' => $module->versie,
@@ -55,11 +55,11 @@ Route::middleware('auth:sanctum')->group(function(){
                                                 'cesuur' => $fbm->cesuur,
                                             ];
                                         })
-                                        ->sortBy('week')
-                                        ->values(),
+                                            ->sortBy('week')
+                                            ->values(),
                                     ];
                                 })
-                                ->sortBy('week_start'),
+                                    ->sortBy('week_start'),
                             ];
                         }),
                     ];
@@ -86,15 +86,16 @@ Route::middleware('auth:sanctum')->group(function(){
                 });
         });
 
-        function getUitvoer(Cohort $cohort, string $uitvoer_id) {
+        function getUitvoer(Cohort $cohort, string $uitvoer_id)
+        {
             $uitvoerId = intval($uitvoer_id);
 
             $cohortNumeric = preg_match('/\D*([0-9]{2,})/', $cohort->naam, $matches);
             $cohortNumeric = $matches[1];
-            $week = WeeksApi::get('/cohort/' . $cohortNumeric);
+            $week = WeeksApi::get('/cohort/'.$cohortNumeric);
 
             if ($uitvoerId === -1) {
-                $schooljaar = substr($week['schooljaar']['start'] , 0, 4);
+                $schooljaar = substr($week['schooljaar']['start'], 0, 4);
                 $volgorde = $week['semester']['volgorde'];
 
                 $uitvoer = $cohort->uitvoeren()
@@ -108,7 +109,7 @@ Route::middleware('auth:sanctum')->group(function(){
                     ->findOrFail($uitvoerId);
             }
 
-            if (!$uitvoer) {
+            if (! $uitvoer) {
                 return response()->json([
                     'message' => 'Geen actieve uitvoer gevonden voor dit cohort',
                 ], 404);
@@ -123,12 +124,9 @@ Route::middleware('auth:sanctum')->group(function(){
                 'vakken' => $uitvoer->vakken->map(function ($vak) {
                     $feedbackmomenten = [];
 
-                    foreach($vak->modules as $module)
-                    {
-                        foreach($module->feedbackmomenten as $fbm)
-                        {
-                            if(($fbm->pivot->week >= $module->pivot->week_start) && ($fbm->pivot->week <= $module->pivot->week_eind))
-                            {
+                    foreach ($vak->modules as $module) {
+                        foreach ($module->feedbackmomenten as $fbm) {
+                            if (($fbm->pivot->week >= $module->pivot->week_start) && ($fbm->pivot->week <= $module->pivot->week_eind)) {
                                 $feedbackmomenten[] = [
                                     'id' => $fbm->id,
                                     'code' => $fbm->code,
@@ -142,7 +140,10 @@ Route::middleware('auth:sanctum')->group(function(){
                     }
 
                     usort($feedbackmomenten, function ($a, $b) {
-                        if($a['week'] == $b['week']) return 0;
+                        if ($a['week'] == $b['week']) {
+                            return 0;
+                        }
+
                         return ($a['week'] < $b['week']) ? -1 : 1;
                     });
 
@@ -157,12 +158,12 @@ Route::middleware('auth:sanctum')->group(function(){
 
             return $output;
 
-        };
+        }
 
         Route::get('/{cohort}/active-uitvoer', function (Cohort $cohort) {
             return getUitvoer($cohort, '-1');
         });
 
-        Route::get('/{cohort}/uitvoer/{uitvoer_id}', fn(Cohort $cohort, string $uitvoer_id) => getUitvoer($cohort, $uitvoer_id));
+        Route::get('/{cohort}/uitvoer/{uitvoer_id}', fn (Cohort $cohort, string $uitvoer_id) => getUitvoer($cohort, $uitvoer_id));
     });
 });

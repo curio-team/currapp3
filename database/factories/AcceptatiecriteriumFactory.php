@@ -3,11 +3,10 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 class AcceptatiecriteriumFactory extends Factory
 {
-    public function definition()
+    public function definition(): array
     {
         return [
             'datum_start' => '2020-08-01',

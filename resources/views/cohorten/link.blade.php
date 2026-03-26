@@ -9,7 +9,7 @@
                 <form>
                     <div class="mb-3">
                         <label for="blok_id">Blok *:</label>
-                        <select class="form-select" name="blok_id" id="blok_id" wire:model="item.blok_id" required>
+                        <select class="form-select" name="blok_id" id="blok_id" wire:model.live="item.blok_id" required>
                             <option />
                             @foreach ($blokken as $blok)
                                 <option value="{{ $blok->id }}">{{ $blok->naam }}</option>
@@ -21,7 +21,7 @@
                     <hr class="my-3">
                     <div class="mb-3">
                         <label for="schooljaar">Uitgevoerd in schooljaar... *</label>
-                        <select class="form-select" id="schooljaar" name="schooljaar" wire:model="item.schooljaar" required>
+                        <select class="form-select" id="schooljaar" name="schooljaar" wire:model.live="item.schooljaar" required>
                             <option />
                             @for($i = 2020; $i < date('Y')+10; $i++)
                                 <option value="{{ $i }}">{{ substr($i, 2, 2) }}/{{ substr($i+1, 2, 2) }}</option>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="blok_in_schooljaar">Als hoeveelste blok in het schooljaar? *</label>
-                        <select class="form-select" id="blok_in_schooljaar" name="blok_in_schooljaar" required wire:model="item.blok_in_schooljaar">
+                        <select class="form-select" id="blok_in_schooljaar" name="blok_in_schooljaar" required wire:model.live="item.blok_in_schooljaar">
                             <option />
                             @for($i = 1; $i <= $opleiding->blokken_per_jaar; $i++)
                                 <option value="{{ $i }}">{{ $i }}e</option>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="points">Met hoeveel studiepunten? *</label>
-                        <input type="number" placeholder="0" class="form-control" id="points" name="points" required wire:model="item.points">
+                        <input type="number" placeholder="0" class="form-control" id="points" name="points" required wire:model.live="item.points">
                         @error('item.points') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                 </form>

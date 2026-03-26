@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>
             </div>
             <div class="modal-body">
-                    <p>Je gaat het blok <strong>{{ optional($item->blok)->naam }}</strong> ontkoppelen van cohort <strong>{{ $cohort->naam }}</strong>.</p>
+                    <p>Je gaat het blok <strong>{{ $item->blok?->naam }}</strong> ontkoppelen van cohort <strong>{{ $cohort->naam }}</strong>.</p>
                     <p>Wil je alleen ontkoppelen, of wil de hele uitvoer verwijderen? De uitvoer verwijderen zal ook koppelingen met modules, comments, enzovoort verwijderen! Je kunt dit niet ongedaan maken.</p>
             </div>
             <div class="modal-footer justify-content-between">

@@ -57,20 +57,20 @@
                                 </div>
                                 {{-- <div class="mb-3">
                                     <label for="points">Punten</span>:</label>
-                                    <input type="number" class="form-control" id="points" name="points" wire:model="item.points">
+                                    <input type="number" class="form-control" id="points" name="points" wire:model.live="item.points">
                                     @error('item.points') <span class="text-danger error">{{ $message }}</span>@enderror
                                 </div> --}}
                                 <div class="mb-3">
                                     <label for="cesuur">Cesuur</span>:</label>
                                     <div class="input-group">
-                                        <input type="number" class="form-control" id="cesuur" name="cesuur" wire:model="item.cesuur">
+                                        <input type="number" class="form-control" id="cesuur" name="cesuur" wire:model.live="item.cesuur">
                                         <span class="input-group-text">%</span>
                                     </div>
                                     @error('item.cesuur') <span class="text-danger error">{{ $message }}</span>@enderror
                                 </div>
                                 <div class="mb-3">
                                     <label for="week">Week</span>:</label>
-                                    <input type="number" class="form-control" id="week" wire:model="week">
+                                    <input type="number" class="form-control" id="week" wire:model.live="week">
                                     @error('week') <span class="text-danger error">{{ $message }}</span>@enderror
                                 </div>
                             </form>
@@ -83,7 +83,7 @@
                                     x-data
                                     x-on:trix-change="$dispatch('input', event.target.value)"
                                     x-ref="trix"
-                                    wire:model.debounce.60s="item.checks"
+                                    wire:model.live.debounce.60s="item.checks"
                                     wire:key="uniqueKey"
                                 ></trix-editor>
                                 @error('checks') <span class="text-danger error">{{ $message }}</span>@enderror
@@ -98,7 +98,7 @@
                         <i class="fa-regular fa-floppy-disk fa-fw" wire:loading.class="d-none" wire:target="edit"></i>
                         Opslaan
                     </button>
-                    <input type="hidden" name="id" wire:model="item.id">
+                    <input type="hidden" name="id" wire:model.live="item.id">
                 </div>
             </div>
         </div>
@@ -121,7 +121,7 @@
                         <i class="fa-solid fa-trash fa-fw" wire:loading.class="d-none" wire:target="destroy"></i>
                         Verwijderen
                     </button>
-                    <input type="hidden" name="id" wire:model="item.id">
+                    <input type="hidden" name="id" wire:model.live="item.id">
                 </div>
             </div>
         </div>

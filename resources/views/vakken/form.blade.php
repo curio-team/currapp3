@@ -15,17 +15,17 @@
                 <form>
                     <div class="mb-3">
                         <label for="naam">Afkorting <span class="text-muted">(korte naam)</span>*:</label>
-                        <input type="text" class="form-control" id="naam" name="naam" wire:model="item.naam" required>
+                        <input type="text" class="form-control" id="naam" name="naam" wire:model.live="item.naam" required>
                         @error('item.naam') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                     <div class="mb-3">
                         <label for="omschrijving">Omschrijving <span class="text-muted">(lange naam)</span>:</label>
-                        <input type="text" class="form-control" id="omschrijving" name="omschrijving" wire:model="item.omschrijving">
+                        <input type="text" class="form-control" id="omschrijving" name="omschrijving" wire:model.live="item.omschrijving">
                         @error('item.omschrijving') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                     <div class="mb-3">
                         <label for="omschrijving">Volgorde *:</label>
-                        <input type="number" class="form-control" id="volgorde" name="volgorde" required wire:model="item.volgorde">
+                        <input type="number" class="form-control" id="volgorde" name="volgorde" required wire:model.live="item.volgorde">
                         @error('item.volgorde') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                 </form>
@@ -37,7 +37,7 @@
                     <i class="fa-regular fa-floppy-disk fa-fw" wire:loading.class="d-none" wire:target="{{ $action }}"></i>
                     Opslaan
                 </button>
-                <input type="hidden" name="id" wire:model="item.id">
+                <input type="hidden" name="id" wire:model.live="item.id">
             </div>
         </div>
     </div>

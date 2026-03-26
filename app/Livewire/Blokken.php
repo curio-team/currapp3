@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
+
 use App\Models\Opleiding;
 
-class Blokken extends _MyComponent
+class Blokken extends MyComponent
 {
     public Opleiding $opleiding;
 
@@ -39,34 +40,28 @@ class Blokken extends _MyComponent
 
     public function destroy()
     {
-        foreach($this->item->uitvoeren as $uitvoer)
-        {
-            foreach($uitvoer->vakken as $vak)
-            {
+        foreach ($this->item->uitvoeren as $uitvoer) {
+            foreach ($uitvoer->vakken as $vak) {
                 $vak->modules()->detach();
                 $vak->delete();
             }
 
-            foreach($uitvoer->leerdoelen as $leerdoel)
-            {
-                foreach($leerdoel->pivot->aspecten as $aspect)
-                {
+            foreach ($uitvoer->leerdoelen as $leerdoel) {
+                foreach ($leerdoel->pivot->aspecten as $aspect) {
                     $aspect->delete();
                 }
             }
 
             $uitvoer->leerdoelen()->detach();
 
-            foreach($uitvoer->comments as $comment)
-            {
+            foreach ($uitvoer->comments as $comment) {
                 $comment->delete();
             }
 
             $uitvoer->delete();
         }
 
-        foreach($this->item->comments as $comment)
-        {
+        foreach ($this->item->comments as $comment) {
             $comment->delete();
         }
 

@@ -7,7 +7,7 @@
 <form class="modal-content">
     @csrf
     <div class="modal-header">
-        <h1 class="modal-title fs-5" id="editStudiepuntenVakModalLabel"><span class="fw-normal">Puntenplan</span> {{ optional(optional($vak_voor_punten)->parent)->naam }} <span class="fw-normal">in</span> {{ $uitvoer->naam }}</h1>
+        <h1 class="modal-title fs-5" id="editStudiepuntenVakModalLabel"><span class="fw-normal">Puntenplan</span> {{ $vak_voor_punten?->parent?->naam }} <span class="fw-normal">in</span> {{ $uitvoer->naam }}</h1>
         @if($mode == 'modal')
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click.prevent="clearItem()"></button>
         @endif

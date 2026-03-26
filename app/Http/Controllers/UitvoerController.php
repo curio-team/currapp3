@@ -6,25 +6,25 @@ use App\Models\ModuleVersie;
 use App\Models\Opleiding;
 use App\Models\Uitvoer;
 use App\Models\VakInUitvoer;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class UitvoerController extends Controller
 {
-    public function show(Opleiding $opleiding, Uitvoer $uitvoer)
+    public function show(Opleiding $opleiding, Uitvoer $uitvoer): View
     {
         return view('uitvoeren.show')
-                ->with('opleiding', $opleiding)
-                ->with('uitvoer', $uitvoer);
+            ->with('opleiding', $opleiding)
+            ->with('uitvoer', $uitvoer);
     }
 
-    public function link_vak_preview(Uitvoer $uitvoer, Request $request)
+    public function link_vak_preview(Uitvoer $uitvoer, Request $request): RedirectResponse
     {
         // Koppel nieuw aangevinkte vakken:
         $added = [];
-        foreach($request->vakken as $vak_id)
-        {
-            if($uitvoer->vakken->doesntContain('vak_id', $vak_id))
-            {
+        foreach ($request->vakken as $vak_id) {
+            if ($uitvoer->vakken->doesntContain('vak_id', $vak_id)) {
                 $added[] = $vak_id;
             }
         }
@@ -32,68 +32,55 @@ class UitvoerController extends Controller
         // Verwijder uitgevinkte vakken:
         $removed = [];
         $vakken = collect($request->vakken);
-        foreach($uitvoer->vakken as $vak)
-        {
-            if($vakken->doesntContain($vak->vak_id))
-            {
+        foreach ($uitvoer->vakken as $vak) {
+            if ($vakken->doesntContain($vak->vak_id)) {
                 $removed[] = $vak->vak_id;
             }
         }
 
         $keuzegroep_added = array_filter($request->keuzegroep);
         $keuzegroep_removed = [];
-        foreach($uitvoer->vakken as $vak)
-        {
-            if($vak->gelinkt_aan_vak_id && !array_key_exists($vak->parent->id, $keuzegroep_added))
-            {
+        foreach ($uitvoer->vakken as $vak) {
+            if ($vak->gelinkt_aan_vak_id && ! array_key_exists($vak->parent->id, $keuzegroep_added)) {
                 $keuzegroep_removed[] = $vak->id;
             }
         }
 
-        if(count($added) || count($removed) || count($keuzegroep_added) || count($keuzegroep_removed))
-        {
+        if (count($added) || count($removed) || count($keuzegroep_added) || count($keuzegroep_removed)) {
             return redirect()->back()->with('vakken_update_preview', ['added' => $added, 'removed' => $removed, 'keuzegroep_added' => $keuzegroep_added, 'keuzegroep_removed' => $keuzegroep_removed]);
-        }
-        else
-        {
+        } else {
             return redirect()->back();
         }
     }
 
-    public function link_vak(Uitvoer $uitvoer, Request $request)
+    public function link_vak(Uitvoer $uitvoer, Request $request): RedirectResponse
     {
         $removed = collect($request->removed);
         $added = collect($request->added);
         $keuzegroep_added = collect($request->keuzegroep_added);
         $keuzegroep_removed = collect($request->keuzegroep_removed);
 
-        foreach($request->uitvoeren as $uitvoer_id)
-        {
+        foreach ($request->uitvoeren as $uitvoer_id) {
             $uitvoer = Uitvoer::find($uitvoer_id);
 
-            foreach($added as $vak_id)
-            {
-                if($uitvoer->vakken->doesntContain('vak_id', $vak_id))
-                {
-                    $vak = new VakInUitvoer();
+            foreach ($added as $vak_id) {
+                if ($uitvoer->vakken->doesntContain('vak_id', $vak_id)) {
+                    $vak = new VakInUitvoer;
                     $vak->vak_id = $vak_id;
                     $vak->uitvoer_id = $uitvoer_id;
                     $vak->save();
                 }
             }
 
-            foreach($uitvoer->vakken as $vak)
-            {
-                if($removed->contains($vak->vak_id))
-                {
+            foreach ($uitvoer->vakken as $vak) {
+                if ($removed->contains($vak->vak_id)) {
                     $vak->modules()->detach();
                     $vak->delete();
                 }
             }
 
-            foreach($keuzegroep_added as $vak1_id => $vak2_id)
-            {
-                //vak1 is slave, vak2 is master
+            foreach ($keuzegroep_added as $vak1_id => $vak2_id) {
+                // vak1 is slave, vak2 is master
 
                 $vak1 = VakInUitvoer::where('vak_id', $vak1_id)->where('uitvoer_id', $uitvoer->id)->first();
                 $vak2 = VakInUitvoer::where('vak_id', $vak2_id)->where('uitvoer_id', $uitvoer->id)->first();
@@ -102,8 +89,7 @@ class UitvoerController extends Controller
                 $vak1->save();
             }
 
-            foreach($keuzegroep_removed as $rem)
-            {
+            foreach ($keuzegroep_removed as $rem) {
                 $vak = VakInUitvoer::find($rem);
                 $vak->gelinkt_aan_vak_id = null;
                 $vak->save();
@@ -113,22 +99,20 @@ class UitvoerController extends Controller
         return redirect()->back();
     }
 
-    public function link_module_preview(Uitvoer $uitvoer, Request $request)
+    public function link_module_preview(Uitvoer $uitvoer, Request $request): RedirectResponse
     {
-        return redirect()->back()->with('link_module_preview', [... $request->all()]);
+        return redirect()->back()->with('link_module_preview', [...$request->all()]);
     }
 
-    public function link_module(Uitvoer $uitvoer, Request $request)
+    public function link_module(Uitvoer $uitvoer, Request $request): RedirectResponse
     {
         $vak_id = VakInUitvoer::find($request->vak_id)->parent->id;
         $module_versie = ModuleVersie::where('module_id', $request->module_id)->orderByDesc('versie')->first();
 
-        foreach($request->uitvoeren as $uitvoer_id)
-        {
+        foreach ($request->uitvoeren as $uitvoer_id) {
             $vak = VakInUitvoer::where('vak_id', $vak_id)->where('uitvoer_id', $uitvoer_id)->first();
-            if(!$vak)
-            {
-                $vak = new VakInUitvoer();
+            if (! $vak) {
+                $vak = new VakInUitvoer;
                 $vak->vak_id = $vak_id;
                 $vak->uitvoer_id = $uitvoer_id;
                 $vak->save();
@@ -143,50 +127,50 @@ class UitvoerController extends Controller
         return redirect()->back();
     }
 
-    public function edit_points_preview(Uitvoer $uitvoer, Request $request)
+    public function edit_points_preview(Uitvoer $uitvoer, Request $request): RedirectResponse
     {
-        return redirect()->back()->with('edit_points_preview', [... $request->all()]);
+        return redirect()->back()->with('edit_points_preview', [...$request->all()]);
     }
 
-    public function edit_points(Request $request)
+    public function edit_points(Request $request): RedirectResponse
     {
-        foreach($request->uitvoeren as $uitvoer_id)
-        {
+        foreach ($request->uitvoeren as $uitvoer_id) {
             $uitvoer = Uitvoer::find($uitvoer_id);
             $uitvoer->points = $request->points;
             $uitvoer->save();
         }
+
         return redirect()->back();
     }
 
-    public function edit_weeks_preview(Request $request)
+    public function edit_weeks_preview(Request $request): RedirectResponse
     {
-        return redirect()->back()->with('edit_weeks_preview', [... $request->all()]);
+        return redirect()->back()->with('edit_weeks_preview', [...$request->all()]);
     }
 
-    public function edit_weeks(Request $request)
+    public function edit_weeks(Request $request): RedirectResponse
     {
-        foreach($request->uitvoeren as $uitvoer_id)
-        {
+        foreach ($request->uitvoeren as $uitvoer_id) {
             $uitvoer = Uitvoer::find($uitvoer_id);
             $uitvoer->weeks = $request->weeks;
             $uitvoer->save();
         }
+
         return redirect()->back();
     }
 
-    public function studiepuntenplan_vak(VakInUitvoer $vak)
+    public function studiepuntenplan_vak(VakInUitvoer $vak): View
     {
         return view('uitvoeren.studiepuntenplan_vak_print')
-                ->with('vak_voor_punten', $vak)
-                ->with('uitvoer', $vak->uitvoer)
-                ->with('opleiding', $vak->uitvoer->blok->opleiding);
+            ->with('vak_voor_punten', $vak)
+            ->with('uitvoer', $vak->uitvoer)
+            ->with('opleiding', $vak->uitvoer->blok->opleiding);
     }
 
-    public function studiepuntenplan_uitvoer(Uitvoer $uitvoer)
+    public function studiepuntenplan_uitvoer(Uitvoer $uitvoer): View
     {
         return view('uitvoeren.studiepuntenplan_uitvoer_print')
-                ->with('uitvoer', $uitvoer)
-                ->with('opleiding', $uitvoer->blok->opleiding);
+            ->with('uitvoer', $uitvoer)
+            ->with('opleiding', $uitvoer->blok->opleiding);
     }
 }

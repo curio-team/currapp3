@@ -15,17 +15,17 @@
                 <form>
                     <div class="mb-3">
                         <label for="naam">Afkorting <span class="text-muted">(korte naam)</span>*:</label>
-                        <input type="text" class="form-control" id="naam" name="naam" wire:model="item.naam" required>
+                        <input type="text" class="form-control" id="naam" name="naam" wire:model.live="item.naam" required>
                         @error('item.naam') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                     <div class="mb-3">
                         <label for="eigenaar_id">Eigenaar:</label>
-                        <input type="text" class="form-control" id="eigenaar_id" name="eigenaar_id" wire:model="item.eigenaar_id" placeholder="ab01">
+                        <input type="text" class="form-control" id="eigenaar_id" name="eigenaar_id" wire:model.live="item.eigenaar_id" placeholder="ab01">
                         @error('item.eigenaar_id') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                     <div class="mb-3">
                         <label for="color">Kleur</span>:</label>
-                        <input type="color" class="form-control" id="color" name="color" wire:model="item.color">
+                        <input type="color" class="form-control" id="color" name="color" wire:model.live="item.color">
                         @error('item.color') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                 </form>
@@ -37,7 +37,7 @@
                     <i class="fa-regular fa-floppy-disk fa-fw" wire:loading.class="d-none" wire:target="{{ $action }}"></i>
                     Opslaan
                 </button>
-                <input type="hidden" name="id" wire:model="item.id">
+                <input type="hidden" name="id" wire:model.live="item.id">
             </div>
         </div>
     </div>
