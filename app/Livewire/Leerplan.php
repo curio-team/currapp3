@@ -18,6 +18,8 @@ class Leerplan extends MyComponent
 
     public $vaknaam;
 
+    public $vak_in_uitvoer_id;
+
     public VakInUitvoer $vak_voor_punten;
 
     protected $className = \App\Models\ModuleVersie::class;
@@ -51,6 +53,7 @@ class Leerplan extends MyComponent
         $this->vaknaam = $vak->parent->naam;
         $this->item = $vak->modules()->find($module_id);
         $this->versie_id = $this->item->id;
+        $this->vak_in_uitvoer_id = $vak->id;
     }
 
     public function setVakItem(VakInUitvoer $vak)
@@ -67,7 +70,7 @@ class Leerplan extends MyComponent
 
     public function editModule()
     {
-        $vak_id = VakInUitvoer::find($this->item->pivot['vak_in_uitvoer_id'])->vak_id;
+        $vak_id = VakInUitvoer::find($this->vak_in_uitvoer_id)->vak_id;
         foreach ($this->uitvoeren as $uitvoer_id) {
             if ($uitvoer_id) {
                 $vak = VakInUitvoer::where('vak_id', $vak_id)->where('uitvoer_id', $uitvoer_id)->first();
@@ -116,7 +119,7 @@ class Leerplan extends MyComponent
 
     public function unlinkModule()
     {
-        $vak_id = VakInUitvoer::find($this->item->pivot['vak_in_uitvoer_id'])->vak_id;
+        $vak_id = VakInUitvoer::find($this->vak_in_uitvoer_id)->vak_id;
         foreach ($this->uitvoeren as $uitvoer_id) {
             if ($uitvoer_id) {
                 $vak = VakInUitvoer::where('vak_id', $vak_id)->where('uitvoer_id', $uitvoer_id)->first();
