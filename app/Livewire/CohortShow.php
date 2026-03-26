@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\Cohort;
 use App\Models\Opleiding;
 use App\Models\Uitvoer;
 
-class CohortShow extends _MyComponent
+class CohortShow extends MyComponent
 {
     public Opleiding $opleiding;
 

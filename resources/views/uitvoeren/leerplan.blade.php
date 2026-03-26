@@ -64,19 +64,19 @@
     @include('uitvoeren.edit_studiepunten_vak')
 
     <script>
-        document.addEventListener('livewire:load', () => {
+        document.addEventListener('livewire:init', () => {
             Livewire.on('unlinkModulePreview', param => {
                 new bootstrap.Modal('#unlinkModulePreviewModal').show();
             })
         })
 
-        document.addEventListener('livewire:load', () => {
+        document.addEventListener('livewire:init', () => {
             Livewire.on('editModulePreview', param => {
                 new bootstrap.Modal('#editModulePreviewModal').show();
             })
         })
 
-        document.addEventListener('livewire:load', () => {
+        document.addEventListener('livewire:init', () => {
             Livewire.on('editStudiepuntenVakPreview', param => {
                 new bootstrap.Modal('#editStudiepuntenVakPreviewModal').show();
             })

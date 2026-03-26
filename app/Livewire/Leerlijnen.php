@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\Opleiding;
 
-class Vakken extends _MyComponent
+class Leerlijnen extends MyComponent
 {
     public Opleiding $opleiding;
 
-    protected $className = \App\Models\Vak::class;
+    protected $className = \App\Models\Leerlijn::class;
 
     protected $rules = [
         'item.naam' => 'required',
-        'item.omschrijving' => 'nullable',
-        'item.volgorde' => 'required|integer|min:0',
+        'item.eigenaar_id' => 'nullable',
+        'item.color' => 'required',
     ];
 
     public function render()
     {
-        return view('vakken.index')
+        return view('leerlijnen.index')
             ->extends('layouts.app', ['opleiding' => $this->opleiding])
             ->section('main');
     }
@@ -40,10 +40,6 @@ class Vakken extends _MyComponent
 
     public function destroy()
     {
-        foreach ($this->item->uitvoeren as $uitvoer) {
-            $uitvoer->modules()->detach();
-            $uitvoer->delete();
-        }
         $this->item->delete();
         $this->endModal();
     }

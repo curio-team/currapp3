@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\Cohort;
 use App\Models\ModuleVersie;
@@ -8,7 +8,7 @@ use App\Models\Opleiding;
 use App\Models\Uitvoer;
 use App\Models\VakInUitvoer;
 
-class Cohorten extends _MyComponent
+class Cohorten extends MyComponent
 {
     public Opleiding $opleiding;
 

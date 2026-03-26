@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\Opleiding;
 
-class Blokken extends _MyComponent
+class Blokken extends MyComponent
 {
     public Opleiding $opleiding;
 

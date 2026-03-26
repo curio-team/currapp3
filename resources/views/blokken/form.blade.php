@@ -15,18 +15,18 @@
                 <form>
                     <div class="mb-3">
                         <label for="eigenaar_id">Eigenaar <span class="text-muted">(docent-code, bijvoorbeeld <strong>ab01</strong>)</span>:</label>
-                        <input type="text" class="form-control" id="eigenaar_id" name="eigenaar_id" wire:model="item.eigenaar_id">
+                        <input type="text" class="form-control" id="eigenaar_id" name="eigenaar_id" wire:model.live="item.eigenaar_id">
                         <div class="form-text">Laat je deze leeg, dan <em>default</em> de eigenaar naar de opleiding-eigenaar.</div>
                         @error('item.eigenaar_id') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                     <div class="mb-3">
                         <label for="naam">Naam *:</label>
-                        <input type="text" class="form-control" id="naam" name="naam" wire:model="item.naam" required>
+                        <input type="text" class="form-control" id="naam" name="naam" wire:model.live="item.naam" required>
                         @error('item.naam') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                     <div class="mb-3">
                         <label for="omschrijving">Volgorde *:</label>
-                        <input type="number" class="form-control" id="volgorde" name="volgorde" required wire:model="item.volgorde">
+                        <input type="number" class="form-control" id="volgorde" name="volgorde" required wire:model.live="item.volgorde">
                         @error('item.volgorde') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                 </form>
@@ -38,7 +38,7 @@
                     <i class="fa-regular fa-floppy-disk fa-fw" wire:loading.class="d-none" wire:target="{{ $action }}"></i>
                     Opslaan
                 </button>
-                <input type="hidden" name="id" wire:model="item.id">
+                <input type="hidden" name="id" wire:model.live="item.id">
             </div>
         </div>
     </div>

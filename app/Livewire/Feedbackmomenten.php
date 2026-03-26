@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\Feedbackmoment;
 use App\Models\ModuleVersie;
 use App\Models\Opleiding;
 
-class Feedbackmomenten extends _MyComponent
+class Feedbackmomenten extends MyComponent
 {
     public $week;
 

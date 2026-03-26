@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use Livewire\Component;
 
-class _MyComponent extends Component
+class MyComponent extends Component
 {
     protected $listeners = ['refreshComponent' => '$refresh'];
 
@@ -28,7 +28,7 @@ class _MyComponent extends Component
     protected function endModal()
     {
         $this->clearItem();
-        $this->emit('confirm');
-        $this->emit('refreshComponent');
+        $this->dispatch('confirm');
+        $this->dispatch('refreshComponent');
     }
 }

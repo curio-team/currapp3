@@ -6,12 +6,12 @@ use App\Http\Controllers\OpleidingController;
 use App\Http\Controllers\RapportController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\UitvoerController;
-use App\Http\Livewire\Blokken;
-use App\Http\Livewire\Cohorten;
-use App\Http\Livewire\CohortShow;
-use App\Http\Livewire\Leerlijnen;
-use App\Http\Livewire\Modules;
-use App\Http\Livewire\Vakken;
+use App\Livewire\Blokken;
+use App\Livewire\Cohorten;
+use App\Livewire\CohortShow;
+use App\Livewire\Leerlijnen;
+use App\Livewire\Modules;
+use App\Livewire\Vakken;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {

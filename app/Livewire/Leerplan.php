@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\Opleiding;
 use App\Models\Uitvoer;
 use App\Models\VakInUitvoer;
 
-class Leerplan extends _MyComponent
+class Leerplan extends MyComponent
 {
     public Opleiding $opleiding;
 
@@ -61,8 +61,8 @@ class Leerplan extends _MyComponent
 
     public function editModulePreview()
     {
-        $this->emit('confirm');
-        $this->emit('editModulePreview');
+        $this->dispatch('confirm');
+        $this->dispatch('editModulePreview');
     }
 
     public function editModule()
@@ -86,8 +86,8 @@ class Leerplan extends _MyComponent
 
     public function editStudiepuntenVakPreview()
     {
-        $this->emit('confirm');
-        $this->emit('editStudiepuntenVakPreview');
+        $this->dispatch('confirm');
+        $this->dispatch('editStudiepuntenVakPreview');
     }
 
     public function editStudiepuntenVak()
@@ -110,8 +110,8 @@ class Leerplan extends _MyComponent
 
     public function unlinkModulePreview()
     {
-        $this->emit('confirm');
-        $this->emit('unlinkModulePreview');
+        $this->dispatch('confirm');
+        $this->dispatch('unlinkModulePreview');
     }
 
     public function unlinkModule()
