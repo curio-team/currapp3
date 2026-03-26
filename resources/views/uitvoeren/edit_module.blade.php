@@ -8,12 +8,12 @@
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
-                        <strong>{{ optional($item->parent)->naam }}</strong> in <strong>{{ $uitvoer->naam }}</strong>
+                        <strong>{{ $item->parent?->naam }}</strong> in <strong>{{ $uitvoer->naam }}</strong>
                     </div>
                     <div class="mb-3">
                         <label for="versie_id">Versie *:</label>
                         <select id="versie_id" wire:model="versie_id" class="form-select">
-                            @foreach (optional($item->parent)->versies ?? [] as $versie)
+                            @foreach ($item->parent?->versies ?? [] as $versie)
                                 <option value="{{ $versie->id }}">{{ $versie->naam }}</option>
                             @endforeach
                         </select>
@@ -53,7 +53,7 @@
             </div>
             <div class="modal-body">
                 Je gaat de volgende wijzigingen toepassen op <strong>{{ $uitvoer->naam }}</strong>:
-                <div class="text-primary fw-bold"><i class="fa-solid fa-edit"></i> {{ optional($item->parent)->naam }}</div>
+                <div class="text-primary fw-bold"><i class="fa-solid fa-edit"></i> {{ $item->parent?->naam }}</div>
                 <hr class="my-3">
                 Wil je deze wijzigingen <strong>ook toepassen</strong> op de volgende niet-gestarte uitvoeren van dit blok?
                 <input type="hidden" wire:model="uitvoeren.0" value="{{ $uitvoer->id }}">

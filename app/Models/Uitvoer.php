@@ -18,10 +18,10 @@ class Uitvoer extends Model
     {
         return Attribute::make(
             get: function ($value) {
-                $month = optional($this->datum_start)->format('n');
+                $month = $this->datum_start?->format('n');
                 $month = ($month >= 6) ? 'sep' : 'feb';
 
-                return optional($this->blok)->naam.' ('.optional($this->datum_start)->format('y').'-'.$month.')';
+                return $this->blok?->naam.' ('.$this->datum_start?->format('y').'-'.$month.')';
             },
         );
     }

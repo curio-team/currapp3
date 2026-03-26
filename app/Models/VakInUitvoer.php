@@ -62,7 +62,7 @@ class VakInUitvoer extends Model
         $weeks = [];
         $cols = [];
         $modules_cols = [];
-        for ($i = 1; $i <= optional($this->uitvoer)->weeks; $i++) {
+        for ($i = 1; $i <= $this->uitvoer?->weeks; $i++) {
             $weeks[$i] = 0;
         }
 
@@ -118,7 +118,7 @@ class VakInUitvoer extends Model
         if ($this->modules->sum('aantal_feedbackmomenten') < 1) {
             $result = false;
         }
-        if ($this->modules->max('max_punten') > optional($this->uitvoer)->points * 0.10) {
+        if ($this->modules->max('max_punten') > $this->uitvoer?->points * 0.10) {
             $result = false;
         }
         if ($this->modules->sum('aantal_checks_niet_oke') > 0) {

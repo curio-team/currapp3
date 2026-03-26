@@ -29,7 +29,7 @@
                                                 {
                                                     $vakinuitvoer = \App\Models\VakInUitvoer::where('uitvoer_id', $uitvoer->id)->where('vak_id', $vak->id)->first();
                                                     $gelinkt_vak = \App\Models\VakInUitvoer::find($vakinuitvoer->gelinkt_aan_vak_id);
-                                                    if(optional($gelinkt_vak)->vak_id == $vak2->id)
+                                                    if($gelinkt_vak?->vak_id == $vak2->id)
                                                     {
                                                         echo "selected";
                                                     }

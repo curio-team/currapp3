@@ -15,7 +15,7 @@
             </div>
             <div class="modal-body">
                 Je gaat de volgende wijzigingen toepassen op <strong>{{ $uitvoer->naam }}</strong>:
-                <div class="text-primary"><i class="fa-regular fa-edit fa-fw"></i>Totaal <strong>{{ optional($vak_voor_punten)->points }}</strong> studiepunten voor het vak <strong>{{ optional(optional($vak_voor_punten)->parent)->naam }}</strong>.</div>
+                <div class="text-primary"><i class="fa-regular fa-edit fa-fw"></i>Totaal <strong>{{ $vak_voor_punten?->points }}</strong> studiepunten voor het vak <strong>{{ $vak_voor_punten?->parent?->naam }}</strong>.</div>
                 <hr class="my-3">
                 Wil je deze wijzigingen <strong>ook toepassen</strong> op de volgende niet-gestarte uitvoeren van dit blok?
                 <input type="hidden" wire:model="uitvoeren.0" value="{{ $uitvoer->id }}">

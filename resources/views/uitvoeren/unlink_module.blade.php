@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <form>
                     <div class="mb-3">
-                        Je gaat module <strong>{{ optional($item->parent)->naam }}</strong> verwijderen uit <strong>{{ $uitvoer->naam }}</strong>. De module blijft bestaan, maar is niet meer gekoppeld aan deze uitvoer.
+                        Je gaat module <strong>{{ $item->parent?->naam }}</strong> verwijderen uit <strong>{{ $uitvoer->naam }}</strong>. De module blijft bestaan, maar is niet meer gekoppeld aan deze uitvoer.
                     </div>
                     <input type="hidden" wire:model="item.pivot.vak_in_uitvoer_id">
                 </form>
@@ -36,7 +36,7 @@
             </div>
             <div class="modal-body">
                 Je gaat de volgende wijzigingen toepassen op <strong>{{ $uitvoer->naam }}</strong>:
-                <div class="text-danger fw-bold"><i class="fa-solid fa-minus"></i> {{ optional($item->parent)->naam }} verwijderen uit {{ $vaknaam }}</div>
+                <div class="text-danger fw-bold"><i class="fa-solid fa-minus"></i> {{ $item->parent?->naam }} verwijderen uit {{ $vaknaam }}</div>
                 <hr class="my-3">
                 Wil je deze wijzigingen <strong>ook toepassen</strong> op de volgende niet-gestarte uitvoeren van dit blok?
                 <input type="hidden" wire:model="uitvoeren.0" value="{{ $uitvoer->id }}">
