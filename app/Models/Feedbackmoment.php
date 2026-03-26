@@ -16,11 +16,11 @@ class Feedbackmoment extends Model
 
     public static function generateCode($batchCodes = [])
     {
-        $characters = "2345679ABCDEFGHJKMNPQRSTUVWXYZ";
+        $characters = '2345679ABCDEFGHJKMNPQRSTUVWXYZ';
 
-        do{
-            $code = "F" . substr(str_shuffle($characters), 0, 3);
-        } while(Feedbackmoment::where('code', $code)->count() || in_array($code, $batchCodes));
+        do {
+            $code = 'F'.substr(str_shuffle($characters), 0, 3);
+        } while (Feedbackmoment::where('code', $code)->count() || in_array($code, $batchCodes));
 
         return $code;
     }

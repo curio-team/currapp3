@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Factories\Sequence;
+use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,17 +19,17 @@ class DatabaseSeeder extends Seeder
         // Users
         //
         $user1 = \App\Models\User::create([
-            'id'    => 'br10',
-            'name'  => 'Bart Roos',
+            'id' => 'br10',
+            'name' => 'Bart Roos',
             'email' => 'b.roos@curio.nl',
-            'type'  => 'teacher',
+            'type' => 'teacher',
             'admin' => true,
         ]);
         $user2 = \App\Models\User::create([
-            'id'    => 'ab01',
-            'name'  => 'Test Kees',
+            'id' => 'ab01',
+            'name' => 'Test Kees',
             'email' => 'b.roos@curio.nl',
-            'type'  => 'teacher',
+            'type' => 'teacher',
         ]);
 
         //
@@ -45,8 +45,8 @@ class DatabaseSeeder extends Seeder
         //
         $opleiding = \App\Models\Opleiding::create([
             'team_id' => $team->id,
-            'naam'  => 'SD',
-            'omschrijving'  => 'Software developer',
+            'naam' => 'SD',
+            'omschrijving' => 'Software developer',
             'crebo' => '25604',
             'eigenaar_id' => 'br10',
             'blokken_per_jaar' => 2,
@@ -82,15 +82,13 @@ class DatabaseSeeder extends Seeder
         //
         // Cohorten
         //
-        foreach(\App\Models\Opleiding::all() as $opleiding)
-        {
-            for($i = 2020; $i <= 2024; $i++)
-            {
+        foreach (\App\Models\Opleiding::all() as $opleiding) {
+            for ($i = 2020; $i <= 2024; $i++) {
                 \App\Models\Cohort::create([
                     'opleiding_id' => $opleiding->id,
-                    'naam' => 'C' . substr($i, 2, 2) . ' (4jr-sep)',
-                    'datum_start' => $i . '-08-01',
-                    'datum_eind' => ($i+4) . '-07-31',
+                    'naam' => 'C'.substr($i, 2, 2).' (4jr-sep)',
+                    'datum_start' => $i.'-08-01',
+                    'datum_eind' => ($i + 4).'-07-31',
                 ]);
             }
         }
@@ -98,14 +96,14 @@ class DatabaseSeeder extends Seeder
         //
         // Uitvoeren
         //
-        foreach(\App\Models\Cohort::all() as $cohort)
-        {
+        foreach (\App\Models\Cohort::all() as $cohort) {
             $datum = new \Carbon\Carbon($cohort->datum_start);
             $i = 1;
-            foreach(\App\Models\Blok::all() as $blok)
-            {
+            foreach (\App\Models\Blok::all() as $blok) {
                 $schooljaar = $datum->format('Y');
-                if($datum->format('m') <= 6) $schooljaar -= 1;
+                if ($datum->format('m') <= 6) {
+                    $schooljaar -= 1;
+                }
 
                 $cohort->uitvoeren()->create([
                     'blok_id' => $blok->id,
@@ -117,17 +115,17 @@ class DatabaseSeeder extends Seeder
                 ]);
 
                 $i++;
-                if($i > 2) $i = 1;
+                if ($i > 2) {
+                    $i = 1;
+                }
             }
         }
 
         //
         // Vakken-in-uitvoer
         //
-        foreach(\App\Models\Uitvoer::all() as $uitvoer)
-        {
-            foreach(\App\Models\Vak::inRandomOrder()->limit(4)->get() as $vak)
-            {
+        foreach (\App\Models\Uitvoer::all() as $uitvoer) {
+            foreach (\App\Models\Vak::inRandomOrder()->limit(4)->get() as $vak) {
                 \App\Models\VakInUitvoer::create([
                     'vak_id' => $vak->id,
                     'uitvoer_id' => $uitvoer->id,
@@ -153,13 +151,11 @@ class DatabaseSeeder extends Seeder
         // Modules
         //
         $numbers = ['I', 'II', 'III', 'IV', 'V'];
-        foreach(\App\Models\Leerlijn::all() as $leerlijn)
-        {
-            for($i = 0; $i < rand(1, 4); $i++)
-            {
+        foreach (\App\Models\Leerlijn::all() as $leerlijn) {
+            for ($i = 0; $i < rand(1, 4); $i++) {
                 \App\Models\Module::create([
                     'leerlijn_id' => $leerlijn->id,
-                    'naam'        => $leerlijn->naam . '-' . $numbers[$i],
+                    'naam' => $leerlijn->naam.'-'.$numbers[$i],
                 ]);
             }
         }
@@ -167,31 +163,28 @@ class DatabaseSeeder extends Seeder
         //
         // Versies
         //
-        foreach(\App\Models\Module::all() as $module)
-        {
-            for($i = 1; $i <= rand(1, 4); $i++)
-            {
+        foreach (\App\Models\Module::all() as $module) {
+            for ($i = 1; $i <= rand(1, 4); $i++) {
                 \App\Models\ModuleVersie::create([
-                    'module_id'      => $module->id,
-                    'versie'         => $i,
+                    'module_id' => $module->id,
+                    'versie' => $i,
                     'hoofdauteur_id' => fake()->randomElement(['br10', 'ab01', null, null, null]),
                 ]);
             }
         }
 
-        foreach(\App\Models\VakInUitvoer::all() as $vak)
-        {
+        foreach (\App\Models\VakInUitvoer::all() as $vak) {
             $eind = rand(3, 14);
             $versie = \App\Models\ModuleVersie::inRandomOrder()->first();
             $vak->modules()->save($versie, [
                 'week_start' => 1,
-                'week_eind'  => $eind,
+                'week_eind' => $eind,
             ]);
 
             $versie = \App\Models\ModuleVersie::inRandomOrder()->first();
             $vak->modules()->save($versie, [
-                'week_start' => $eind+1,
-                'week_eind'  => 16,
+                'week_start' => $eind + 1,
+                'week_eind' => 16,
             ]);
         }
 
@@ -204,10 +197,8 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         $ids = \App\Models\Acceptatiecriterium::all()->pluck('id')->toArray();
-        foreach(\App\Models\ModuleVersie::limit(10)->get() as $module)
-        {
-            for($i = 0; $i < rand(1, 4); $i++)
-            {
+        foreach (\App\Models\ModuleVersie::limit(10)->get() as $module) {
+            for ($i = 0; $i < rand(1, 4); $i++) {
                 $module->acceptatiecriteria()->attach(fake()->randomElement($ids), ['voldoet' => rand(0, 1)]);
             }
         }
@@ -215,13 +206,11 @@ class DatabaseSeeder extends Seeder
         //
         // Feedbackmomenten
         //
-        foreach(\App\Models\VakInUitvoer::with('modules')->get() as $vak)
-        {
+        foreach (\App\Models\VakInUitvoer::with('modules')->get() as $vak) {
             // Add the same feedbackmoment to each version of the module
             $fbm = \App\Models\Feedbackmoment::factory()->make();
 
-            foreach($vak->modules as $moduleVersie)
-            {
+            foreach ($vak->modules as $moduleVersie) {
                 $moduleVersie->feedbackmomenten()->save($fbm, ['week' => rand($moduleVersie->pivot->week_start, $moduleVersie->pivot->week_eind)]);
             }
         }

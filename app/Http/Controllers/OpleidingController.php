@@ -11,32 +11,32 @@ class OpleidingController extends Controller
     public function show(Opleiding $opleiding)
     {
         $week = WeeksApi::get();
-        $schooljaar = substr($week['schooljaar']['start'] , 0, 4);
+        $schooljaar = substr($week['schooljaar']['start'], 0, 4);
         $volgorde = $week['semester']['volgorde'];
 
         $prev_volgorde = ($volgorde == 2) ? 1 : 2;
-        $prev_schooljaar = ($volgorde == 2) ? $schooljaar : $schooljaar-1;
+        $prev_schooljaar = ($volgorde == 2) ? $schooljaar : $schooljaar - 1;
 
         $next_volgorde = ($volgorde == 2) ? 1 : 2;
-        $next_schooljaar = ($volgorde == 2) ? $schooljaar+1 : $schooljaar;
+        $next_schooljaar = ($volgorde == 2) ? $schooljaar + 1 : $schooljaar;
 
         $uitvoeren_verleden = $opleiding->uitvoeren()
-                                        ->where('schooljaar', $prev_schooljaar)
-                                        ->where('blok_in_schooljaar', $prev_volgorde)
-                                        ->orderBy('blokken.volgorde')
-                                        ->get();
+            ->where('schooljaar', $prev_schooljaar)
+            ->where('blok_in_schooljaar', $prev_volgorde)
+            ->orderBy('blokken.volgorde')
+            ->get();
 
         $uitvoeren_actueel = $opleiding->uitvoeren()
-                                        ->where('schooljaar', $schooljaar)
-                                        ->where('blok_in_schooljaar', $volgorde)
-                                        ->orderBy('blokken.volgorde')
-                                        ->get();
+            ->where('schooljaar', $schooljaar)
+            ->where('blok_in_schooljaar', $volgorde)
+            ->orderBy('blokken.volgorde')
+            ->get();
 
         $uitvoeren_toekomst = $opleiding->uitvoeren()
-                                        ->where('schooljaar', $next_schooljaar)
-                                        ->where('blok_in_schooljaar', $next_volgorde)
-                                        ->orderBy('blokken.volgorde')
-                                        ->get();
+            ->where('schooljaar', $next_schooljaar)
+            ->where('blok_in_schooljaar', $next_volgorde)
+            ->orderBy('blokken.volgorde')
+            ->get();
 
         return view('opleidingen.show')
             ->with('opleiding', $opleiding)

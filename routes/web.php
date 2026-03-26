@@ -1,20 +1,18 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\OpleidingController;
-use App\Http\Controllers\UitvoerController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\OpleidingController;
 use App\Http\Controllers\RapportController;
 use App\Http\Controllers\TokenController;
+use App\Http\Controllers\UitvoerController;
 use App\Http\Livewire\Blokken;
-use App\Http\Livewire\Leerlijnen;
-use App\Http\Livewire\Vakken;
-use App\Http\Livewire\Modules;
 use App\Http\Livewire\Cohorten;
 use App\Http\Livewire\CohortShow;
-use Illuminate\Http\Request;
+use App\Http\Livewire\Leerlijnen;
+use App\Http\Livewire\Modules;
+use App\Http\Livewire\Vakken;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
 
@@ -24,9 +22,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('opleidingen', OpleidingController::class)->parameter('opleidingen', 'opleiding');
 
-    Route::get('opleidingen/{opleiding}/blokken',  Blokken::class )->name('opleidingen.blokken');
-    Route::get('opleidingen/{opleiding}/leerlijnen',  Leerlijnen::class )->name('opleidingen.leerlijnen');
-    Route::get('opleidingen/{opleiding}/vakken',   Vakken::class  )->name('opleidingen.vakken' );
+    Route::get('opleidingen/{opleiding}/blokken', Blokken::class)->name('opleidingen.blokken');
+    Route::get('opleidingen/{opleiding}/leerlijnen', Leerlijnen::class)->name('opleidingen.leerlijnen');
+    Route::get('opleidingen/{opleiding}/vakken', Vakken::class)->name('opleidingen.vakken');
     Route::get('opleidingen/{opleiding}/modules', Modules::class)->name('opleidingen.modules');
     Route::get('opleidingen/{opleiding}/modules/{module}', [ModuleController::class, 'show'])->name('opleidingen.modules.show');
     Route::get('opleidingen/{opleiding}/modules/{module}/v/{versie}', [ModuleController::class, 'show_versie'])->name('opleidingen.modules.show.versie');
@@ -59,13 +57,13 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::redirect('/login', '/sdclient/redirect')->name('login');
-Route::get('/sdclient/ready', function(){
-	return redirect()->route('home');
+Route::get('/sdclient/ready', function () {
+    return redirect()->route('home');
 });
 
-Route::get('/sdclient/error', function() {
+Route::get('/sdclient/error', function () {
     $error = session('sdclient.error');
     $error_description = session('sdclient.error_description');
 
-    return 'There was an error signing in: ' . $error_description . ' (' . $error . ')<br><a href="/login">Try again</a>';
+    return 'There was an error signing in: '.$error_description.' ('.$error.')<br><a href="/login">Try again</a>';
 });

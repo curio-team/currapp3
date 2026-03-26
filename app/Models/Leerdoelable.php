@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\MorphPivot;
 class Leerdoelable extends MorphPivot
 {
     public $incrementing = true;
+
     protected $table = 'leerdoelables';
 
     public function aspecten()

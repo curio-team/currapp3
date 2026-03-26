@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Vak extends Model
 {
     use HasFactory;
-    
+
     protected $table = 'vakken';
 
     public function opleiding()

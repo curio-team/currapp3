@@ -11,13 +11,14 @@ class Admin
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->admin == false) return redirect()->route('home')->with('status', ['warning' => 'Enkel voor admins!']);
+        if (Auth::user()->admin == false) {
+            return redirect()->route('home')->with('status', ['warning' => 'Enkel voor admins!']);
+        }
+
         return $next($request);
     }
 }

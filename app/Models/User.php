@@ -3,10 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -47,9 +47,9 @@ class User extends Authenticatable
     }
 
     public function teams()
-	{
-		return $this->belongsToMany(Team::class)->orderBy('naam');
-	}
+    {
+        return $this->belongsToMany(Team::class)->orderBy('naam');
+    }
 
     public function opleiding()
     {

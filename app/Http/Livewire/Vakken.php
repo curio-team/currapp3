@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Livewire;
+
 use App\Models\Opleiding;
 
 class Vakken extends _MyComponent
@@ -8,6 +9,7 @@ class Vakken extends _MyComponent
     public Opleiding $opleiding;
 
     protected $className = \App\Models\Vak::class;
+
     protected $rules = [
         'item.naam' => 'required',
         'item.omschrijving' => 'nullable',
@@ -38,8 +40,7 @@ class Vakken extends _MyComponent
 
     public function destroy()
     {
-        foreach($this->item->uitvoeren as $uitvoer)
-        {
+        foreach ($this->item->uitvoeren as $uitvoer) {
             $uitvoer->modules()->detach();
             $uitvoer->delete();
         }

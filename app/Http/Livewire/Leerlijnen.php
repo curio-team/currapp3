@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Livewire;
+
 use App\Models\Opleiding;
 
 class Leerlijnen extends _MyComponent
@@ -8,6 +9,7 @@ class Leerlijnen extends _MyComponent
     public Opleiding $opleiding;
 
     protected $className = \App\Models\Leerlijn::class;
+
     protected $rules = [
         'item.naam' => 'required',
         'item.eigenaar_id' => 'nullable',

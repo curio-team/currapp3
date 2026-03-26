@@ -9,9 +9,13 @@ use App\Models\Opleiding;
 class Feedbackmomenten extends _MyComponent
 {
     public $week;
+
     public ModuleVersie $versie;
+
     public Opleiding $opleiding;
+
     protected $className = \App\Models\Feedbackmoment::class;
+
     protected $rules = [
         'item.naam' => 'required',
         'item.checks' => 'nullable',
@@ -22,7 +26,8 @@ class Feedbackmomenten extends _MyComponent
 
     public function render()
     {
-        $this->item->checks = $this->item->checks ?? "";
+        $this->item->checks = $this->item->checks ?? '';
+
         return view('feedbackmomenten.index');
     }
 
@@ -35,7 +40,9 @@ class Feedbackmomenten extends _MyComponent
     public function edit()
     {
         $this->validate($this->rules);
-        if(empty($this->item->checks)) $this->item->checks = null;
+        if (empty($this->item->checks)) {
+            $this->item->checks = null;
+        }
         $this->item->save();
         $this->versie->feedbackmomenten()->updateExistingPivot(
             $this->item->id,

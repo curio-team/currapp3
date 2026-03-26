@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Model;
 
 class ModuleVersie extends Model
 {
     protected $fillable = ['versie'];
+
     protected $table = 'module_versies';
-    
+
     protected function naam(): Attribute
     {
         return Attribute::make(
@@ -54,7 +55,7 @@ class ModuleVersie extends Model
     {
         return $this->belongsToMany(VakInUitvoer::class, 'module_vak')->withPivot(['week_start', 'week_eind'])->withTimestamps();
     }
-    
+
     public function leerdoelen()
     {
         return $this->morphToMany(Leerdoel::class, 'leerdoelable')->using(Leerdoelable::class)->withPivot('id');
@@ -72,6 +73,6 @@ class ModuleVersie extends Model
 
     public function feedbackmomenten()
     {
-        return $this->belongsToMany(Feedbackmoment::class,)->withPivot(['week']);
+        return $this->belongsToMany(Feedbackmoment::class)->withPivot(['week']);
     }
 }
