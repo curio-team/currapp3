@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
+#[Table('leerdoelen')]
 class Leerdoel extends Model
 {
-    protected $table = 'leerdoelen';
-
     protected function naam(): Attribute
     {
         return Attribute::make(

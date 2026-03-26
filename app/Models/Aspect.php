@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
 
-class Aspect extends Model
-{
-    protected $table = 'aspecten';
-}
+#[Table('aspecten')]
+class Aspect extends Model {}
