@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
 use App\Models\Opleiding;
 use App\Services\WeeksApi;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class OpleidingController extends Controller
 {

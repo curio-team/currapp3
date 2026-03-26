@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 use App\Models\ModuleVersie;
 use App\Models\Opleiding;
 use App\Models\Uitvoer;
 use App\Models\VakInUitvoer;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class UitvoerController extends Controller
 {

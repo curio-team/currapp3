@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
-use Illuminate\Http\RedirectResponse;
 use App\Models\Feedbackmoment;
 use App\Models\Module;
 use App\Models\ModuleVersie;
 use App\Models\Opleiding;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ModuleController extends Controller
 {
