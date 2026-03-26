@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
+#[Table('opleidingen')]
 class Opleiding extends Model
 {
-    protected $table = 'opleidingen';
-
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);

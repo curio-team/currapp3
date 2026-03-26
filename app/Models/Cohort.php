@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+#[Table('cohorten')]
 class Cohort extends Model
 {
-    protected $table = 'cohorten';
-
     public function opleiding(): BelongsTo
     {
         return $this->belongsTo(Opleiding::class);

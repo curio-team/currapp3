@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+#[Table('vakken_in_uitvoer')]
 class VakInUitvoer extends Model
 {
-    protected $table = 'vakken_in_uitvoer';
-
     public function parent(): BelongsTo
     {
         return $this->belongsTo(Vak::class, 'vak_id');

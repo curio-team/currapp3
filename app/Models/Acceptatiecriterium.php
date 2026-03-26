@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+#[Table('acceptatiecriteria')]
 class Acceptatiecriterium extends Model
 {
     use HasFactory;
-
-    protected $table = 'acceptatiecriteria';
 
     protected function casts(): array
     {
