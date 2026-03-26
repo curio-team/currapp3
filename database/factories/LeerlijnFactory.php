@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class LeerlijnFactory extends Factory
 {
-    public function definition()
+    public function definition(): array
     {
         return [
             'naam' => strtoupper(fake()->lexify('???')),

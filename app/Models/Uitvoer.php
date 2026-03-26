@@ -2,6 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,17 +30,17 @@ class Uitvoer extends Model
         );
     }
 
-    public function cohorten()
+    public function cohorten(): BelongsToMany
     {
         return $this->belongsToMany(Cohort::class)->orderBy('datum_start');
     }
 
-    public function blok()
+    public function blok(): BelongsTo
     {
         return $this->belongsTo(Blok::class);
     }
 
-    public function vakken()
+    public function vakken(): HasMany
     {
         return $this->hasMany(VakInUitvoer::class)
             ->join('vakken', 'vakken.id', '=', 'vakken_in_uitvoer.vak_id')
@@ -44,12 +48,12 @@ class Uitvoer extends Model
             ->orderBy('vakken.volgorde');
     }
 
-    public function leerdoelen()
+    public function leerdoelen(): MorphToMany
     {
         return $this->morphToMany(Leerdoel::class, 'leerdoelable')->using(Leerdoelable::class)->withPivot('id');
     }
 
-    public function comments()
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }

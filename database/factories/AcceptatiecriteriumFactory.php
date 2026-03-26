@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AcceptatiecriteriumFactory extends Factory
 {
-    public function definition()
+    public function definition(): array
     {
         return [
             'datum_start' => '2020-08-01',

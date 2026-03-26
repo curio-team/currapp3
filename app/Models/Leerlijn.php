@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -67,22 +70,22 @@ class Leerlijn extends Model
         return $return;
     }
 
-    public function opleiding()
+    public function opleiding(): BelongsTo
     {
         return $this->belongsTo(Opleiding::class);
     }
 
-    public function modules()
+    public function modules(): HasMany
     {
         return $this->hasMany(Module::class);
     }
 
-    public function leerdoelen()
+    public function leerdoelen(): HasMany
     {
         return $this->hasMany(Leerdoel::class);
     }
 
-    public function acceptatiecriteria()
+    public function acceptatiecriteria(): BelongsToMany
     {
         return $this->belongsToMany(Acceptatiecriterium::class, 'acceptatiecriterium_leerlijn');
     }

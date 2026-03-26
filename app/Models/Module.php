@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,12 +18,12 @@ class Module extends Model
         );
     }
 
-    public function leerlijn()
+    public function leerlijn(): BelongsTo
     {
         return $this->belongsTo(Leerlijn::class);
     }
 
-    public function versies()
+    public function versies(): HasMany
     {
         return $this->hasMany(ModuleVersie::class);
     }

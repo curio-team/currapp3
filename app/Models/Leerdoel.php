@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,17 +18,17 @@ class Leerdoel extends Model
         );
     }
 
-    public function leerlijn()
+    public function leerlijn(): BelongsTo
     {
         return $this->belongsTo(Leerlijn::class);
     }
 
-    public function blokken()
+    public function blokken(): MorphToMany
     {
         return $this->morphedByMany(Uitvoer::class, 'leerdoelable')->using(Leerdoelable::class)->withPivot('id');
     }
 
-    public function modules()
+    public function modules(): MorphToMany
     {
         return $this->morphedByMany(Module::class, 'leerdoelable')->using(Leerdoelable::class)->withPivot('id');
     }

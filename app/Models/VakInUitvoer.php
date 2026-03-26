@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,17 +11,17 @@ class VakInUitvoer extends Model
 {
     protected $table = 'vakken_in_uitvoer';
 
-    public function parent()
+    public function parent(): BelongsTo
     {
         return $this->belongsTo(Vak::class, 'vak_id');
     }
 
-    public function uitvoer()
+    public function uitvoer(): BelongsTo
     {
         return $this->belongsTo(Uitvoer::class);
     }
 
-    public function modules()
+    public function modules(): BelongsToMany
     {
         return $this->belongsToMany(ModuleVersie::class, 'module_vak')
             ->withPivot(['week_start', 'week_eind'])
