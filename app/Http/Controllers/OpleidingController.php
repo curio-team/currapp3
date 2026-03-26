@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Models\Opleiding;
 use App\Services\WeeksApi;
 use Illuminate\Http\Request;
 
 class OpleidingController extends Controller
 {
-    public function show(Opleiding $opleiding)
+    public function show(Opleiding $opleiding): View
     {
         $week = WeeksApi::get();
         $schooljaar = substr($week['schooljaar']['start'], 0, 4);

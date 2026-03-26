@@ -27,7 +27,7 @@ class BlokFactory extends Factory
      *
      * @return static
      */
-    public function zonderNaam()
+    public function zonderNaam(): static
     {
         return $this->state(fn (array $attributes) => [
             'naam' => null,

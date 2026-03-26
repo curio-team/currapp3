@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Models\Opleiding;
 use App\Services\WeeksApi;
 
 class RapportController extends Controller
 {
-    public function llc(Opleiding $opleiding)
+    public function llc(Opleiding $opleiding): View
     {
         $week = WeeksApi::get();
         $schooljaar = substr($week['schooljaar']['start'], 0, 4);
@@ -38,7 +39,7 @@ class RapportController extends Controller
             ->with('per_vak', collect($per_vak));
     }
 
-    public function llc2(Opleiding $opleiding)
+    public function llc2(Opleiding $opleiding): View
     {
         $per_eigenaar = $opleiding->leerlijnen->groupBy('eigenaar_id')->toArray();
         ksort($per_eigenaar);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class HomeController extends Controller
         return redirect()->route('opleidingen.show', $user->standaard_opleiding);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $user = User::find(Auth::user()->id);
         $user->standaard_opleiding = $request->opleiding_id;

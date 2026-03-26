@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use App\Models\ModuleVersie;
 use App\Models\Opleiding;
 use App\Models\Uitvoer;
@@ -10,14 +12,14 @@ use Illuminate\Http\Request;
 
 class UitvoerController extends Controller
 {
-    public function show(Opleiding $opleiding, Uitvoer $uitvoer)
+    public function show(Opleiding $opleiding, Uitvoer $uitvoer): View
     {
         return view('uitvoeren.show')
             ->with('opleiding', $opleiding)
             ->with('uitvoer', $uitvoer);
     }
 
-    public function link_vak_preview(Uitvoer $uitvoer, Request $request)
+    public function link_vak_preview(Uitvoer $uitvoer, Request $request): RedirectResponse
     {
         // Koppel nieuw aangevinkte vakken:
         $added = [];
@@ -51,7 +53,7 @@ class UitvoerController extends Controller
         }
     }
 
-    public function link_vak(Uitvoer $uitvoer, Request $request)
+    public function link_vak(Uitvoer $uitvoer, Request $request): RedirectResponse
     {
         $removed = collect($request->removed);
         $added = collect($request->added);
@@ -97,12 +99,12 @@ class UitvoerController extends Controller
         return redirect()->back();
     }
 
-    public function link_module_preview(Uitvoer $uitvoer, Request $request)
+    public function link_module_preview(Uitvoer $uitvoer, Request $request): RedirectResponse
     {
         return redirect()->back()->with('link_module_preview', [...$request->all()]);
     }
 
-    public function link_module(Uitvoer $uitvoer, Request $request)
+    public function link_module(Uitvoer $uitvoer, Request $request): RedirectResponse
     {
         $vak_id = VakInUitvoer::find($request->vak_id)->parent->id;
         $module_versie = ModuleVersie::where('module_id', $request->module_id)->orderByDesc('versie')->first();
@@ -125,12 +127,12 @@ class UitvoerController extends Controller
         return redirect()->back();
     }
 
-    public function edit_points_preview(Uitvoer $uitvoer, Request $request)
+    public function edit_points_preview(Uitvoer $uitvoer, Request $request): RedirectResponse
     {
         return redirect()->back()->with('edit_points_preview', [...$request->all()]);
     }
 
-    public function edit_points(Request $request)
+    public function edit_points(Request $request): RedirectResponse
     {
         foreach ($request->uitvoeren as $uitvoer_id) {
             $uitvoer = Uitvoer::find($uitvoer_id);
@@ -141,12 +143,12 @@ class UitvoerController extends Controller
         return redirect()->back();
     }
 
-    public function edit_weeks_preview(Request $request)
+    public function edit_weeks_preview(Request $request): RedirectResponse
     {
         return redirect()->back()->with('edit_weeks_preview', [...$request->all()]);
     }
 
-    public function edit_weeks(Request $request)
+    public function edit_weeks(Request $request): RedirectResponse
     {
         foreach ($request->uitvoeren as $uitvoer_id) {
             $uitvoer = Uitvoer::find($uitvoer_id);
@@ -157,7 +159,7 @@ class UitvoerController extends Controller
         return redirect()->back();
     }
 
-    public function studiepuntenplan_vak(VakInUitvoer $vak)
+    public function studiepuntenplan_vak(VakInUitvoer $vak): View
     {
         return view('uitvoeren.studiepuntenplan_vak_print')
             ->with('vak_voor_punten', $vak)
@@ -165,7 +167,7 @@ class UitvoerController extends Controller
             ->with('opleiding', $vak->uitvoer->blok->opleiding);
     }
 
-    public function studiepuntenplan_uitvoer(Uitvoer $uitvoer)
+    public function studiepuntenplan_uitvoer(Uitvoer $uitvoer): View
     {
         return view('uitvoeren.studiepuntenplan_uitvoer_print')
             ->with('uitvoer', $uitvoer)

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Models\Feedbackmoment;
 use App\Models\Module;
 use App\Models\ModuleVersie;
@@ -10,14 +12,14 @@ use Illuminate\Http\Request;
 
 class ModuleController extends Controller
 {
-    public function show(Opleiding $opleiding, Module $module)
+    public function show(Opleiding $opleiding, Module $module): RedirectResponse
     {
         $versie = $module->versies()->orderByDesc('versie')->first();
 
         return redirect()->route('opleidingen.modules.show.versie', [$opleiding, $module, $versie]);
     }
 
-    public function show_versie(Opleiding $opleiding, Module $module, ModuleVersie $versie)
+    public function show_versie(Opleiding $opleiding, Module $module, ModuleVersie $versie): View
     {
         return view('modules.show')
             ->with(compact('versie'))
@@ -25,7 +27,7 @@ class ModuleController extends Controller
             ->with(compact('opleiding'));
     }
 
-    public function create_fbm(Opleiding $opleiding, Module $module, ModuleVersie $versie, Request $request)
+    public function create_fbm(Opleiding $opleiding, Module $module, ModuleVersie $versie, Request $request): RedirectResponse
     {
         $request->validate([
             'naam' => 'required',
@@ -47,7 +49,7 @@ class ModuleController extends Controller
         return redirect()->back();
     }
 
-    public function update(Opleiding $opleiding, Module $module, Request $request)
+    public function update(Opleiding $opleiding, Module $module, Request $request): RedirectResponse
     {
         $request->validate([
             'naam' => 'required',
@@ -61,7 +63,7 @@ class ModuleController extends Controller
         return redirect()->back();
     }
 
-    public function create_version(Opleiding $opleiding, Module $module, Request $request)
+    public function create_version(Opleiding $opleiding, Module $module, Request $request): RedirectResponse
     {
         $old = $module->versies()->orderByDesc('versie')->first();
 
