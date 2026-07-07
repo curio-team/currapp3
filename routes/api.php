@@ -68,7 +68,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('cohorts')->group(function () {
         Route::get('/', function () {
-            return Cohort::orderBy('naam', 'desc')->get();
+            return Cohort::orderByDesc('naam')->get();
         });
 
         Route::get('/{cohort}/uitvoeren', function (Cohort $cohort) {
