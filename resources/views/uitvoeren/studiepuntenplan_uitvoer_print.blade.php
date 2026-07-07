@@ -5,7 +5,7 @@
 
     <div class="my-5">
         <h1>Studiepuntenplan {{ $uitvoer->naam }}</h1>
-        <p><em>Export gemaakt op {{ Carbon\Carbon::now()->format("d-m-Y") }} door {{ \Auth::user()->id }}</em></p>
+        <p><em>Export gemaakt op {{ Illuminate\Support\Carbon::now()->format("d-m-Y") }} door {{ \Auth::user()->id }}</em></p>
     </div>
 
     @foreach($uitvoer->vakken as $vak)
