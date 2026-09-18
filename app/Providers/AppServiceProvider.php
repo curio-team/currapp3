@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        config(['livewire.legacy_model_binding' => true]);
         $this->bootRoute();
     }
 
