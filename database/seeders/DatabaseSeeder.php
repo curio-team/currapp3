@@ -95,7 +95,7 @@ class DatabaseSeeder extends Seeder
         // Uitvoeren
         //
         foreach (\App\Models\Cohort::all() as $cohort) {
-            $datum = new \Carbon\Carbon($cohort->datum_start);
+            $datum = new \Illuminate\Support\Carbon($cohort->datum_start);
             $i = 1;
             foreach (\App\Models\Blok::all() as $blok) {
                 $schooljaar = $datum->format('Y');
