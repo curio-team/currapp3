@@ -14,7 +14,10 @@
         "postcss": "^8.4.39",
         "sass": "^1.77.6",
         "vite": "^7.0.7",
-        "concurrently": "^9.0.1"
+        "concurrently": "^10.0.3"
+    },
+    "optionalDependencies": {
+        "@laravel/multiplex": "^0.4.1"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.5.2"
