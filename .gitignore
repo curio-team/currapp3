@@ -17,3 +17,5 @@ yarn-error.log
 /.idea
 /.nova
 /.vscode
+/.phpunit.cache
+.phpunit.result.cache
